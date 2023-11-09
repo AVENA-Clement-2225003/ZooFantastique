@@ -82,7 +82,7 @@ public class EnclosAquarium extends Enclos {
 
     @Override
     public int entretientEnclos() {
-        if (super.getNbCreaturesDansEnclos() > 0) {
+        if (super.getNbCreaturesDansEnclos() > 0 && super.getProprete() == PropreteEnum.MAUVAIS) {
             return 1;
         }
         saliniteBassinOK = true;

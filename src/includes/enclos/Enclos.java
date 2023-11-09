@@ -199,4 +199,59 @@ public abstract class Enclos {
                 ", proprete=" + propreteEnum +
                 '}';
     }
+
+    /**
+     * Fonction qui permet de nourrir toutes les créatures de l'enclos
+     * @return 0 si tous les animaux sont nourrit, 1 sinon
+     */
+    public int nourrirCreatures(){
+        for (Creature creature : listeCreatures){
+            creature.setFaim(false);
+        }
+        return 0;
+    }
+
+    /**
+     * Fonction permettant l'ajout d'une créature dans l'enclos
+     * @param creature Créature à ajouter
+     * @return 0 si la créature est ajoutée
+     */
+    public int ajouterCreature(Creature creature){ //la vérification que le type de creature est le même que les autres se fera dans le MVC
+        listeCreatures.add(creature);
+        return 0;
+    }
+
+    /**
+     * Fonction permmettant la suppression d'un créature dans l'enclos
+     * @return 0 si la suppression à fonctionner
+     */
+    public int retirerCreature(Creature creature){
+        listeCreatures.remove(getIndexCreature(creature));
+    }
+
+    /**
+     * Fonction qui permet de récupérer l'indice d'une créature dans la liste des créatures
+     * @param creature
+     * @return
+     */
+    public int getIndexCreature(Creature creature){
+        for (Creature creatureListe : listeCreatures){
+            if(creatureListe.getID == creature.getID){
+                return
+            }
+        }
+    }
+    /**
+     * Fonction qui permet de savoir si une créature existe dans la liste des créatures
+     * @param creature
+     * @return true si elle existe false sinon
+     */
+    public boolean getIndexCreature(Creature creature){
+        for (Creature creatureListe : listeCreatures){
+            if(creatureListe.getID == creature.getID){
+                return true;
+            }
+        }
+        return false;
+    }
 }
