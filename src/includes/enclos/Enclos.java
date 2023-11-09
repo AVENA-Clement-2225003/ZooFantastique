@@ -235,11 +235,12 @@ public abstract class Enclos {
      * @return
      */
     public int getIndexCreature(Creature creature){
-        for (Creature creatureListe : listeCreatures){
-            if(creatureListe.getID == creature.getID){
-                return
+        for (int i = 0; i < listeCreatures.size(); i++){
+            if(listeCreatures.get(i).getID == listeCreatures.get(i).getID){
+                return i;
             }
         }
+        return listeCreatures.size();
     }
     /**
      * Fonction qui permet de savoir si une créature existe dans la liste des créatures
