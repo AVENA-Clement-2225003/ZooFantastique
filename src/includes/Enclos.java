@@ -1,9 +1,11 @@
+package includes;
+
 import java.util.ArrayList;
 
 /**
  * Classe qui représente un enclos
  */
-public class Enclos {
+public abstract class Enclos {
     /**
      * Nom de l'enclos
      */
@@ -27,7 +29,7 @@ public class Enclos {
     /**
      * Degré de propreté de l'encos
      */
-    private Proprete proprete;
+    private PropreteEnum propreteEnum;
 
     /**
      * Contructeur simple
@@ -39,7 +41,7 @@ public class Enclos {
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
         this.nbCreaturesDansEnclos = 0;
-        this.proprete = Proprete.BON;
+        this.propreteEnum = PropreteEnum.BON;
         this.listeCreatures = new ArrayList<>();
     }
 
@@ -48,75 +50,123 @@ public class Enclos {
      * @param nom Le nom de l'enclos
      * @param superficie La superficie de l'enclos
      * @param capaciteEnclos La capacité maximale de l'enclos
-     * @param proprete Le degré de propreté qui peut etre MAUVAIS, CORRECT, BON
+     * @param propreteEnum Le degré de propreté qui peut etre MAUVAIS, CORRECT, BON
      * @param listeCreatures La liste des créatures présentent dans l'enclos
      */
-    public Enclos(String nom, int superficie, int capaciteEnclos, Proprete proprete, ArrayList<Creature> listeCreatures) {
+    public Enclos(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures) {
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
         this.nbCreaturesDansEnclos = listeCreatures.size(); //Prend automatiquement la taille de la liste des créatures
-        this.proprete = proprete;
+        this.propreteEnum = propreteEnum;
         this.listeCreatures = listeCreatures;
     }
 
+    /**
+     * Permet de récupérer la valeur de la variable nom
+     * @return
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Permet de changer la valeur de la variable nom
+     * @return
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
-
+    /**
+     * Permet de récupérer la valeur de la variable superficie
+     * @return
+     */
     public int getSuperficie() {
         return superficie;
     }
-
+    /**
+     * Permet de changer la valeur de la variable superficie
+     * @return
+     */
     public void setSuperficie(int superficie) {
         this.superficie = superficie;
     }
-
+    /**
+     * Permet de récupérer la valeur de la variable capaciteEnclos
+     * @return
+     */
     public int getCapaciteEnclos() {
         return capaciteEnclos;
     }
-
+    /**
+     * Permet de changer la valeur de la variable capaciteEnclos
+     * @return
+     */
     public void setCapaciteEnclos(int capaciteEnclos) {
         this.capaciteEnclos = capaciteEnclos;
     }
-
+    /**
+     * Permet de récupérer la valeur de la variable nbCreaturesDansEnclos
+     * @return
+     */
     public int getNbCreaturesDansEnclos() {
         return nbCreaturesDansEnclos;
     }
-
+    /**
+     * Permet de changer la valeur de la variable nbCreaturesDansEnclos
+     * @return
+     */
     public void setNbCreaturesDansEnclos(int nbCreaturesDansEnclos) {
         this.nbCreaturesDansEnclos = nbCreaturesDansEnclos;
     }
-
+    /**
+     * Permet de récupérer la valeur de la variable listeCreatures
+     * @return
+     */
     public ArrayList<Creature> getListeCreatures() {
         return listeCreatures;
     }
-
+    /**
+     * Permet de changer la valeur de la variable listeCreatures
+     * @return
+     */
     public void setListeCreatures(ArrayList<Creature> listeCreatures) {
         this.listeCreatures = listeCreatures;
     }
-
-    public Proprete getProprete() {
-        return proprete;
+    /**
+     * Permet de récupérer la valeur de la variable proprete
+     * @return
+     */
+    public PropreteEnum getProprete() {
+        return propreteEnum;
+    }
+    /**
+     * Permet de changer la valeur de la variable proprete
+     * @return
+     */
+    public void setProprete(PropreteEnum propreteEnum) {
+        this.propreteEnum = propreteEnum;
     }
 
-    public void setProprete(Proprete proprete) {
-        this.proprete = proprete;
-    }
+    /**
+     * Fonction permettant l'entretient de l'enclos
+     * @return
+     */
+    public abstract int entretientEnclos();
 
+    /**
+     * Fonction d'affichage de l'enclos
+     * @return
+     */
     @Override
     public String toString() {
-        return "Enclos{" +
+        return "includes.Enclos{" +
                 "nom='" + nom + '\'' +
                 ", superficie=" + superficie +
                 ", capaciteEnclos=" + capaciteEnclos +
                 ", nbCreaturesDansEnclos=" + nbCreaturesDansEnclos +
-                ", listeCreatures=" + for (listeCreatures: Creature creature){creature.toString()} +
-                ", proprete=" + proprete +
+                ", listeCreatures=" + listeCreatures.toString() +
+                ", proprete=" + propreteEnum +
                 '}';
     }
 }
