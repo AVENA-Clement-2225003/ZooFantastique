@@ -1,3 +1,5 @@
+package includes.creatures;
+
 /**
  * Enum qui liste les differentes especes du zoo.
  */

@@ -1,11 +1,11 @@
-package includes;
+package includes.enclos;
 
 import java.util.ArrayList;
 
 /**
  * Classe qui représente un aquarium
  */
-public class EnclosAquarium extends Enclos{
+public class EnclosAquarium extends Enclos {
     /**
      * Variable de la profondeur de l'aquarium
      */

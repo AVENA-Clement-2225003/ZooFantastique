@@ -1,15 +1,19 @@
-package includes;
+package includes.enclos;
 
 import java.util.ArrayList;
 
 /**
- * Classe qui représente une volière
+ * Classe qui représente un enclos standard
  */
-public class EnclosVoliere extends Enclos{
-    private boolean toitCageOK;
-    public EnclosVoliere(String nom, int superficie, int capaciteEnclos) {
+public class EnclosStandard extends Enclos {
+    /**
+     *
+     * @param nom
+     * @param superficie
+     * @param capaciteEnclos
+     */
+    public EnclosStandard(String nom, int superficie, int capaciteEnclos) {
         super(nom, superficie, capaciteEnclos);
-        toitCageOK = true;
     }
 
     /**
@@ -19,12 +23,11 @@ public class EnclosVoliere extends Enclos{
      * @param capaciteEnclos
      * @param propreteEnum
      * @param listeCreatures
-     * @param toitCageOK
      */
-    public EnclosVoliere(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, boolean toitCageOK) {
+    public EnclosStandard(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures) {
         super(nom, superficie, capaciteEnclos, propreteEnum, listeCreatures);
-        this.toitCageOK = toitCageOK;
     }
+
     /**
      * Fonction qui permet d'effectuer l'entretient de l'enclos
      * @return 0 si l'entretient est fait, 1 si l'entretient est pas possible (enclos non vide)
@@ -34,7 +37,6 @@ public class EnclosVoliere extends Enclos{
         if (super.getNbCreaturesDansEnclos() > 0) {
             return 1;
         }
-        toitCageOK = true;
         super.setProprete(PropreteEnum.BON);
         return 0;
     }

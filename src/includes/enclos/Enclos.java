@@ -1,4 +1,6 @@
-package includes;
+package includes.enclos;
+
+import includes.enclos.PropreteEnum;
 
 import java.util.ArrayList;
 
@@ -160,7 +162,7 @@ public abstract class Enclos {
      */
     @Override
     public String toString() {
-        return "includes.Enclos{" +
+        return "includes.enclos.Enclos{" +
                 "nom='" + nom + '\'' +
                 ", superficie=" + superficie +
                 ", capaciteEnclos=" + capaciteEnclos +
