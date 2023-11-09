@@ -1,5 +1,6 @@
 package includes.enclos;
 
+import includes.creatures.Creature;
 import includes.enclos.PropreteEnum;
 
 import java.util.ArrayList;
@@ -8,6 +9,14 @@ import java.util.ArrayList;
  * Classe qui représente un enclos
  */
 public abstract class Enclos {
+    /**
+     * Permet de création de numéro d'enclos unique
+     */
+    private static int lastID = 0;
+    /**
+     * Numéro unique de l'enclos
+     */
+    private int ID;
     /**
      * Nom de l'enclos
      */
@@ -34,11 +43,13 @@ public abstract class Enclos {
     private PropreteEnum propreteEnum;
 
     /**
-     * Contructeur simple
+     * Constructeur simple
      * @param nom Nom de l'enclos
      * @param superficie Superficie de l'enclos
+     * @param capaciteEnclos Capacité de l'enclos
      */
     public Enclos(String nom, int superficie, int capaciteEnclos) {
+        this.ID = this.lastID++;
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
@@ -56,12 +67,29 @@ public abstract class Enclos {
      * @param listeCreatures La liste des créatures présentent dans l'enclos
      */
     public Enclos(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures) {
+        this.ID = this.lastID++;
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
         this.nbCreaturesDansEnclos = listeCreatures.size(); //Prend automatiquement la taille de la liste des créatures
         this.propreteEnum = propreteEnum;
         this.listeCreatures = listeCreatures;
+    }
+
+    /**
+     * Permet de récupérer la valeur de la variable lastID
+     * @return
+     */
+    public static int getLastID() {
+        return lastID;
+    }
+
+    /**
+     * Permet de récupérer la valeur de la variable ID
+     * @return
+     */
+    public int getID() {
+        return ID;
     }
 
     /**
@@ -170,5 +198,61 @@ public abstract class Enclos {
                 ", listeCreatures=" + listeCreatures.toString() +
                 ", proprete=" + propreteEnum +
                 '}';
+    }
+
+    /**
+     * Fonction qui permet de nourrir toutes les créatures de l'enclos
+     * @return 0 si tous les animaux sont nourrit, 1 sinon
+     */
+    public int nourrirCreatures(){
+        for (Creature creature : listeCreatures){
+            creature.setFaim(false);
+        }
+        return 0;
+    }
+
+    /**
+     * Fonction permettant l'ajout d'une créature dans l'enclos
+     * @param creature Créature à ajouter
+     * @return 0 si la créature est ajoutée
+     */
+    public int ajouterCreature(Creature creature){ //la vérification que le type de creature est le même que les autres se fera dans le MVC
+        listeCreatures.add(creature);
+        return 0;
+    }
+
+    /**
+     * Fonction permmettant la suppression d'un créature dans l'enclos
+     * @return 0 si la suppression à fonctionner
+     */
+    public int retirerCreature(Creature creature){
+        listeCreatures.remove(getIndexCreature(creature));
+    }
+
+    /**
+     * Fonction qui permet de récupérer l'indice d'une créature dans la liste des créatures
+     * @param creature
+     * @return
+     */
+    public int getIndexCreature(Creature creature){
+        for (int i = 0; i < listeCreatures.size(); i++){
+            if(listeCreatures.get(i).getID == listeCreatures.get(i).getID){
+                return i;
+            }
+        }
+        return listeCreatures.size();
+    }
+    /**
+     * Fonction qui permet de savoir si une créature existe dans la liste des créatures
+     * @param creature
+     * @return true si elle existe false sinon
+     */
+    public boolean existInListeCreature(Creature creature){
+        for (Creature creatureListe : listeCreatures){
+            if(creatureListe.getID == creature.getID){
+                return true;
+            }
+        }
+        return false;
     }
 }
