@@ -236,7 +236,7 @@ public abstract class Enclos {
      */
     public int getIndexCreature(Creature creature){
         for (int i = 0; i < listeCreatures.size(); i++){
-            if(listeCreatures.get(i).getID == listeCreatures.get(i).getID){
+            if(listeCreatures.get(i).getID() == listeCreatures.get(i).getID()){
                 return i;
             }
         }
@@ -249,7 +249,7 @@ public abstract class Enclos {
      */
     public boolean existInListeCreature(Creature creature){
         for (Creature creatureListe : listeCreatures){
-            if(creatureListe.getID == creature.getID){
+            if(creatureListe.getID() == creature.getID()){
                 return true;
             }
         }
