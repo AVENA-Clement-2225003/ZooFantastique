@@ -1,5 +1,6 @@
 package includes.enclos;
 
+import includes.creatures.Creature;
 import includes.enclos.PropreteEnum;
 
 import java.util.ArrayList;
@@ -8,6 +9,14 @@ import java.util.ArrayList;
  * Classe qui représente un enclos
  */
 public abstract class Enclos {
+    /**
+     * Permet de création de numéro d'enclos unique
+     */
+    private static int lastID = 0;
+    /**
+     * Numéro unique de l'enclos
+     */
+    private int ID;
     /**
      * Nom de l'enclos
      */
@@ -34,11 +43,13 @@ public abstract class Enclos {
     private PropreteEnum propreteEnum;
 
     /**
-     * Contructeur simple
+     * Constructeur simple
      * @param nom Nom de l'enclos
      * @param superficie Superficie de l'enclos
+     * @param capaciteEnclos Capacité de l'enclos
      */
     public Enclos(String nom, int superficie, int capaciteEnclos) {
+        this.ID = this.lastID++;
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
@@ -56,12 +67,29 @@ public abstract class Enclos {
      * @param listeCreatures La liste des créatures présentent dans l'enclos
      */
     public Enclos(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures) {
+        this.ID = this.lastID++;
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
         this.nbCreaturesDansEnclos = listeCreatures.size(); //Prend automatiquement la taille de la liste des créatures
         this.propreteEnum = propreteEnum;
         this.listeCreatures = listeCreatures;
+    }
+
+    /**
+     * Permet de récupérer la valeur de la variable lastID
+     * @return
+     */
+    public static int getLastID() {
+        return lastID;
+    }
+
+    /**
+     * Permet de récupérer la valeur de la variable ID
+     * @return
+     */
+    public int getID() {
+        return ID;
     }
 
     /**

@@ -1,5 +1,7 @@
 package includes.enclos;
 
+import includes.creatures.Creature;
+
 import java.util.ArrayList;
 
 /**
@@ -7,10 +9,10 @@ import java.util.ArrayList;
  */
 public class EnclosStandard extends Enclos {
     /**
-     *
-     * @param nom
-     * @param superficie
-     * @param capaciteEnclos
+     * Constructeur simple
+     * @param nom Nom de l'enclos
+     * @param superficie Superficie de l'enclos
+     * @param capaciteEnclos Capacité de l'enclos
      */
     public EnclosStandard(String nom, int superficie, int capaciteEnclos) {
         super(nom, superficie, capaciteEnclos);
@@ -18,11 +20,11 @@ public class EnclosStandard extends Enclos {
 
     /**
      * Fonction permettant surtout des tests rapide grâce à la possibilité de définir tous les champs dès sa contruction
-     * @param nom
-     * @param superficie
-     * @param capaciteEnclos
-     * @param propreteEnum
-     * @param listeCreatures
+     * @param nom Nom de l'enclos
+     * @param superficie Superficie de l'enclos
+     * @param capaciteEnclos Capacité de l'enclos
+     * @param propreteEnum Niveau de propreté de l'enclos
+     * @param listeCreatures Liste des créatures
      */
     public EnclosStandard(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures) {
         super(nom, superficie, capaciteEnclos, propreteEnum, listeCreatures);

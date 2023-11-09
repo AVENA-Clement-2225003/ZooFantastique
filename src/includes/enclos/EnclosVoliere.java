@@ -1,12 +1,23 @@
 package includes.enclos;
 
 import java.util.ArrayList;
+import includes.creatures.Creature;
 
 /**
  * Classe qui représente une volière
  */
 public class EnclosVoliere extends Enclos {
+    /**
+     * Variable pour connaître l'état du toit
+     */
     private boolean toitCageOK;
+
+    /**
+     * Constructeur simple
+     * @param nom Nom de l'enclos
+     * @param superficie Superficie de l'enclos
+     * @param capaciteEnclos Capacité de l'enclos
+     */
     public EnclosVoliere(String nom, int superficie, int capaciteEnclos) {
         super(nom, superficie, capaciteEnclos);
         toitCageOK = true;
@@ -14,12 +25,12 @@ public class EnclosVoliere extends Enclos {
 
     /**
      * Fonction permettant surtout des tests rapide grâce à la possibilité de définir tous les champs dès sa contruction
-     * @param nom
-     * @param superficie
-     * @param capaciteEnclos
-     * @param propreteEnum
-     * @param listeCreatures
-     * @param toitCageOK
+     * @param nom Nom de l'enclos
+     * @param superficie Superficie de l'enclos
+     * @param capaciteEnclos Capacité de l'enclos
+     * @param propreteEnum Niveau de propreté de l'enclos
+     * @param listeCreatures Liste des créatures
+     * @param toitCageOK true si le toit est OK false sinon
      */
     public EnclosVoliere(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, boolean toitCageOK) {
         super(nom, superficie, capaciteEnclos, propreteEnum, listeCreatures);
