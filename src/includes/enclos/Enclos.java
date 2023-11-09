@@ -246,7 +246,7 @@ public abstract class Enclos {
      * @param creature
      * @return true si elle existe false sinon
      */
-    public boolean getIndexCreature(Creature creature){
+    public boolean existInListeCreature(Creature creature){
         for (Creature creatureListe : listeCreatures){
             if(creatureListe.getID == creature.getID){
                 return true;
