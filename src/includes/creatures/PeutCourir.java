@@ -3,7 +3,7 @@ package includes.creatures;
 /**
  * Interface pour les creatures qui peuvent courir
  */
-public interface peutCourir {
+public interface PeutCourir {
 
     /**
      * Methode pour courir

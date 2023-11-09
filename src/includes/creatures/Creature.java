@@ -6,6 +6,15 @@ package includes.creatures;
 public abstract class Creature {
 
     /**
+     * Permet de création de numéro de creature unique
+     */
+    private static int lastID = 0;
+    /**
+     * Numéro unique de la creature
+     */
+    private int ID;
+
+    /**
      * Nom de l'espece de la creature
      */
     private EspecesEnum nomEspece;
@@ -63,6 +72,7 @@ public abstract class Creature {
      * @param name nom de la creature (ne depend pas de son espece)
      */
     public Creature(EspecesEnum nomEspece, Sexe sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String name) {
+        this.ID = lastID++;
         this.nomEspece = nomEspece;
         this.sexe = sexe;
         this.poids = poids;
@@ -110,7 +120,7 @@ public abstract class Creature {
     /**
      * Fonction qui permet a la creature de vieillir
      */
-    public void vieillir(){
+    public void vieillir() {
 
     }
 
@@ -118,8 +128,32 @@ public abstract class Creature {
      * Fonction qui permet d'afficher les caracteristiques de la creature
      * @return String toString
      */
-    public String toString(){
-        return "includes.creatures.Creature [";
+    @Override
+    public String toString() {
+        return "Creature{" +
+                "ID=" + ID +
+                "nomEspece=" + nomEspece +
+                ", sexe=" + sexe +
+                ", poids=" + poids +
+                ", taille=" + taille +
+                ", age=" + age +
+                ", faim=" + faim +
+                ", estEnTrainDeDormir=" + estEnTrainDeDormir +
+                ", sante=" + sante +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public static int getLastID() {
+        return lastID;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public EspecesEnum getNomEspece() {
