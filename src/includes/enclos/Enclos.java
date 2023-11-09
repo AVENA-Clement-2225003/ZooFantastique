@@ -227,6 +227,7 @@ public abstract class Enclos {
      */
     public int retirerCreature(Creature creature){
         listeCreatures.remove(getIndexCreature(creature));
+        return 0;
     }
 
     /**
