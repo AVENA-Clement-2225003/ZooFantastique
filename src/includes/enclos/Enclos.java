@@ -1,7 +1,6 @@
 package includes.enclos;
 
 import includes.creatures.Creature;
-import includes.enclos.PropreteEnum;
 
 import java.util.ArrayList;
 
