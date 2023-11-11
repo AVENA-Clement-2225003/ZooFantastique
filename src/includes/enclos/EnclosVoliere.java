@@ -11,6 +11,7 @@ public class EnclosVoliere extends Enclos {
      * Variable pour connaître l'état du toit
      */
     private boolean toitCageOK;
+    private int hauteur;
 
     /**
      * Constructeur simple
@@ -18,9 +19,10 @@ public class EnclosVoliere extends Enclos {
      * @param superficie Superficie de l'enclos
      * @param capaciteEnclos Capacité de l'enclos
      */
-    public EnclosVoliere(String nom, int superficie, int capaciteEnclos) {
+    public EnclosVoliere(String nom, int superficie, int capaciteEnclos, int hauteur) {
         super(nom, superficie, capaciteEnclos);
         toitCageOK = true;
+        this.hauteur = hauteur;
     }
 
     /**
@@ -32,9 +34,10 @@ public class EnclosVoliere extends Enclos {
      * @param listeCreatures Liste des créatures
      * @param toitCageOK true si le toit est OK false sinon
      */
-    public EnclosVoliere(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, boolean toitCageOK) {
+    public EnclosVoliere(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, boolean toitCageOK, int hauteur) {
         super(nom, superficie, capaciteEnclos, propreteEnum, listeCreatures);
         this.toitCageOK = toitCageOK;
+        this.hauteur = hauteur;
     }
     /**
      * Fonction qui permet d'effectuer l'entretient de l'enclos
@@ -48,5 +51,13 @@ public class EnclosVoliere extends Enclos {
         toitCageOK = true;
         super.setProprete(PropreteEnum.BON);
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "EnclosVoliere{" + super.toString() +
+                ", toitCageOK=" + toitCageOK +
+                ", hauteur=" + hauteur +
+                '}';
     }
 }

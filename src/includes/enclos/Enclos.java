@@ -189,7 +189,7 @@ public abstract class Enclos {
      */
     @Override
     public String toString() {
-        return "includes.enclos.Enclos{" +
+        return "Enclos{" +
                 "nom='" + nom + '\'' +
                 ", superficie=" + superficie +
                 ", capaciteEnclos=" + capaciteEnclos +
