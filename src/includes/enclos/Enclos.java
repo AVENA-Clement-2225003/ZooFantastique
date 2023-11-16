@@ -204,11 +204,30 @@ public abstract class Enclos {
      * @return un string avec le nom de toutes les crétures
      */
     public String afficherCreatures() {
-        String strConteneur = nom + " = {";
-        for (Creature creature: listeCreatures) {
-            strConteneur += creature.getName() + ", ";
+        if (listeCreatures.isEmpty()) return "L'enclos est vide";
+        String strConteneur = nom + " = {" + listeCreatures.get(0).getNom();
+        for (int i = 1; i < listeCreatures.size(); i++) {
+            strConteneur += ", " + listeCreatures.get(i).getNom();
         }
         return strConteneur + '}';
+    }
+
+    /**
+     * Fonction qui permet la récupération d'un affichage utilisateur
+     * @return un string avec le nom de toutes les informations de l'enclos
+     */
+    public String afficherEnclos() {
+        return nom + " d'une superficie de " + superficie + "m² pouvant accueillir " + capaciteEnclos + " créatures avec " + listeCreatures.size() + " présentes et il est en " + propreteEnum + " état";
+    }
+    public boolean equals(Enclos enclos) {
+        return this.ID == enclos.ID;
+    }
+    public int deplacerCreatureEnclos(Creature creature, Enclos enclos) {
+        if (this.equals(enclos)) return 1; //Si l'enclos de destination est celui ou se trouve acutellement la créature
+        if (!existInListeCreature(creature)) return 2; //Si la créature n'existe pas dans l'enclos
+        if (enclos.ajouterCreature(creature)==2) return 3; //Si plus de place dans enclos de destination
+        if (retirerCreature(creature)==1) return 4; //Si la créature à retirer n'existe pas dans l'enclos
+        return 0; //Si tous se passe bien
     }
 
     /**
@@ -225,9 +244,18 @@ public abstract class Enclos {
     /**
      * Fonction permettant l'ajout d'une créature dans l'enclos
      * @param creature Créature à ajouter
-     * @return 0 si la créature est ajoutée
+     * @return 0 si la créature est ajoutée 1 si elle est déjà présente
      */
     public int ajouterCreature(Creature creature){ //la vérification que le type de creature est le même que les autres se fera dans le MVC
+        if (listeCreatures.size() >= capaciteEnclos) return 2; // Si il n'y a plus de place
+        for (Creature creature1 : listeCreatures) {
+            if (creature1.getID() == creature.getID()) return 1; // Si la créature est déjà présente
+            if (creature1.getNom() == creature.getNom()) {
+                creature.setNom(creature.getNom() + creature.getID());
+                listeCreatures.add(creature);
+                return 0;
+            }
+        }
         listeCreatures.add(creature);
         return 0;
     }
@@ -237,6 +265,7 @@ public abstract class Enclos {
      * @return 0 si la suppression à fonctionner
      */
     public int retirerCreature(Creature creature){
+        if (!existInListeCreature(creature)) return 1;
         listeCreatures.remove(getIndexCreature(creature));
         return 0;
     }

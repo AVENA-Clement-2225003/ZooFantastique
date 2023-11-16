@@ -26,13 +26,13 @@ public class Controller {
                 tabOption.add(option);
                 i++; //Sauter l'espace pour commencer la récupération de la prochaine option
             }
-            executerCommande(nomCommande, tabOption);
+            //executerCommande(nomCommande, tabOption);
         }else {
-            executerCommande(nomCommande, new ArrayList<>());
+            //executerCommande(nomCommande, new ArrayList<>());
         }
         //potentiel appel de fonction executerCommande(nomCommande, tabOption);
     }
-    public int executerCommande(String nomCommande, ArrayList<String> tabOption) {
+    /*public int executerCommande(String nomCommande, ArrayList<String> tabOption) {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
@@ -72,5 +72,5 @@ public class Controller {
                 System.out.println("Commande pour soiger un animal\nTapez soigner leNomAnimal");
                 break;
         }
-    }
+    }*/
 }

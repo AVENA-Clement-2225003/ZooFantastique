@@ -1,5 +1,7 @@
 package tests.enclos;
 
+import includes.creatures.Lycanthrope;
+import includes.creatures.LycanthropeMale;
 import includes.enclos.EnclosStandard;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,5 +18,8 @@ public class EnclosStandardTest {
     public void testEnclosStandardToutParametre() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 140, 25, includes.enclos.PropreteEnum.BON, new ArrayList<>());
         assertEquals("Enclos{nom='Enclos1', superficie=140, capaciteEnclos=20, nbCreaturesDansEnclos=0, listeCreatures=[], proprete=BON}", E1.toString());
+    }
+    @Test
+    void entretientEnclos() {
     }
 }
