@@ -45,7 +45,7 @@ public class EnclosVoliere extends Enclos {
      */
     @Override
     public int entretientEnclos() {
-        if (super.getNbCreaturesDansEnclos() > 0) {
+        if (super.getListeCreatures().size() > 0) {
             return 1;
         }
         toitCageOK = true;
