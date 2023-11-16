@@ -54,4 +54,20 @@ public class Phenix extends Creature implements PeutVoler{
     public String emettreUnSon(){
         return "Le phenix " + this.getNom() + " pialle";
     }
+
+    /**
+     * Permet a la creature de renaitre des ses cendres, a l'age d'un ans
+     * @return String msg de confirmation
+     */
+    @Override
+    public String vieillir(){
+        setAge(getAge()+1);;
+        if (getAge() >= getAgeMort()){
+            this.setAge(1);
+            return "Le phenix " + getNom() + " est mort. Il renait de ses cendres";
+        }
+        else {
+            return "" + getAge();
+        }
+    }
 }

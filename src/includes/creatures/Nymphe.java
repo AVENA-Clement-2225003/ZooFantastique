@@ -45,4 +45,20 @@ public abstract class Nymphe extends Creature{
     public String emettreUnSon(){
         return "La nymphe " + this.getNom() + " parle";
     }
+
+    /**
+     * Permet a la creature de renaitre des ses cendres, a l'age d'un ans
+     * @return String msg de confirmation
+     */
+    @Override
+    public String vieillir(){
+        setAge(getAge()+1);;
+        if (getAge() >= getAgeMort()){
+            this.setAge(1);
+            return "La nymphe " + getNom() + " est mort. Il renait de ses cendres";
+        }
+        else {
+            return "" + getAge();
+        }
+    }
 }

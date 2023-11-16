@@ -68,4 +68,20 @@ public class Dragon extends Creature implements PeutVoler, PeutCourir, PeutNager
     public String emettreUnSon(){
         return "Le dragon " + this.getNom() + " fait un rugissement";
     }
+
+    /**
+     * Permet a la creature de renaitre des ses cendres, a l'age d'un ans
+     * @return String msg de confirmation
+     */
+    @Override
+    public String vieillir(){
+        setAge(getAge()+1);;
+        if (getAge() >= getAgeMort()){
+            this.setAge(1);
+            return "Le dragon " + getNom() + " est mort. Il renait de ses cendres";
+        }
+        else {
+            return "" + getAge();
+        }
+    }
 }
