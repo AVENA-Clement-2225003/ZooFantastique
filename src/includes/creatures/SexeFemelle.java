@@ -24,4 +24,11 @@ public class SexeFemelle extends Sexe{
     public String donnerVie(){
         return "La creature donne la vie";
     }
+
+    @Override
+    public String toString() {
+        return "SexeFemelle{" +
+                "sexe=" + sexe +
+                '}';
+    }
 }

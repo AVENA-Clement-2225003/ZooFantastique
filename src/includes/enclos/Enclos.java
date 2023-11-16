@@ -1,7 +1,6 @@
 package includes.enclos;
 
 import includes.creatures.Creature;
-import includes.enclos.PropreteEnum;
 
 import java.util.ArrayList;
 
@@ -190,7 +189,7 @@ public abstract class Enclos {
      */
     @Override
     public String toString() {
-        return "includes.enclos.Enclos{" +
+        return "Enclos{" +
                 "nom='" + nom + '\'' +
                 ", superficie=" + superficie +
                 ", capaciteEnclos=" + capaciteEnclos +
@@ -198,6 +197,18 @@ public abstract class Enclos {
                 ", listeCreatures=" + listeCreatures.toString() +
                 ", proprete=" + propreteEnum +
                 '}';
+    }
+
+    /**
+     * Fonction qui permet la récupération d'un affichage utilisateur
+     * @return un string avec le nom de toutes les crétures
+     */
+    public String afficherCreatures() {
+        String strConteneur = nom + " = {";
+        for (Creature creature: listeCreatures) {
+            strConteneur += creature.getName() + ", ";
+        }
+        return strConteneur + '}';
     }
 
     /**
@@ -232,7 +243,7 @@ public abstract class Enclos {
 
     /**
      * Fonction qui permet de récupérer l'indice d'une créature dans la liste des créatures
-     * @param creature
+     * @param creature Créature recherché
      * @return
      */
     public int getIndexCreature(Creature creature){
@@ -245,7 +256,7 @@ public abstract class Enclos {
     }
     /**
      * Fonction qui permet de savoir si une créature existe dans la liste des créatures
-     * @param creature
+     * @param creature Créature recherché
      * @return true si elle existe false sinon
      */
     public boolean existInListeCreature(Creature creature){

@@ -49,7 +49,7 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      */
     @Override
     public String toString() {
-        return "Lycanthrope{} " + super.toString();
+        return "Lycanthrope{ " + super.toString() + "}";
     }
 
     /**
