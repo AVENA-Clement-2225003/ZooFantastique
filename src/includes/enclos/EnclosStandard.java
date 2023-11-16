@@ -36,7 +36,7 @@ public class EnclosStandard extends Enclos {
      */
     @Override
     public int entretientEnclos() {
-        if (super.getNbCreaturesDansEnclos() > 0) {
+        if (super.getListeCreatures().size() > 0) {
             return 1;
         }
         super.setProprete(PropreteEnum.BON);

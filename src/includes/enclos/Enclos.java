@@ -31,10 +31,6 @@ public abstract class Enclos {
     /**
      * Le nombre de créature présentes dnas l'enclos
      */
-    private int nbCreaturesDansEnclos;
-    /**
-     * La liste contenant les créatures présentes
-     */
     private ArrayList<Creature> listeCreatures;
     /**
      * Degré de propreté de l'encos
@@ -52,7 +48,6 @@ public abstract class Enclos {
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
-        this.nbCreaturesDansEnclos = 0;
         this.propreteEnum = PropreteEnum.BON;
         this.listeCreatures = new ArrayList<>();
     }
@@ -70,7 +65,6 @@ public abstract class Enclos {
         this.nom = nom;
         this.superficie = superficie;
         this.capaciteEnclos = capaciteEnclos;
-        this.nbCreaturesDansEnclos = listeCreatures.size(); //Prend automatiquement la taille de la liste des créatures
         this.propreteEnum = propreteEnum;
         this.listeCreatures = listeCreatures;
     }
@@ -135,20 +129,6 @@ public abstract class Enclos {
         this.capaciteEnclos = capaciteEnclos;
     }
     /**
-     * Permet de récupérer la valeur de la variable nbCreaturesDansEnclos
-     * @return
-     */
-    public int getNbCreaturesDansEnclos() {
-        return nbCreaturesDansEnclos;
-    }
-    /**
-     * Permet de changer la valeur de la variable nbCreaturesDansEnclos
-     * @return
-     */
-    public void setNbCreaturesDansEnclos(int nbCreaturesDansEnclos) {
-        this.nbCreaturesDansEnclos = nbCreaturesDansEnclos;
-    }
-    /**
      * Permet de récupérer la valeur de la variable listeCreatures
      * @return
      */
@@ -193,7 +173,6 @@ public abstract class Enclos {
                 "nom='" + nom + '\'' +
                 ", superficie=" + superficie +
                 ", capaciteEnclos=" + capaciteEnclos +
-                ", nbCreaturesDansEnclos=" + nbCreaturesDansEnclos +
                 ", listeCreatures=" + listeCreatures.toString() +
                 ", proprete=" + propreteEnum +
                 '}';
@@ -204,10 +183,10 @@ public abstract class Enclos {
      * @return un string avec le nom de toutes les crétures
      */
     public String afficherCreatures() {
-        if (listeCreatures.isEmpty()) return "L'enclos est vide";
-        String strConteneur = nom + " = {" + listeCreatures.get(0).getNom();
+        if (listeCreatures.isEmpty()) return nom + " = {L'enclos est vide}";
+        String strConteneur = nom + " = {" + listeCreatures.get(0).afficherCreature();
         for (int i = 1; i < listeCreatures.size(); i++) {
-            strConteneur += ", " + listeCreatures.get(i).getNom();
+            strConteneur += ", " + listeCreatures.get(i).afficherCreature();
         }
         return strConteneur + '}';
     }
@@ -276,12 +255,13 @@ public abstract class Enclos {
      * @return
      */
     public int getIndexCreature(Creature creature){
+        if (!existInListeCreature(creature)) return listeCreatures.size();
         for (int i = 0; i < listeCreatures.size(); i++){
             if(listeCreatures.get(i).getID() == listeCreatures.get(i).getID()){
                 return i;
             }
         }
-        return listeCreatures.size();
+        return listeCreatures.size(); //Dupliqué car sinon la méthode est considérée comme fausse par l'IDE
     }
     /**
      * Fonction qui permet de savoir si une créature existe dans la liste des créatures
@@ -289,6 +269,7 @@ public abstract class Enclos {
      * @return true si elle existe false sinon
      */
     public boolean existInListeCreature(Creature creature){
+        if (listeCreatures.isEmpty()) return false;
         for (Creature creatureListe : listeCreatures){
             if(creatureListe.getID() == creature.getID()){
                 return true;
