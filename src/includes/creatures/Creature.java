@@ -1,5 +1,7 @@
 package includes.creatures;
 
+import includes.enclos.Enclos;
+
 /**
  * Classe abstraite qui decrit les creatures.
  */
@@ -60,6 +62,11 @@ public abstract class Creature {
     private String nom;
 
     /**
+     * Enclos dans lequel est la creature
+     */
+    private Enclos enclos;
+
+    /**
      * Constructeur de la classe abstraite includes.creatures.Creature
      * @param nomEspece nom de l'espece de la creature
      * @param sexe sexe de la creature
@@ -82,6 +89,7 @@ public abstract class Creature {
         this.estEnTrainDeDormir = estEnTrainDeDormir;
         this.sante = sante;
         this.nom = nom;
+        this.enclos = null;
     }
 
     /**
@@ -302,5 +310,21 @@ public abstract class Creature {
      */
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    /**
+     * Getter de l'enclos
+     * @return enclos
+     */
+    public Enclos getEnclos() {
+        return enclos;
+    }
+
+    /**
+     * Setter de l'enclos
+     * @param enclos
+     */
+    public void setEnclos(Enclos enclos) {
+        this.enclos = enclos;
     }
 }
