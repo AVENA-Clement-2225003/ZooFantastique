@@ -132,7 +132,7 @@ public abstract class Creature {
     public String toString() {
         return "Creature{" +
                 "ID=" + ID +
-                "nomEspece=" + nomEspece +
+                ", nomEspece=" + nomEspece +
                 ", sexe=" + sexe +
                 ", poids=" + poids +
                 ", taille=" + taille +

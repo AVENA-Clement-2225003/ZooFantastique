@@ -51,7 +51,7 @@ public class Lycanthrope extends Creature implements PeutCourir, Vivipare {
      */
     @Override
     public String toString() {
-        return "Lycanthrope{} " + super.toString();
+        return "Lycanthrope{ " + super.toString() + "}";
     }
 
     @Override

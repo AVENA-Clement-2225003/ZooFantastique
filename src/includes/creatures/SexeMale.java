@@ -16,4 +16,11 @@ public class SexeMale extends Sexe{
     public SexeMale() {
         this.sexe = SexesEnum.MALE;
     }
+
+    @Override
+    public String toString() {
+        return "SexeMale{" +
+                "sexe=" + sexe +
+                '}';
+    }
 }
