@@ -14,6 +14,10 @@ public class LycanthropeFemelle extends Lycanthrope implements Vivipare{
         super(espece, SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom);
     }
 
+    /**
+     * Fonction qui permet aux femelles de mettre bas
+     * @return String message de confirmation
+     */
     @Override
     public String mettreBas() {
         return "Le lycanthrope " + this.getNom() + " met bas";

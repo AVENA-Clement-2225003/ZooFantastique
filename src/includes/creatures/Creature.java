@@ -146,86 +146,160 @@ public abstract class Creature {
                 '}';
     }
 
+    /**
+     * Getter de lastID
+     * @return int lastID
+     */
     public static int getLastID() {
         return lastID;
     }
 
+    /**
+     * Getter de ID
+     * @return int ID
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * Setter de ID
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     * Getter de nomEspece
+     * @return EspecesEnum nomEspece
+     */
     public EspecesEnum getNomEspece() {
         return nomEspece;
     }
 
+    /**
+     * Setter de nomEspece
+     */
     public void setNomEspece(EspecesEnum nomEspece) {
         this.nomEspece = nomEspece;
     }
 
+    /**
+     * Getter de sexe
+      * @return SexesEnum sexe
+     */
     public SexesEnum getSexe() {
         return sexe;
     }
 
+    /**
+     * Setter du sexe
+     */
     public void setSexe(SexesEnum sexe) {
         this.sexe = sexe;
     }
 
+    /**
+     * Getter du poids
+     * @return int poids
+     */
     public int getPoids() {
         return poids;
     }
 
+    /**
+     * Setter du poids
+     */
     public void setPoids(int poids) {
         this.poids = poids;
     }
 
+    /**
+     * Getter de la taille
+     * @return int taille
+     */
     public int getTaille() {
         return taille;
     }
 
+    /**
+     * Setter de la taille
+     */
     public void setTaille(int taille) {
         this.taille = taille;
     }
 
+    /**
+     * Getter de l age
+     * @return int age
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     * Setter de l age
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
+    /**
+     * Getter de la faim
+     * @return boolean faim
+     */
     public boolean isFaim() {
         return faim;
     }
 
+    /**
+     * Setter de la faim
+     */
     public void setFaim(boolean faim) {
         this.faim = faim;
     }
 
+    /**
+     * Getter du sommeil
+     * @return boolean estEnTrainDeDormir
+     */
     public boolean isEstEnTrainDeDormir() {
         return estEnTrainDeDormir;
     }
 
+    /**
+     * Setter du sommeil de la creature
+     */
     public void setEstEnTrainDeDormir(boolean estEnTrainDeDormir) {
         this.estEnTrainDeDormir = estEnTrainDeDormir;
     }
 
+    /**
+     * Getter de la sante
+     * @return boolean sante
+     */
     public boolean isSante() {
         return sante;
     }
 
+    /**
+     * Setter de la sante de la creature
+     */
     public void setSante(boolean sante) {
         this.sante = sante;
     }
 
+    /**
+     * Getter du nom
+     * @return String nom
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Setter du nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
