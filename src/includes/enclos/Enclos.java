@@ -204,11 +204,20 @@ public abstract class Enclos {
      * @return un string avec le nom de toutes les crétures
      */
     public String afficherCreatures() {
-        String strConteneur = nom + " = {";
-        for (Creature creature: listeCreatures) {
-            strConteneur += creature.getNom() + ", ";
+        if (listeCreatures.isEmpty()) return "L'enclos est vide";
+        String strConteneur = nom + " = {" + listeCreatures.get(0).getNom();
+        for (int i = 1; i < listeCreatures.size(); i++) {
+            strConteneur += ", " + listeCreatures.get(i).getNom();
         }
         return strConteneur + '}';
+    }
+
+    /**
+     * Fonction qui permet la récupération d'un affichage utilisateur
+     * @return un string avec le nom de toutes les informations de l'enclos
+     */
+    public String afficherEnclos() {
+        return nom + " d'une superficie de " + superficie + "m² pouvant accueillir " + capaciteEnclos + " créatures avec " + listeCreatures.size() + " présentes et il est en " + propreteEnum + " état";
     }
 
     /**
