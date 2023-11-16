@@ -8,6 +8,13 @@ import java.util.ArrayList;
  * Classe qui représente le zoo
  */
 public class zooFantastique {
+    public zooFantastique(String nom, String maitreZoo, int maxEnclos, ArrayList<Enclos> enclosExistant) {
+        this.nom = nom;
+        this.maitreZoo = maitreZoo;
+        this.maxEnclos = maxEnclos;
+        this.enclosExistant = enclosExistant;
+    }
+
     /**
      * Nom du zoo
      */
@@ -67,9 +74,38 @@ public class zooFantastique {
     public void setEnclosExistant(ArrayList<Enclos> enclosExistant) {
         this.enclosExistant = enclosExistant;
     }
-    public void compteEnclos(ArrayList<Enclos> enclosExistant){
-        for( Enclos enclos : enclosExistant){
 
+    /**
+     * Permet de retourner le nombre de créature dans le zoo
+     * @return
+     */
+    public int compteNbCreatureZoo(){
+        int cpt = 0;
+        for( Enclos enclos : enclosExistant){
+            cpt += enclos.getListeCreatures().size();
         }
+        return cpt;
     }
+
+    /**
+     * Fonction d'affichage du zoo
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "zooFantastique{" +
+                "nom='" + nom + '\'' +
+                ", maitreZoo='" + maitreZoo + '\'' +
+                ", maxEnclos=" + maxEnclos +
+                ", enclosExistant=" + enclosExistant +
+                '}';
+    }
+    /**
+     * Permet d'afficher les créatures du zoo fantastique
+     * @return
+     */
+    public String AfficherCreature() {
+        return enclosExistant.toString();
+    }
+
 }
