@@ -22,7 +22,7 @@ public abstract class Creature {
     /**
      * includes.creatures.Sexe de la creature
      */
-    private Sexe sexe;
+    private SexesEnum sexe;
 
     /**
      * Poids de la creature
@@ -57,7 +57,7 @@ public abstract class Creature {
     /**
      * Nom de la creature (ne depend pas de son espece)
      */
-    private String name;
+    private String nom;
 
     /**
      * Constructeur de la classe abstraite includes.creatures.Creature
@@ -69,9 +69,9 @@ public abstract class Creature {
      * @param faim faim de la creature
      * @param estEnTrainDeDormir sommeil de la creature
      * @param sante sante de la creature
-     * @param name nom de la creature (ne depend pas de son espece)
+     * @param nom nom de la creature (ne depend pas de son espece)
      */
-    public Creature(EspecesEnum nomEspece, Sexe sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String name) {
+    public Creature(EspecesEnum nomEspece, SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom) {
         this.ID = lastID++;
         this.nomEspece = nomEspece;
         this.sexe = sexe;
@@ -81,28 +81,28 @@ public abstract class Creature {
         this.faim = faim;
         this.estEnTrainDeDormir = estEnTrainDeDormir;
         this.sante = sante;
-        this.name = name;
+        this.nom = nom;
     }
 
     /**
      * Fonction qui permet a la creature de manger
      */
     public void manger(){
-        System.out.println(this.nomEspece + "est en train de manger");
+        System.out.println(this.nomEspece + " " + this.nom + " est en train de manger");
     }
 
     /**
      * Fonction qui permet a la creature d'emettre un son
      */
-    public void emettreUnSon(){
-        System.out.println(this.nomEspece + "emet un son");
+    public String emettreUnSon(){
+        return (this.nomEspece + " " + this.nom + " emet un son");
     }
 
     /**
      * Fonction qui permet a la creature d'etre soigne
      */
     public void etreSoigne(){
-        System.out.println(this.nomEspece + "est soigne");
+        System.out.println(this.nomEspece + " " + this.nom + " est soigne");
     }
 
     /**
@@ -110,10 +110,12 @@ public abstract class Creature {
      */
     public void endormir(){
         if (this.estEnTrainDeDormir){
-            System.out.println(this.nomEspece + "se reveille");
+            System.out.println(this.nomEspece  + " " + this.nom + " se reveille");
+            estEnTrainDeDormir = false;
         }
         else {
-            System.out.println(this.nomEspece + "s'endort");
+            System.out.println(this.nomEspece + " " + this.nom + " s'endort");
+            estEnTrainDeDormir = true;
         }
     }
 
@@ -140,7 +142,7 @@ public abstract class Creature {
                 ", faim=" + faim +
                 ", estEnTrainDeDormir=" + estEnTrainDeDormir +
                 ", sante=" + sante +
-                ", name='" + name + '\'' +
+                ", name='" + nom + '\'' +
                 '}';
     }
 
@@ -164,11 +166,11 @@ public abstract class Creature {
         this.nomEspece = nomEspece;
     }
 
-    public Sexe getSexe() {
+    public SexesEnum getSexe() {
         return sexe;
     }
 
-    public void setSexe(Sexe sexe) {
+    public void setSexe(SexesEnum sexe) {
         this.sexe = sexe;
     }
 
@@ -220,11 +222,11 @@ public abstract class Creature {
         this.sante = sante;
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return nom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 }

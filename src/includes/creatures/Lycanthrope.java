@@ -3,7 +3,7 @@ package includes.creatures;
 /**
  * Classe qui represente les lycanthopes, qui a pour interface peutCourir (et qui aura vivipare)
  */
-public class Lycanthrope extends Creature implements PeutCourir, Vivipare {
+public abstract class Lycanthrope extends Creature implements PeutCourir {
 
 
     /**
@@ -13,10 +13,10 @@ public class Lycanthrope extends Creature implements PeutCourir, Vivipare {
      * @param poids
      * @param taille
      * @param age
-     * @param name
+     * @param nom
      */
-    public Lycanthrope(EspecesEnum espece, Sexe sexe, int poids, int taille, int age, String name) {
-        super(espece, sexe, poids, taille, age, false, false, true , name);
+    public Lycanthrope(EspecesEnum espece, SexesEnum sexe, int poids, int taille, int age, String nom) {
+        super(espece, sexe, poids, taille, age, false, false, true , nom);
     }
 
     /**
@@ -29,10 +29,10 @@ public class Lycanthrope extends Creature implements PeutCourir, Vivipare {
      * @param faim
      * @param estEnTrainDeDormir
      * @param sante
-     * @param name
+     * @param nom
      */
-    public Lycanthrope(EspecesEnum espece, Sexe sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String name) {
-        super(espece, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, name);
+    public Lycanthrope(EspecesEnum espece, SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom) {
+        super(espece, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom);
     }
 
 
@@ -42,7 +42,7 @@ public class Lycanthrope extends Creature implements PeutCourir, Vivipare {
      */
     @Override
     public String courir() {
-        return "Le lycantrope " + this.getName() + " court.";
+        return "Le lycantrope " + this.getNom() + " court.";
     }
 
     /**
@@ -54,8 +54,15 @@ public class Lycanthrope extends Creature implements PeutCourir, Vivipare {
         return "Lycanthrope{} " + super.toString();
     }
 
+    /*
     @Override
     public String mettreBas() {
         return "Le lycanthrope met bas";
+    }
+     */
+
+    @Override
+    public String emettreUnSon(){
+        return "Le lycantrope " + this.getNom() + " fait un hurlement";
     }
 }
