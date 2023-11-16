@@ -27,9 +27,9 @@ public class View {
                 tabOption.add(option);
                 i++; //Sauter l'espace pour commencer la récupération de la prochaine option
             }
-            Controlleur.executerCommande(nomCommande, tabOption);
+            //Controlleur.executerCommande(nomCommande, tabOption);
         }else {
-            Controlleur.executerCommande(nomCommande, new ArrayList<>());
+            //Controlleur.executerCommande(nomCommande, new ArrayList<>());
         }
         //potentiel appel de fonction executerCommande(nomCommande, tabOption);
     }

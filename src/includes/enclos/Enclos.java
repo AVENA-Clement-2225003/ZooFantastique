@@ -206,7 +206,7 @@ public abstract class Enclos {
     public String afficherCreatures() {
         String strConteneur = nom + " = {";
         for (Creature creature: listeCreatures) {
-            strConteneur += creature.getName() + ", ";
+            strConteneur += creature.getNom() + ", ";
         }
         return strConteneur + '}';
     }
@@ -225,9 +225,17 @@ public abstract class Enclos {
     /**
      * Fonction permettant l'ajout d'une créature dans l'enclos
      * @param creature Créature à ajouter
-     * @return 0 si la créature est ajoutée
+     * @return 0 si la créature est ajoutée 1 si elle est déjà présente
      */
     public int ajouterCreature(Creature creature){ //la vérification que le type de creature est le même que les autres se fera dans le MVC
+        for (Creature creature1 : listeCreatures) {
+            if (creature1.getID() == creature.getID()) return 1;
+            if (creature1.getNom() == creature.getNom()) {
+                creature.setNom(creature.getNom() + creature.getID());
+                listeCreatures.add(creature);
+                return 0;
+            }
+        }
         listeCreatures.add(creature);
         return 0;
     }

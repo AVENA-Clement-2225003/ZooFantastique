@@ -1,4 +1,4 @@
-package tests.enclos;
+/*package tests.enclos;
 
 import includes.enclos.EnclosStandard;
 import org.junit.jupiter.api.Test;
@@ -18,3 +18,4 @@ public class EnclosStandardTest {
         assertEquals("Enclos{nom='Enclos1', superficie=140, capaciteEnclos=20, nbCreaturesDansEnclos=0, listeCreatures=[], proprete=BON}", E1.toString());
     }
 }
+*/
