@@ -150,8 +150,14 @@ public abstract class Creature {
                 ", faim=" + faim +
                 ", estEnTrainDeDormir=" + estEnTrainDeDormir +
                 ", sante=" + sante +
-                ", name='" + nom + '\'' +
+                ", nom='" + nom + '\'' +
                 '}';
+    }
+
+    public String afficherCreature(){
+        return "La creature " + nom + " de type " + nomEspece + ", d'identifiant " + ID + " et de sexe " + sexe +
+                 " fait " + taille + " cm, " + poids + " kg, a " + age + " ans, " + ((faim)?"a faim, ":"n'a pas faim, ") +
+                 ((estEnTrainDeDormir)?"a sommeil et ":"n'a pas sommeil et ") + ((sante)?"est en bonne sante":"n'est pas en bonne sante");
     }
 
     /**
