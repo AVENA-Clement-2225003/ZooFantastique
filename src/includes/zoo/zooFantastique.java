@@ -1,6 +1,7 @@
 package includes.zoo;
 
 import includes.enclos.Enclos;
+import includes.enclos.EnclosStandard;
 
 import java.util.ArrayList;
 
@@ -105,7 +106,20 @@ public class zooFantastique {
      * @return
      */
     public String AfficherCreature() {
-        return enclosExistant.toString();
+        String strConteneur = "Le zoo : " + nom + " avec les créatures :  {" + enclosExistant.get(0).afficherCreatures();
+        for (int i = 1; i < enclosExistant.size(); i++) {
+            strConteneur += ", " + enclosExistant.get(i).afficherCreatures();
+        }
+        return strConteneur + '}';
+    }
+
+    /**
+     * Permet d'afficher un enclos choisi du zoo, ainsi que ses animaux
+     * @param enclos
+     * @return
+     */
+    public String getEnclosByNom(Enclos enclos) {
+        return enclos.toString();
     }
 
 }

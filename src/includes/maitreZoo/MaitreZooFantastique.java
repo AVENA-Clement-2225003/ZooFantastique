@@ -1,9 +1,19 @@
 package includes.maitreZoo;
 
+
+import includes.creatures.Creature;
+import includes.enclos.Enclos;
+
 /**
  * Classe qui représente le maître du zoo fantastique
  */
 public class MaitreZooFantastique {
+    public MaitreZooFantastique(String nom, String sexe, int age) {
+        this.nom = nom;
+        this.sexe = sexe;
+        this.age = age;
+    }
+
     /**
      * Nom du maître du zoo
      */
@@ -33,6 +43,21 @@ public class MaitreZooFantastique {
         this.age = age;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
 
     /**
      * Fonction d'affichage du maître du zoo
@@ -40,10 +65,23 @@ public class MaitreZooFantastique {
      */
     @Override
     public String toString() {
-        return "includes.maitreZoo.MaitreZooFantastique{" +
+        return "maître zoo fantastique{" +
                 "nom='" + nom + '\'' +
                 ", sexe='" + sexe + '\'' +
                 ", age=" + age +
                 '}';
+    }
+    public String examinerEnclos(Enclos enclos) {
+        return "Le maître de zoo " + nom + " est dans le l'" + enclos.afficherEnclos();
+    }
+    public String nettoyerEnclos(Enclos enclos) {
+        return nom + "a nettoyer l'" + enclos.entretientEnclos();
+    }
+    public String nourrirCreatures(Enclos enclos) {
+        enclos.nourrirCreatures();
+        return nom + "a nourrit les créatures de l'" + enclos;
+    }
+    public int deplacerCreature(Creature creature, Enclos enclos) {
+        return creature.getEnclos().deplacerCreatureEnclos(creature, enclos);
     }
 }
