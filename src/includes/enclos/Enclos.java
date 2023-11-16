@@ -200,6 +200,18 @@ public abstract class Enclos {
     }
 
     /**
+     * Fonction qui permet la récupération d'un affichage utilisateur
+     * @return un string avec le nom de toutes les crétures
+     */
+    public String afficherCreatures() {
+        String strConteneur = nom + " = {";
+        for (Creature creature: listeCreatures) {
+            strConteneur += creature.getName() + ", ";
+        }
+        return strConteneur + '}';
+    }
+
+    /**
      * Fonction qui permet de nourrir toutes les créatures de l'enclos
      * @return 0 si tous les animaux sont nourrit, 1 sinon
      */
