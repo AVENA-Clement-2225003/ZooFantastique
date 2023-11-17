@@ -2,6 +2,8 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+import java.util.Random;
+
 /**
  * Classe abstraite qui decrit les creatures.
  */
@@ -67,6 +69,11 @@ public abstract class Creature {
     private Enclos enclos;
 
     /**
+     * Age auquel la creature meurt (si elle ne meurt pas avant a cause de sa sante)
+     */
+    private int ageMort;
+
+    /**
      * Constructeur de la classe abstraite includes.creatures.Creature
      * @param nomEspece nom de l'espece de la creature
      * @param sexe sexe de la creature
@@ -90,6 +97,8 @@ public abstract class Creature {
         this.sante = sante;
         this.nom = nom;
         this.enclos = null;
+        Random r = new Random();
+        this.ageMort = r.nextInt((40 - 20) + 1) + 20;
     }
 
     /**
@@ -130,8 +139,14 @@ public abstract class Creature {
     /**
      * Fonction qui permet a la creature de vieillir
      */
-    public void vieillir() {
-
+    public String vieillir() {
+        age++;
+        if (age >= ageMort){
+            return("A IMPLEMENTER : la creature meurt");
+        }
+        else {
+            return "" + age;
+        }
     }
 
     /**
@@ -150,7 +165,8 @@ public abstract class Creature {
                 ", faim=" + faim +
                 ", estEnTrainDeDormir=" + estEnTrainDeDormir +
                 ", sante=" + sante +
-                ", nom='" + nom + '\'' +
+                ", nom=" + nom +
+                ", ageMort='" + ageMort + '\'' +
                 '}';
     }
 
@@ -332,5 +348,21 @@ public abstract class Creature {
      */
     public void setEnclos(Enclos enclos) {
         this.enclos = enclos;
+    }
+
+    /**
+     * Getter de l'age de la mort
+     * @return ageMort int
+     */
+    public int getAgeMort() {
+        return ageMort;
+    }
+
+    /**
+     * Setter de l'age de la mort
+     * @param ageMort int
+     */
+    public void setAgeMort(int ageMort) {
+        this.ageMort = ageMort;
     }
 }
