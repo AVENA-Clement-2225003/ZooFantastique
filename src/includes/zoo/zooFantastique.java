@@ -119,7 +119,7 @@ public class zooFantastique {
      * @return
      */
     public String getEnclosByNom(Enclos enclos) {
-        return enclos.toString();
+        return enclos.afficherEnclos();
     }
 
 }
