@@ -3,6 +3,7 @@ import includes.creatures.LicorneMale;
 import includes.creatures.LycanthropeFemelle;
 import includes.creatures.LycanthropeMale;
 import includes.enclos.Enclos;
+import app.View;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
 import includes.zoo.zooFantastique;
