@@ -8,7 +8,9 @@ import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
 import includes.zoo.zooFantastique;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -23,7 +25,14 @@ public class Main {
         E1.ajouterCreature(Ly1);
         E1.ajouterCreature(Ly2);
         System.out.println(zoo.AfficherCreature() + "\n");
-        System.out.println(zoo.toString());
-
+        System.out.println(zoo);
+        String resCommande = "";
+        Scanner myObj = new Scanner(System.in);
+        while(true) {
+            resCommande = View.entreeCommande(myObj.nextLine()); // Lis la commande de l'utilisateur
+            if (resCommande.equals("exit")) break; // Si l'utilisateur veut quitter le jeu alors on sors de la boucle
+            System.out.println(resCommande); // Affiche le résultat de sa commande (si il y en a un);
+        }
+        // Faire le processus de sauvegarde
     }
 }

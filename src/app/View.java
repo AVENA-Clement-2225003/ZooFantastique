@@ -3,40 +3,20 @@ package app;
 import java.util.ArrayList;
 
 import includes.creatures.Creature;
+import includes.creatures.LycanthropeFemelle;
+import includes.creatures.LycanthropeMale;
 import includes.enclos.Enclos;
+import includes.enclos.EnclosStandard;
+import includes.zoo.zooFantastique;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class View {
-    private Controller Controlleur;
-    public void entreeCommande(String commande) {
-        if (!Character.isLetter(commande.charAt(0))) {
-            System.out.println("N'est pas une commande, retirez l'espace devant");
-        }
-        int i = 0;
-        String nomCommande = "";
-        while (i < commande.length() && commande.charAt(i) != ' ') { //Récupération du nom de la commande
-            nomCommande += commande.charAt(i);
-            i++;
-        }
-        if (i < commande.length()) {
-            i++; //Pour sauter l'espace
-            ArrayList<String> tabOption = new ArrayList<>();
-            String option;
-            while (i < commande.length()) { // Récupération des options associées
-                option = "";
-                while (i < commande.length() && commande.charAt(i) != ' ') {
-                    option += commande.charAt(i);
-                    i++;
-                }
-                tabOption.add(option);
-                i++; //Sauter l'espace pour commencer la récupération de la prochaine option
-            }
-            //Controlleur.executerCommande(nomCommande, tabOption);
-        }else {
-            //Controlleur.executerCommande(nomCommande, new ArrayList<>());
-        }
-        //potentiel appel de fonction executerCommande(nomCommande, tabOption);
+    private static Controller Controlleur = new Controller();
+    public static String entreeCommande(String commande) {
+        if (commande.equals("exit")) return "exit";
+        return Controlleur.entreeCommande(commande);
     }
     public void showScreen(int moreLengthName, ArrayList<String> nomCreatures, ArrayList<String> nomEnclos) {
         if (moreLengthName < "Créatures".length()) {
@@ -55,5 +35,6 @@ public class View {
         }
         System.out.println("...\t...\t...\t...");
     }
+
 
 }
