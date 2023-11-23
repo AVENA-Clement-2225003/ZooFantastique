@@ -51,6 +51,14 @@ public class zooFantastique {
     }
 
     /**
+     * Permet de récupérer la valeur d'enclos maximal
+     * @return
+     */
+    public int getMaxEnclos() {
+        return maxEnclos;
+    }
+
+    /**
      * Permet de récupérer le nom du zoo
      * @return
      */
@@ -105,7 +113,7 @@ public class zooFantastique {
      * Permet d'afficher les créatures du zoo fantastique
      * @return
      */
-    public String AfficherCreature() {
+    public String afficherCreature() {
         String strConteneur = "Le zoo : " + nom + " avec les créatures :  {" + enclosExistant.get(0).afficherCreatures();
         for (int i = 1; i < enclosExistant.size(); i++) {
             strConteneur += ", " + enclosExistant.get(i).afficherCreatures();
