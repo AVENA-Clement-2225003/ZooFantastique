@@ -15,7 +15,7 @@ import java.util.Scanner;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ArrayList<Enclos> listeEnclos = new ArrayList<>() ;
         zooFantastique zoo = new zooFantastique("L'amnéstie","Pierre", 10, listeEnclos);
         EnclosStandard E1 = new EnclosStandard("Enclos de Lycanthrope", 100, 10);
@@ -29,10 +29,19 @@ public class Main {
         String resCommande = "";
         Scanner myObj = new Scanner(System.in);
         while(true) {
-            resCommande = View.entreeCommande(myObj.nextLine()); // Lis la commande de l'utilisateur
+            resCommande = View.getInstance().entreeCommande(myObj.nextLine()); // Lis la commande de l'utilisateur
             if (resCommande.equals("exit")) break; // Si l'utilisateur veut quitter le jeu alors on sors de la boucle
+            clear();
+            //View.showScreen();
             System.out.println(resCommande); // Affiche le résultat de sa commande (si il y en a un);
         }
         // Faire le processus de sauvegarde
+    }
+
+    static private void clear()
+    {
+        for(int i = 0; i < 500; i++) {
+            System.out.println();
+        }
     }
 }

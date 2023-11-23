@@ -13,10 +13,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class View {
-    private static Controller Controlleur = new Controller();
-    public static String entreeCommande(String commande) {
+
+    public static View instance = null;
+    private Controller controlleur;
+
+    private View() {
+        controlleur = new Controller();
+    }
+
+    public static View getInstance() {
+        if (instance == null) {
+            instance = new View();
+        }
+
+        return instance;
+    }
+
+    public String entreeCommande(String commande) {
         if (commande.equals("exit")) return "exit";
-        return Controlleur.entreeCommande(commande);
+        if (commande.equals("")) return "";
+        return controlleur.entreeCommande(commande);
     }
     public void showScreen(int moreLengthName, ArrayList<String> nomCreatures, ArrayList<String> nomEnclos) {
         if (moreLengthName < "Créatures".length()) {
