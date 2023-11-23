@@ -37,13 +37,13 @@ public class Controller {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
-                    return "Liste de toutes les commandes : soigner, nourir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos\nPour plus d'aide help nomCommande";
+                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos\nPour plus d'aide help nomCommande";
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
                             return "Commande pour soigner un animal\nTapez soigner leNomAnimal";
-                        case "nourir":
-                            return "Commande pour nourir un animal\nTapez nourir leNomAnimal";
+                        case "nourrir":
+                            return "Commande pour nourrir un animal\nTapez nourrir leNomAnimal";
                         case "renommerCreature":
                             return "Commande pour renommer un animal\nTapez renommerCreature leNomAnimal LeNouveauNom";
                         case "nettoyer":
