@@ -41,7 +41,7 @@ public class Controller {
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
-                            return "Commande pour soigner un animal\nTapez soigner leNomAnimal";
+                            return "Commande pour soigner un animal\nTapez " + "\\u001B[32m" + "soigner leNomAnimal" + "\\u001B[0m";
                         case "nourrir":
                             return "Commande pour nourrir un animal\nTapez nourrir leNomAnimal";
                         case "renommerCreature":
