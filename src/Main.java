@@ -1,33 +1,14 @@
-import includes.creatures.LicorneFemelle;
-import includes.creatures.LicorneMale;
-import includes.creatures.LycanthropeFemelle;
-import includes.creatures.LycanthropeMale;
-import includes.enclos.Enclos;
 import app.View;
-import includes.enclos.EnclosStandard;
-import includes.enclos.EnclosVoliere;
-import includes.zoo.zooFantastique;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) throws IOException {
-        ArrayList<Enclos> listeEnclos = new ArrayList<>() ;
-        zooFantastique zoo = new zooFantastique("L'amnéstie","Pierre", 10, listeEnclos);
-        EnclosStandard E1 = new EnclosStandard("Enclos de Lycanthrope", 100, 10);
-        LycanthropeMale Ly1 = new LycanthropeMale(100, 180, 10,"Micheline");
-        LycanthropeFemelle Ly2 = new LycanthropeFemelle(100, 180, 10,"Jeanne");
-        listeEnclos.add(E1);
-        E1.ajouterCreature(Ly1);
-        E1.ajouterCreature(Ly2);
-        System.out.println(zoo.AfficherCreature() + "\n");
-        System.out.println(zoo);
-        String resCommande = "";
+    public static void main(String[] args){
         Scanner myObj = new Scanner(System.in);
+        System.out.print("Donnez un nom à votre zoo : ");
+        String nom = myObj.nextLine();
+        System.out.print("Donnez un nom à votre maitre de zoo : ");
+        View.getInstance().CreerUnZoo(nom, myObj.nextLine());
+        String resCommande = "";
         while(true) {
             resCommande = View.getInstance().entreeCommande(myObj.nextLine()); // Lis la commande de l'utilisateur
             if (resCommande.equals("exit")) break; // Si l'utilisateur veut quitter le jeu alors on sors de la boucle
@@ -40,7 +21,7 @@ public class Main {
 
     static private void clear()
     {
-        for(int i = 0; i < 500; i++) {
+        for(int i = 0; i < 250; i++) {
             System.out.println();
         }
     }

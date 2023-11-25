@@ -34,6 +34,9 @@ public class View {
         if (commande.equals("")) return "";
         return controlleur.entreeCommande(commande);
     }
+    public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
+        controlleur.CreerUnZoo(nom, nomMaitreDeZoo);
+    }
     public void showScreen(int moreLengthName, ArrayList<String> nomCreatures, ArrayList<String> nomEnclos) {
         if (moreLengthName < "Créatures".length()) {
             moreLengthName = "Créatures".length();

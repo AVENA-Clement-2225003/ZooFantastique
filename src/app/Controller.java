@@ -4,6 +4,10 @@ import app.Error;
 import java.util.ArrayList;
 
 public class Controller {
+    Model modele = new Model();
+    public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
+        modele.CreerUnZoo(nom, nomMaitreDeZoo);
+    }
     public String entreeCommande(String commande) {
         if (!Character.isLetter(commande.charAt(0))) {
             return "N'est pas une commande, retirez l'espace devant";
@@ -37,7 +41,7 @@ public class Controller {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
-                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos\nPour plus d'aide help nomCommande";
+                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, exit\nPour plus d'aide help nomCommande";
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
@@ -54,14 +58,25 @@ public class Controller {
                             return "Commande pour retirer un animal mort\nTapez retirerCadrave leNomAnimal";
                         case "supprimerEnclos":
                             return "Commande pour supprimer un enclos VIDE\nTapez suppri leNomAnimal";
+                        case "infos":
+                            return "Permet de visualiser les informations en fonction de l'option \"zoo\", \"maitreZoo\" ou \"Enclos nomEnclos\"";
                         case "exit":
                             return "Commande pour quitter le jeu";
                         default:
                             return "Erreur help: commande non reconnue";
                     }
                 }
-            case "a":
-                return "Commande pour soiger un animal\nTapez soigner leNomAnimal";
+            case "infos":
+                if (tabOption.isEmpty() || tabOption.get(0).equals("")) return "Il manque des options (zoo, enclos, maitreZoo)";
+                switch (tabOption.get(0)) {
+                    case "zoo":
+                        return modele.getZoo().toString();
+                    case "maitreZoo":
+                        return modele.getMaitre().toString();
+                    case "enclos":
+                        if (tabOption.size() < 2) return modele.getZoo().getEnclosExistant().toString();
+                        //return modele.getZoo().getEnclosByNom(tabOption.get(1));
+                }
             case "e":
                 return "Commande pour soiger un animal\nTapez soigner leNomAnimal";
             case "b":
