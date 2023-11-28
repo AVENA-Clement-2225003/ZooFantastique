@@ -1,6 +1,6 @@
 package includes.creatures;
 
-public class Phenix extends Creature implements PeutVoler{
+public abstract class Phenix extends Creature implements PeutVoler{
     /**
      * Constructeur qui permet de creer un phenixs, qui n'a pas faim, est reveille et est en bonne sante
      * @param sexe SexesEnum sexe de la creature

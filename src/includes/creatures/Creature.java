@@ -162,21 +162,12 @@ public abstract class Creature {
      * Fonction qui permet d'afficher les caracteristiques de la creature
      * @return String toString
      */
+
     @Override
     public String toString() {
-        return "Creature{" +
-                "ID=" + ID +
-                ", nomEspece=" + nomEspece +
-                ", sexe=" + sexe +
-                ", poids=" + poids +
-                ", taille=" + taille +
-                ", age=" + age +
-                ", faim=" + faim +
-                ", estEnTrainDeDormir=" + estEnTrainDeDormir +
-                ", sante=" + sante +
-                ", nom=" + nom +
-                ", ageMort='" + ageMort + '\'' +
-                '}';
+        return "\n nom : " + nom + " | espece : " + nomEspece +
+                " | ID : " + ID + " | age : " + age + " | faim : " + ((faim)?" oui ":" non ") +
+                " | en bonne sante : " + ((sante)?" oui ":" non ") + " | dort : " + ((estEnTrainDeDormir)?" oui ":" non ");
     }
 
     public String afficherCreature(){

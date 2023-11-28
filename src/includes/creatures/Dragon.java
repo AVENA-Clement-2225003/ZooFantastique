@@ -1,6 +1,6 @@
 package includes.creatures;
 
-public class Dragon extends Creature implements PeutVoler, PeutCourir, PeutNager{
+public abstract class Dragon extends Creature implements PeutVoler, PeutCourir, PeutNager{
     /**
      * Constructeur qui permet de creer un dragon, qui n'a pas faim, est reveille et est en bonne sante
      * @param sexe SexesEnum sexe de la creature
