@@ -1,12 +1,14 @@
 package app;
 
-import app.Error;
+import includes.enclos.EnclosAquarium;
+import includes.enclos.EnclosStandard;
+import includes.enclos.EnclosVoliere;
+
 import java.util.ArrayList;
 
 public class Controller {
-    Model modele = new Model();
     public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
-        modele.CreerUnZoo(nom, nomMaitreDeZoo);
+        Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
     }
     public String entreeCommande(String commande) {
         if (!Character.isLetter(commande.charAt(0))) {
@@ -50,6 +52,8 @@ public class Controller {
                             return "Commande pour nourrir un animal\nTapez nourrir leNomAnimal";
                         case "renommerCreature":
                             return "Commande pour renommer un animal\nTapez renommerCreature leNomAnimal LeNouveauNom";
+                        case "creerEnclos":
+                            return "Commande pour créer un enclos\nTapez creerEnclos type nomEnclos superficie capacite.\nPour les volière et aquarium ajouter à la suite la profondeur/hauteur";
                         case "nettoyer":
                             return "Commande pour nettoyer un enclos\nTapez nettoyer leNomEnclos";
                         case "renommerEnclos":
@@ -70,15 +74,42 @@ public class Controller {
                 if (tabOption.isEmpty() || tabOption.get(0).equals("")) return "Il manque des options (zoo, enclos, maitreZoo)";
                 switch (tabOption.get(0)) {
                     case "zoo":
-                        return modele.getZoo().toString();
+                        return Model.getInstance().getZoo().toString();
                     case "maitreZoo":
-                        return modele.getMaitre().toString();
+                        return Model.getInstance().getMaitre().toString();
                     case "enclos":
-                        if (tabOption.size() < 2) return modele.getZoo().getEnclosExistant().toString();
-                        //return modele.getZoo().getEnclosByNom(tabOption.get(1));
+                        if (tabOption.size() < 2) return Model.getInstance().getZoo().getEnclosExistant().toString();
+                        if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) == null ) return "Pas d'enclos à ce nom";
+                        return Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).toString();
+                    case "creature":
+                        if (tabOption.size() < 2) return "Donnez le nom de la créature";
+                        if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)) == null ) return "Pas de créature à ce nom";
+                        return Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).toString();
+                    default:
+                        return "Pas d'infos pour : " + tabOption.get(0);
                 }
-            case "e":
-                return "Commande pour soiger un animal\nTapez soigner leNomAnimal";
+            case "creerEnclos":
+                if (tabOption.isEmpty() || tabOption.size() < 4) return "Il manque des options (type, nom, superficie, capacité)";
+                switch (tabOption.get(0)) {
+                    case "standard":
+                        Model.getInstance().getZoo().ajouterEnclos(new EnclosStandard(tabOption.get(1), Integer.parseInt(tabOption.get(2)), Integer.parseInt(tabOption.get(3))));
+                        break;
+                    case "voliaire":
+                        if (tabOption.isEmpty() || tabOption.size() < 5) return "Il manque la hauteur";
+                        Model.getInstance().getZoo().ajouterEnclos(new EnclosVoliere(tabOption.get(1), Integer.parseInt(tabOption.get(2)), Integer.parseInt(tabOption.get(3)), Integer.parseInt(tabOption.get(4))));
+                        break;
+                    case "aquarium":
+                        if (tabOption.isEmpty() || tabOption.size() < 5) return "Il manque la profondeur";
+                        Model.getInstance().getZoo().ajouterEnclos(new EnclosAquarium(tabOption.get(1), Integer.parseInt(tabOption.get(2)), Integer.parseInt(tabOption.get(3)), Integer.parseInt(tabOption.get(4))));
+                        break;
+                    default:
+                        return "Type inconnu";
+                }
+                return "Enclos " + tabOption.get(1) + " créé, il y a maintenant " + Model.getInstance().getZoo().getEnclosExistant().size() + " enclos!";
+            case "supprimerEnclos":
+                if (tabOption.isEmpty()) return "Il manque des options (type, nom, superficie, capacité)";
+                Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
+                return "Enclos " + tabOption.get(0) + " supprimé, il y a maintenant " + Model.getInstance().getZoo().getEnclosExistant().size() + " enclos!";
             case "b":
                 return "Commande pour soiger un animal\nTapez soigner leNomAnimal";
             default:

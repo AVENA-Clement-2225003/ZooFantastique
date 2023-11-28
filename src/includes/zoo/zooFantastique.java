@@ -1,5 +1,7 @@
 package includes.zoo;
 
+import app.View;
+import includes.creatures.Creature;
 import includes.enclos.Enclos;
 import includes.enclos.EnclosStandard;
 
@@ -123,11 +125,36 @@ public class zooFantastique {
 
     /**
      * Permet d'afficher un enclos choisi du zoo, ainsi que ses animaux
-     * @param enclos
+     * @param nomEnclos
      * @return
      */
-    public String getEnclosByNom(Enclos enclos) {
-        return enclos.afficherEnclos();
+    public Enclos getEnclosByNom(String nomEnclos) {
+        for(Enclos e:enclosExistant){
+            if (e.getNom().equals(nomEnclos)) return e;
+        }
+        return null;
+    }
+
+    /**
+     * Permet d'afficher un enclos choisi du zoo, ainsi que ses animaux
+     * @param nomCreature
+     * @return
+     */
+    public Creature getCreatureByNom(String nomCreature) {
+        for(Enclos e:enclosExistant){
+            for(Creature c:e.getListeCreatures())
+                if (c.getNom().equals(nomCreature)) return c;
+        }
+        return null;
+    }
+
+    /**
+     * Permet d'afficher un enclos choisi du zoo, ainsi que ses animaux
+     * @param nvEnclos
+     * @return
+     */
+    public void ajouterEnclos(Enclos nvEnclos) {
+        enclosExistant.add(nvEnclos);
     }
 
 }

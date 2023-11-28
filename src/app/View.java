@@ -2,16 +2,6 @@ package app;
 
 import java.util.ArrayList;
 
-import includes.creatures.Creature;
-import includes.creatures.LycanthropeFemelle;
-import includes.creatures.LycanthropeMale;
-import includes.enclos.Enclos;
-import includes.enclos.EnclosStandard;
-import includes.zoo.zooFantastique;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class View {
 
     public static View instance = null;
