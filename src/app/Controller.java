@@ -107,9 +107,26 @@ public class Controller {
                 }
                 return "Enclos " + tabOption.get(1) + " créé, il y a maintenant " + Model.getInstance().getZoo().getEnclosExistant().size() + " enclos!";
             case "supprimerEnclos":
-                if (tabOption.isEmpty()) return "Il manque des options (type, nom, superficie, capacité)";
+                if (tabOption.isEmpty()) return "Il manque le nom";
+                if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).getListeCreatures().size() != 0) return "Enclos non vide, la supression n'est pas possible!";
                 Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
                 return "Enclos " + tabOption.get(0) + " supprimé, il y a maintenant " + Model.getInstance().getZoo().getEnclosExistant().size() + " enclos!";
+            case "retirerCreature":
+                if (tabOption.isEmpty()) return "Il manque le nom";
+                if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature vivante!";
+                Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
+                return "Enclos " + tabOption.get(0) + " supprimé, il y a maintenant " + Model.getInstance().getZoo().getEnclosExistant().size() + " enclos!";
+            case "renommerEnclos":
+                if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nom, nouveau nom)";
+                Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).setNom(tabOption.get(1));
+                return "Enclos " + tabOption.get(0) + " renommé " + tabOption.get(1);
+            case "renommerCreature":
+                if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nom, nouveau nom)";
+                Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).setNom(tabOption.get(1));
+                return "Créature " + tabOption.get(0) + " renommé " + tabOption.get(1);
+            case "soigner":
+                if (tabOption.isEmpty()) return "Il manque le nom de l'animal";
+                return Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).etreSoigne();
             case "b":
                 return "Commande pour soiger un animal\nTapez soigner leNomAnimal";
             default:

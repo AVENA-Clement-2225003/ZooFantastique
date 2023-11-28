@@ -118,8 +118,17 @@ public abstract class Creature {
     /**
      * Fonction qui permet a la creature d'etre soigne
      */
-    public void etreSoigne(){
-        System.out.println(this.nomEspece + " " + this.nom + " est soigne");
+    public String etreSoigne(){
+        this.sante = true;
+        if (this.sexe == SexesEnum.FEMELLE) return this.nomEspece + " " + this.nom + " est soignée";
+        return this.nomEspece + " " + this.nom + " est soigné";
+    }
+
+    /**
+     * Fonction qui permet a la creature d'etre soigne true si vivant false sinon
+     */
+    public boolean estVivant(){
+        return !(this.age == this.ageMort);
     }
 
     /**
