@@ -1,5 +1,6 @@
 package app;
 
+import includes.creatures.SexesEnum;
 import includes.enclos.EnclosAquarium;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
@@ -7,6 +8,14 @@ import includes.enclos.EnclosVoliere;
 import java.util.ArrayList;
 
 public class Controller {
+    private static Controller instance;
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller();
+        }
+
+        return instance;
+    }
     public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
         Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
     }
@@ -49,7 +58,7 @@ public class Controller {
                         case "soigner":
                             return "Commande pour soigner un animal\nTapez " + "\\u001B[32m" + "soigner leNomAnimal" + "\\u001B[0m";
                         case "nourrir":
-                            return "Commande pour nourrir un animal\nTapez nourrir leNomAnimal";
+                            return "Commande pour nourrir les animaux d'un enclos\nTapez nourrir nomEnclos";
                         case "renommerCreature":
                             return "Commande pour renommer un animal\nTapez renommerCreature leNomAnimal LeNouveauNom";
                         case "creerEnclos":
@@ -111,11 +120,23 @@ public class Controller {
                 if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).getListeCreatures().size() != 0) return "Enclos non vide, la supression n'est pas possible!";
                 Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
                 return "Enclos " + tabOption.get(0) + " supprimé, il y a maintenant " + Model.getInstance().getZoo().getEnclosExistant().size() + " enclos!";
-            case "retirerCreature":
+            case "retirerCadavre":
                 if (tabOption.isEmpty()) return "Il manque le nom";
                 if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature vivante!";
                 Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
-                return "Enclos " + tabOption.get(0) + " supprimé, il y a maintenant " + Model.getInstance().getZoo().getEnclosExistant().size() + " enclos!";
+                return "Créature " + tabOption.get(0) + " morte retirée";
+            case "deplacerCreature":
+                if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomCreature, nomEnclosDestination)";
+                if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature morte!";
+                if (false) return "Les créatures de l'enclos de destination ne sont pas de la même espèce"; // #290404
+                int code = Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).ajouterCreature(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)));
+                if (code == 2) return "Enclos de destination complet";
+                if (code == 1) return "La créature est déjà présente dans l'enclos de destination";
+                if (code == 0) {
+                    Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().retirerCreature(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)));
+                    return "Créature déplacée vers " + tabOption.get(1);
+                }
+                return "Créature " + tabOption.get(0) + " déplacée";
             case "renommerEnclos":
                 if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nom, nouveau nom)";
                 Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).setNom(tabOption.get(1));
@@ -127,6 +148,21 @@ public class Controller {
             case "soigner":
                 if (tabOption.isEmpty()) return "Il manque le nom de l'animal";
                 return Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).etreSoigne();
+            case "nourir":
+                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nourir";
+                Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).nourrirCreatures();
+                return "Les créatures de l'enclos " + tabOption.get(0) + " ont été nourri";
+            case "nettoyer":
+                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nettoyer";
+                if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).entretientEnclos() == 1) return "L'enclos " + tabOption.get(0) + " n'est pas vide";
+                return "L'enclos " + tabOption.get(0) + " est nettoyé";
+            case "reproduire":
+                if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomParent, nomParent, nomBébé)";
+                if (false) return "Les parents ne sont pas de la même espèce"; // Vérifie qu'il soient de la même espèce #290404
+                if (false) return "Les parents ne sont aps du même enclos"; // Vérifie qu'il soient du même enclos #290404
+                if (!(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).getListeCreatures().size()+1 < Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getCapaciteEnclos())) return "L'enclos de est complet, il ne peuvent pas se reproduire"; // Vérifie qu'il y ai de la place
+                if (!(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe() == SexesEnum.FEMELLE && Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getSexe() == SexesEnum.MALE) || ((Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getSexe() == SexesEnum.FEMELLE && Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe() == SexesEnum.MALE))) return "Ce n'est pas un mâle et une femelle"; // Vérifie qu'il y ai un mâle et une femelle
+                return tabOption.get(2) + "est né";
             case "b":
                 return "Commande pour soiger un animal\nTapez soigner leNomAnimal";
             default:

@@ -8,7 +8,7 @@ public class View {
     private Controller controlleur;
 
     private View() {
-        controlleur = new Controller();
+        controlleur = Controller.getInstance();
     }
 
     public static View getInstance() {
