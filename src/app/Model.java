@@ -3,6 +3,7 @@ import includes.creatures.Licorne;
 import includes.creatures.LicorneFemelle;
 import includes.creatures.LicorneMale;
 import includes.enclos.EnclosStandard;
+import includes.maitreZoo.ENUMSexe;
 import includes.zoo.zooFantastique;
 import includes.maitreZoo.MaitreZooFantastique;
 
@@ -24,7 +25,7 @@ public class Model {
     public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
         if (nomMaitreDeZoo.equals("")) nomMaitreDeZoo = "UnMaitreSuper";
-        maitre = new MaitreZooFantastique(nomMaitreDeZoo, "Mâle", 23);
+        maitre = new MaitreZooFantastique(nomMaitreDeZoo, ENUMSexe.Male, 23);
         unZoo = new zooFantastique(nom, nomMaitreDeZoo/*maitre*/, 15, new ArrayList<>());
         Licorne L1 = new LicorneMale(50, 150, 25, "James");
         Licorne L2 = new LicorneFemelle(50, 150, 25, "Maria");

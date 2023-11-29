@@ -3,6 +3,7 @@ package tests.zoo;
 import includes.creatures.*;
 import includes.enclos.Enclos;
 import includes.enclos.EnclosStandard;
+import includes.maitreZoo.ENUMSexe;
 import includes.maitreZoo.MaitreZooFantastique;
 import includes.zoo.zooFantastique;
 import org.junit.jupiter.api.Test;
@@ -124,7 +125,26 @@ class zooFantastiqueTest {
         EnclosStandard EV2 = new EnclosStandard("Enclos2", 100, 10);
         listeEnclos.add(EV2);
         zooFantastique zoo = new zooFantastique("L'amnéstie","Pierre", 10, listeEnclos);
-        MaitreZooFantastique Pierre = new MaitreZooFantastique("Pierre", "Male", 28);
+        MaitreZooFantastique Pierre = new MaitreZooFantastique("Pierre", ENUMSexe.Male, 28);
         //assertEquals("Enclos2 d'une superficie de 100m² pouvant accueillir 10 créatures avec 0 présentes et il est en BON état",zoo.getEnclosByNom(EV2), "L'affichage de 'getEnclosByNom' est incorrect");
     }
+
+    @Test
+    void getCreatureByNom() {
+        ArrayList<Enclos> listeEnclos = new ArrayList<>() ;
+        zooFantastique zoo = new zooFantastique("L'amnéstie","Pierre", 10, listeEnclos);
+        EnclosStandard E1 = new EnclosStandard("Enclos de Lycanthrope", 100, 10);
+        LycanthropeMale Ly1 = new LycanthropeMale(100, 180, 10,"Micheline");
+        LycanthropeFemelle Ly2 = new LycanthropeFemelle(100, 180, 10,"Jeanne");
+        listeEnclos.add(E1);
+        E1.ajouterCreature(Ly1);
+        E1.ajouterCreature(Ly2);
+        assertEquals("Lycanthrope{ \n nom : Micheline | espece : LYCANTROPE | ID : 0 | age : 10 | faim :  non  | en bonne sante :  oui  | dort :  non }", zoo.getCreatureByNom("Micheline").toString(),"La fonction getCreatureByNom ne fonctionne pas");
+    }
+
+    @Test
+    void ajouterEnclos() {
+
+    }
+
 }

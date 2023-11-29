@@ -8,7 +8,7 @@ import includes.enclos.Enclos;
  * Classe qui représente le maître du zoo fantastique
  */
 public class MaitreZooFantastique {
-    public MaitreZooFantastique(String nom, String sexe, int age) {
+    public MaitreZooFantastique(String nom, ENUMSexe sexe, int age) {
         this.nom = nom;
         this.sexe = sexe;
         this.age = age;
@@ -21,7 +21,7 @@ public class MaitreZooFantastique {
     /**
      * Sexe du maître du zoo
      */
-    private String sexe;
+    private ENUMSexe sexe;
     /**
      * Age du maître du zoo
      */
@@ -51,11 +51,11 @@ public class MaitreZooFantastique {
         this.nom = nom;
     }
 
-    public String getSexe() {
+    public ENUMSexe getSexe() {
         return sexe;
     }
 
-    public void setSexe(String sexe) {
+    public void setSexe(ENUMSexe sexe) {
         this.sexe = sexe;
     }
 
