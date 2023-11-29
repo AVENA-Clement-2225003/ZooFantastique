@@ -1,11 +1,14 @@
 package app;
 
-import includes.creatures.SexesEnum;
+import includes.creatures.*;
 import includes.enclos.EnclosAquarium;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Controller {
     private static Controller instance;
@@ -18,6 +21,14 @@ public class Controller {
     }
     public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
         Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
+    }
+    private String choisirUnPrénom(int sexe) { // Il faut impérativement le même nombre de prénoms masculins et féminins
+        ArrayList<ArrayList<String>> ListePrenoms = new ArrayList<>(
+                Arrays.asList(
+                        new ArrayList<>(Arrays.asList("Jean", "Pierre", "Paul", "Thomas", "Antoine", "Nicolas", "Alexandre", "David", "François", "Guillaume")),
+                        new ArrayList<>(Arrays.asList("Marie", "Sophie", "Emma", "Alice", "Charlotte", "Léa", "Camille", "Eva", "Juliette", "Louise"))
+                ));
+        return ListePrenoms.get(sexe).get(new Random().nextInt(ListePrenoms.size()));
     }
     public String entreeCommande(String commande) {
         if (!Character.isLetter(commande.charAt(0))) {
@@ -52,7 +63,7 @@ public class Controller {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
-                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, exit\nPour plus d'aide help nomCommande";
+                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, exit\nPour plus d'aide: help nomCommande";
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
@@ -86,8 +97,9 @@ public class Controller {
                         return Model.getInstance().getZoo().toString();
                     case "maitreZoo":
                         return Model.getInstance().getMaitre().toString();
-                    case "enclos": // #290404 Ajouter que si on met creatures ca affiche la liste des créatures à l'intérieur (avec leur infos)
+                    case "enclos":
                         if (tabOption.size() < 2) return Model.getInstance().getZoo().getEnclosExistant().toString();
+                        if (tabOption.size() == 3 && tabOption.get(2).equals("creatures")) return Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).afficherCreatures(); // si l'on ecris creatures apres le nom d'enlcos alors ca nous retourne la liste des créatures
                         if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) == null ) return "Pas d'enclos à ce nom";
                         return Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).toString();
                     case "creature":
@@ -128,7 +140,7 @@ public class Controller {
             case "deplacerCreature":
                 if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomCreature, nomEnclosDestination)";
                 if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature morte!";
-                if (false) return "Les créatures de l'enclos de destination ne sont pas de la même espèce"; // #290404
+                if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece() != Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece()) return "Les créatures de l'enclos de destination ne sont pas de la même espèce";
                 int code = Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).ajouterCreature(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)));
                 if (code == 2) return "Enclos de destination complet";
                 if (code == 1) return "La créature est déjà présente dans l'enclos de destination";
@@ -156,17 +168,82 @@ public class Controller {
                 if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nettoyer";
                 if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).entretientEnclos() == 1) return "L'enclos " + tabOption.get(0) + " n'est pas vide";
                 return "L'enclos " + tabOption.get(0) + " est nettoyé";
-            case "reproduire": // #290404 Faire apparaitre le sexe puis une saisie du nom (si entrée direce alors choisir aléatoirement)
-                if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomParent, nomParent, nomBébé)";
-                if (false) return "Les parents ne sont pas de la même espèce"; // Vérifie qu'il soient de la même espèce #290404
-                if (false) return "Les parents ne sont aps du même enclos"; // Vérifie qu'il soient du même enclos #290404
+            case "reproduire":
+                if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomParent, nomParent)";
+                if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece() == Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getNomEspece()) return "Les parents ne sont pas de la même espèce"; // Vérifie qu'il soient de la même espèce
+                if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().equals(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getEnclos())) return "Les parents ne sont aps du même enclos"; // Vérifie qu'il soient du même enclos
                 if (!(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).getListeCreatures().size()+1 < Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getCapaciteEnclos())) return "L'enclos de est complet, il ne peuvent pas se reproduire"; // Vérifie qu'il y ai de la place
                 if (!(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe() == SexesEnum.FEMELLE && Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getSexe() == SexesEnum.MALE) || ((Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getSexe() == SexesEnum.FEMELLE && Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe() == SexesEnum.MALE))) return "Ce n'est pas un mâle et une femelle"; // Vérifie qu'il y ai un mâle et une femelle
-                return tabOption.get(2) + "est né";
+                int sexe = new Random().nextInt(1);
+                if (sexe == 0) System.out.print("C'est un garçon ! Quel nom voulez vous lui donner : ");
+                else System.out.print("C'est une fille ! Quel nom voulez vous lui donner : ");
+                String nom = new Scanner(System.in).nextLine();
+                if (nom.equals("")) {
+                    nom = choisirUnPrénom(sexe);
+                }
+                switch (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece()) {
+                    case DRAGON:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new DragonMale(600, 2000, 0, nom));
+                        }else {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new DragonFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé dragon est né !";
+                    case KRAKEN:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new KrakenMale(600, 2000, 0, nom));
+                        }else {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new KrakenFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé kraken est né !";
+                    case LICORNE:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new LicorneMale(600, 2000, 0, nom));
+                        }else {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new LicorneFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé kraken est né !";
+                    case LYCANTHROPE:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new LycanthropeMale(600, 2000, 0, nom));
+                        }else {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new LycanthropeFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé lycanthrope est né !";
+                    case MEGALODON:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new MegalodonMale(600, 2000, 0, nom));
+                        }else {
+                            //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new MegalodonFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé mégalodon est né !";
+                    case NYMPHE:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new NympheMale(600, 2000, 0, nom));
+                        }else {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new NympheFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé nymphe est né !";
+                    case PHENIX:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new PhenixMale(600, 2000, 0, nom));
+                        }else {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new PhenixFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé phénix est né !";
+                    case SIRENE:
+                        if (sexe == 0) {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new SireneMale(600, 2000, 0, nom));
+                        }else {
+                            Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new SireneFemelle(600, 2000, 0, nom));
+                        }
+                        return "Le bébé sirène est né !";
+                }
             case "b":
                 return "Commande pour soiger un animal\nTapez soigner leNomAnimal";
             default:
                 return "Commande non reconnue";
         }
     }
+
 }

@@ -169,13 +169,7 @@ public abstract class Enclos {
      */
     @Override
     public String toString() {
-        return "Enclos{" +
-                "nom='" + nom + '\'' +
-                ", superficie=" + superficie +
-                ", capaciteEnclos=" + capaciteEnclos +
-                ", listeCreatures=" + listeCreatures.toString() +
-                ", proprete=" + propreteEnum +
-                '}';
+        return "Enclos: " + nom + " | Superficie: " + superficie + " | Capacitée: " + capaciteEnclos + " | Propretée: " + propreteEnum;
     }
 
     /**
@@ -183,12 +177,12 @@ public abstract class Enclos {
      * @return un string avec le nom de toutes les crétures
      */
     public String afficherCreatures() {
-        if (listeCreatures.isEmpty()) return nom + " = {L'enclos est vide}";
-        String strConteneur = nom + " = {" + listeCreatures.get(0).afficherCreature();
-        for (int i = 1; i < listeCreatures.size(); i++) {
-            strConteneur += ", " + listeCreatures.get(i).afficherCreature();
+        if (listeCreatures.isEmpty()) return "L'enclos " + nom +  " est vide";
+        String strConteneur = "Enclos " + nom + " :";
+        for (Creature c:listeCreatures) {
+            strConteneur += "\n" + c.toString();
         }
-        return strConteneur + '}';
+        return strConteneur;
     }
 
     /**
