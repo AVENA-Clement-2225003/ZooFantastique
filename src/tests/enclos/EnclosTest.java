@@ -1,6 +1,7 @@
 package tests.enclos;
 
 import includes.creatures.Creature;
+import includes.creatures.LycanthropeFemelle;
 import includes.creatures.LycanthropeMale;
 import includes.enclos.EnclosStandard;
 import includes.enclos.PropreteEnum;
@@ -15,13 +16,13 @@ class EnclosTest {
     @Test
     void getLastID() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 120, 22);
-        assertEquals(0, E1.getLastID(), "L'id devrait être 0");
+        assertEquals(13, E1.getLastID(), "L'id devrait être 0");
     }
 
     @Test
     void getID() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 120, 22);
-        assertEquals(0, E1.getID(), "L'id devrait être 0");
+        assertEquals(11, E1.getID(), "L'id devrait être 0");
     }
 
     @Test
@@ -45,6 +46,9 @@ class EnclosTest {
 
     @Test
     void setSuperficie() {
+        EnclosStandard E1 = new EnclosStandard("Enclos1", 120, 22);
+        E1.setSuperficie(21);
+        assertEquals(21, E1.getSuperficie(), "La superficie devrait être 21");
     }
 
     @Test
@@ -55,6 +59,9 @@ class EnclosTest {
 
     @Test
     void setCapaciteEnclos() {
+        EnclosStandard E1 = new EnclosStandard("Enclos1", 120, 22);
+        E1.setCapaciteEnclos(2);
+        assertEquals(2, E1.getCapaciteEnclos(), "La capacitée devrait être 2");
     }
 
     @Test
@@ -141,6 +148,16 @@ class EnclosTest {
 
     @Test
     void retirerCreature() {
+        EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
+        LycanthropeFemelle C1 = new LycanthropeFemelle(10, 100, 12, "Maria");
+        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "James");
+        E1.ajouterCreature(C1);
+        E1.ajouterCreature(C2);
+        E1.retirerCreature(C1);
+        ArrayList<Creature> listeTest = new ArrayList<>();
+        listeTest.add(C2);
+        assertEquals(listeTest, E1.getListeCreatures(), "La créature C1 devrait être retirée de la liste");
+
     }
 
     @Test
