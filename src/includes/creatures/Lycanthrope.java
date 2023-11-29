@@ -13,7 +13,7 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @param nom String nom de la creature (ne depend pas de son espece)
      */
     public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, String nom) {
-        super(EspecesEnum.LYCANTROPE, sexe, poids, taille, age, false, false, true , nom);
+        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, false, false, true , nom);
     }
 
     /**
@@ -28,7 +28,7 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @param nom String nom de la creature (ne depend pas de son espece)
      */
     public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom) {
-        super(EspecesEnum.LYCANTROPE, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom);
+        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom);
     }
 
 
@@ -38,7 +38,7 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      */
     @Override
     public String courir() {
-        return "Le lycantrope " + this.getNom() + " court.";
+        return "Le lycanthrope " + this.getNom() + " court.";
     }
 
     /**
@@ -56,6 +56,6 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      */
     @Override
     public String emettreUnSon(){
-        return "Le lycantrope " + this.getNom() + " fait un hurlement";
+        return "Le lycanthrope " + this.getNom() + " fait un hurlement";
     }
 }

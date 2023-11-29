@@ -104,16 +104,14 @@ public abstract class Creature {
     /**
      * Fonction qui permet a la creature de manger
      */
-    public void manger(){
-        System.out.println(this.nomEspece + " " + this.nom + " est en train de manger");
+    public String manger(){
+        return (this.nomEspece + " " + this.nom + " est en train de manger");
     }
 
     /**
      * Fonction qui permet a la creature d'emettre un son
      */
-    public String emettreUnSon(){
-        return (this.nomEspece + " " + this.nom + " emet un son");
-    }
+    public abstract String emettreUnSon();
 
     /**
      * Fonction qui permet a la creature d'etre soigne
@@ -134,14 +132,14 @@ public abstract class Creature {
     /**
      * Fonction qui permet a la creature de s'endormir ou se reveiller
      */
-    public void endormir(){
+    public String endormir(){
         if (this.estEnTrainDeDormir){
-            System.out.println(this.nomEspece  + " " + this.nom + " se reveille");
             estEnTrainDeDormir = false;
+            return(this.nomEspece  + " " + this.nom + " se reveille");
         }
         else {
-            System.out.println(this.nomEspece + " " + this.nom + " s'endort");
             estEnTrainDeDormir = true;
+            return (this.nomEspece + " " + this.nom + " s'endort");
         }
     }
 
