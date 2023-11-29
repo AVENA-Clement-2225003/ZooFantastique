@@ -86,7 +86,7 @@ public class Controller {
                         return Model.getInstance().getZoo().toString();
                     case "maitreZoo":
                         return Model.getInstance().getMaitre().toString();
-                    case "enclos":
+                    case "enclos": // #290404 Ajouter que si on met creatures ca affiche la liste des créatures à l'intérieur (avec leur infos)
                         if (tabOption.size() < 2) return Model.getInstance().getZoo().getEnclosExistant().toString();
                         if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) == null ) return "Pas d'enclos à ce nom";
                         return Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).toString();
@@ -156,7 +156,7 @@ public class Controller {
                 if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nettoyer";
                 if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).entretientEnclos() == 1) return "L'enclos " + tabOption.get(0) + " n'est pas vide";
                 return "L'enclos " + tabOption.get(0) + " est nettoyé";
-            case "reproduire":
+            case "reproduire": // #290404 Faire apparaitre le sexe puis une saisie du nom (si entrée direce alors choisir aléatoirement)
                 if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomParent, nomParent, nomBébé)";
                 if (false) return "Les parents ne sont pas de la même espèce"; // Vérifie qu'il soient de la même espèce #290404
                 if (false) return "Les parents ne sont aps du même enclos"; // Vérifie qu'il soient du même enclos #290404
