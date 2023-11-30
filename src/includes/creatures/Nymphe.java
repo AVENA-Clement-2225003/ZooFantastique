@@ -29,15 +29,6 @@ public abstract class Nymphe extends Creature{
     }
 
     /**
-     * Fonction toString de la nymphe.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "Nymphe{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet a la nymphe de parler
      * @return String parle
      */

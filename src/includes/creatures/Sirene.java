@@ -38,15 +38,6 @@ public abstract class Sirene extends Creature implements PeutNager{
     }
 
     /**
-     * Fonction toString de la sirene.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "Sirene{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet a la sirene de faire des bulles
      * @return String bulles
      */

@@ -38,15 +38,6 @@ public abstract class Licorne extends Creature implements PeutCourir {
     }
 
     /**
-     * Fonction toString de la licorne.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "Licorne{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet a la licorne de hennir
      * @return String hennissement
      */

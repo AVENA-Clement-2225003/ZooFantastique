@@ -42,15 +42,6 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
     }
 
     /**
-     * Fonction toString du lycanthrope.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "Lycanthrope{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet au lycanthrope de faire un hurlement
      * @return String hurlement
      */

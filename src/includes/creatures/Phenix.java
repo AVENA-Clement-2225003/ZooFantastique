@@ -38,15 +38,6 @@ public abstract class Phenix extends Creature implements PeutVoler{
     }
 
     /**
-     * Fonction toString du phenix.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "Phenix{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet au phenix de faire un hurlement
      * @return String piallement
      */

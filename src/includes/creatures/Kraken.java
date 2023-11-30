@@ -39,15 +39,6 @@ public abstract class Kraken extends Creature implements PeutNager {
     }
 
     /**
-     * Fonction toString du kraken.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "Kraken{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet au kraken de faire un hurlement
      * @return String hurlement
      */

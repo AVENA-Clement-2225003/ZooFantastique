@@ -52,15 +52,6 @@ public abstract class Dragon extends Creature implements PeutVoler, PeutCourir, 
     }
 
     /**
-     * Fonction toString du dragon.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "dragon{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet au dragon de faire un rugissement
      * @return String rugissement
      */

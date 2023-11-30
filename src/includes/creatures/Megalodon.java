@@ -38,15 +38,6 @@ public abstract class Megalodon extends Creature implements PeutNager{
     }
 
     /**
-     * Fonction toString du megalodon.
-     * @return un toString
-     */
-    @Override
-    public String toString() {
-        return "megalodon{ " + super.toString() + "}";
-    }
-
-    /**
      * Fonction qui permet au megalodon de faire un hurlement
      * @return String hurlement
      */
