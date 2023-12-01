@@ -1,7 +1,9 @@
 package app;
+import includes.creatures.Creature;
 import includes.creatures.Licorne;
 import includes.creatures.LicorneFemelle;
 import includes.creatures.LicorneMale;
+import includes.enclos.Enclos;
 import includes.enclos.EnclosStandard;
 import includes.maitreZoo.ENUMSexe;
 import includes.zoo.zooFantastique;
@@ -19,8 +21,8 @@ public class Model {
         return instance;
     }
 
-    MaitreZooFantastique maitre;
-    zooFantastique unZoo;
+    private MaitreZooFantastique maitre;
+    private zooFantastique unZoo;
 
     public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
@@ -32,6 +34,20 @@ public class Model {
         unZoo.ajouterEnclos(new EnclosStandard("Tuto", 45, 5));
         unZoo.getEnclosExistant().get(0).ajouterCreature(L1);
         unZoo.getEnclosExistant().get(0).ajouterCreature(L2);
+    }
+
+    public void verifierNomEtRenommerCreature(Creature animal, String nom) {
+        int id = 1;
+        String nvNom = nom;
+        for (Enclos e:unZoo.getEnclosExistant()) {
+            for (Creature c:e.getListeCreatures()) {
+                if (nvNom.equals(c.getNom())) {
+                    nvNom = nom + id;
+                    ++id;
+                }
+            }
+        }
+        animal.setNom(nvNom);
     }
 
     public MaitreZooFantastique getMaitre() {
