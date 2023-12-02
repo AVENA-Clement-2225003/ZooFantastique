@@ -1,6 +1,8 @@
 package includes.creatures;
 
-public class DragonFemelle extends Dragon implements Ovipare{
+import java.util.Random;
+
+public class DragonFemelle extends Dragon implements OvipareTemp{
     /**
      * Constructeur qui permet de creer un dragon, qui n'a pas faim, est reveille et est en bonne sante
      * @param poids
@@ -16,7 +18,7 @@ public class DragonFemelle extends Dragon implements Ovipare{
      * Fonction qui permet aux femelles de pondre des oeufs
      * @return String message de confirmation
      */
-    public String pondreOeuf() {
-        return "Le dragon " + this.getNom() + " pond des oeufs";
+    public Oeuf pondreOeuf(String nom, SexesEnum sexe) {
+        return new Oeuf(EspecesEnum.DRAGON, sexe, 3, 30, 0, false, true, true, nom);
     }
 }
