@@ -88,6 +88,8 @@ public class Controller {
                             return "Commande pour faire reproduire deux créature de même espèce\nTapez reproduire nom1erParent nom2eParent";
                         case "infos":
                             return "Permet de visualiser les informations en fonction de l'option \"zoo\", \"maitreZoo\" ou \"Enclos nomEnclos\"";
+                        case "deplacer":
+                            return "Pas encore de description\nA faire";
                         case "exit":
                             return "Commande pour quitter le jeu";
                         default:
@@ -141,9 +143,9 @@ public class Controller {
                 if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature vivante!";
                 Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
                 return "Créature " + tabOption.get(0) + " morte retirée";
-            case "deplacerCreature":
+            case "deplacer":
                 if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomCreature, nomEnclosDestination)";
-                if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature morte!";
+                if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature morte!";
                 if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece() != Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece()) return "Les créatures de l'enclos de destination ne sont pas de la même espèce";
                 int code = Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).ajouterCreature(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)));
                 if (code == 2) return "Enclos de destination complet";
