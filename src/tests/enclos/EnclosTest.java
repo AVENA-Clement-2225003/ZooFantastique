@@ -67,7 +67,7 @@ class EnclosTest {
     @Test
     void getListeCreatures() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 120, 22);
-        LycanthropeMale L1 = new LycanthropeMale(80, 170, 21, "James");
+        LycanthropeMale L1 = new LycanthropeMale(80, 170, 21, "James", E1);
         ArrayList<Creature> Liste = new ArrayList<>();
         assertEquals(Liste, E1.getListeCreatures(), "La devrait être vide");
         Liste.add(L1);
@@ -78,7 +78,7 @@ class EnclosTest {
     @Test
     void setListeCreatures() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 120, 22);
-        LycanthropeMale L1 = new LycanthropeMale(80, 170, 21, "James");
+        LycanthropeMale L1 = new LycanthropeMale(80, 170, 21, "James", E1);
         ArrayList<Creature> Liste = new ArrayList<>();
         Liste.add(L1);
         E1.setListeCreatures(Liste);
@@ -101,7 +101,7 @@ class EnclosTest {
     @Test
     void testToString() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
-        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James");
+        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
         assertEquals("Enclos{nom='Enclos1', superficie=150, capaciteEnclos=13, listeCreatures=[], proprete=BON}", E1.toString(), "L'affichage n'est pas correct");
         E1.ajouterCreature(C1);
         assertEquals("Enclos{nom='Enclos1', superficie=150, capaciteEnclos=13, listeCreatures=[Lycanthrope{ Creature{ID=0, nomEspece=LYCANTROPE, sexe=MALE, poids=10, taille=100, age=12, faim=false, estEnTrainDeDormir=false, sante=true, name='James'}}], proprete=BON}", E1.toString(), "L'affichage n'est pas correct");
@@ -110,8 +110,8 @@ class EnclosTest {
     @Test
     void afficherCreatures() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
-        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James");
-        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry");
+        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
+        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry", E1);
         assertEquals("Enclos1 = {L'enclos est vide}", E1.afficherCreatures(), "L'enclos est vide normalement");
         E1.ajouterCreature(C1);
         E1.ajouterCreature(C2);
@@ -121,11 +121,11 @@ class EnclosTest {
     @Test
     void nourrirCreatures() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
-        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James");
+        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
         C1.setFaim(true);
-        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry");
+        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry", E1);
         C2.setFaim(true);
-        LycanthropeMale C3 = new LycanthropeMale(10, 100, 12, "Gabin");
+        LycanthropeMale C3 = new LycanthropeMale(10, 100, 12, "Gabin", E1);
         E1.nourrirCreatures();
         assertEquals(false, C1.isFaim()&&C2.isFaim()&&C3.isFaim(), "Acune créature ne devrais avoir faim");
     }
@@ -133,8 +133,8 @@ class EnclosTest {
     @Test
     void ajouterCreature() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
-        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James");
-        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "James");
+        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
+        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "James", E1);
         E1.ajouterCreature(C1);
         ArrayList<Creature> listeTest = new ArrayList<>();
         listeTest.add(C1);
@@ -149,8 +149,8 @@ class EnclosTest {
     @Test
     void retirerCreature() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
-        LycanthropeFemelle C1 = new LycanthropeFemelle(10, 100, 12, "Maria");
-        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "James");
+        LycanthropeFemelle C1 = new LycanthropeFemelle(10, 100, 12, "Maria", E1);
+        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "James", E1);
         E1.ajouterCreature(C1);
         E1.ajouterCreature(C2);
         E1.retirerCreature(C1);
@@ -163,9 +163,9 @@ class EnclosTest {
     @Test
     void getIndexCreature() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
-        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James");
-        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry");
-        LycanthropeMale C3 = new LycanthropeMale(10, 100, 12, "Josh");
+        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
+        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry", E1);
+        LycanthropeMale C3 = new LycanthropeMale(10, 100, 12, "Josh", E1);
         E1.ajouterCreature(C1);
         E1.ajouterCreature(C2);
         assertEquals(0, E1.getIndexCreature(C1), "L'indice devrait être 0");
@@ -176,8 +176,8 @@ class EnclosTest {
     @Test
     void existInListeCreature() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
-        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James");
-        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry");
+        LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
+        LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry", E1);
         assertEquals(false, E1.existInListeCreature(C1), "La liste est vide donc elle ne devrait pas retourner autre chose que false");
         E1.ajouterCreature(C1);
         assertEquals(true, E1.existInListeCreature(C1), "C1 se trouve dans la liste donc devrait être trouvé");

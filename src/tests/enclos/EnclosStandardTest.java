@@ -23,7 +23,7 @@ public class EnclosStandardTest {
     @Test
     void entretientEnclos() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 120, 22);
-        LycanthropeMale L1 = new LycanthropeMale(80, 170, 21, "James");
+        LycanthropeMale L1 = new LycanthropeMale(80, 170, 21, "James", E1);
         E1.setProprete(PropreteEnum.CORRECT);
         assertEquals(0, E1.entretientEnclos(), "L'enclos est vide et devrait être néttoyé");
         E1.setProprete(PropreteEnum.CORRECT);

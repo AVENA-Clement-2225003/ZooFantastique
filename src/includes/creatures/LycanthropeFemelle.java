@@ -1,5 +1,7 @@
 package includes.creatures;
 
+import includes.enclos.Enclos;
+
 public class LycanthropeFemelle extends Lycanthrope implements Vivipare{
 
     /**
@@ -9,8 +11,8 @@ public class LycanthropeFemelle extends Lycanthrope implements Vivipare{
      * @param age
      * @param nom
      */
-    public LycanthropeFemelle( int poids, int taille, int age, String nom) {
-        super(SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom);
+    public LycanthropeFemelle( int poids, int taille, int age, String nom, Enclos enclos) {
+        super(SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom, enclos);
     }
 
     /**

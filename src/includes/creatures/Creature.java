@@ -85,7 +85,7 @@ public abstract class Creature {
      * @param sante sante de la creature
      * @param nom nom de la creature (ne depend pas de son espece)
      */
-    public Creature(EspecesEnum nomEspece, SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom) {
+    public Creature(EspecesEnum nomEspece, SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos) {
         this.ID = lastID++;
         this.nomEspece = nomEspece;
         this.sexe = sexe;
@@ -96,7 +96,7 @@ public abstract class Creature {
         this.estEnTrainDeDormir = estEnTrainDeDormir;
         this.sante = sante;
         this.nom = nom;
-        this.enclos = null;
+        this.enclos = enclos;
         Random r = new Random();
         this.ageMort = r.nextInt((40 - 20) + 1) + 20;
     }
@@ -163,7 +163,7 @@ public abstract class Creature {
 
     @Override
     public String toString() {
-        return "\n nom : " + nom + " | espece : " + nomEspece +
+        return "nom : " + nom + " | espece : " + nomEspece +
                 " | ID : " + ID + " | age : " + age + " | faim : " + ((faim)?" oui ":" non ") +
                 " | en bonne sante : " + ((sante)?" oui ":" non ") + " | dort : " + ((estEnTrainDeDormir)?" oui ":" non ");
     }

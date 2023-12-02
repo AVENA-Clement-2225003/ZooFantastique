@@ -1,5 +1,7 @@
 package includes.creatures;
 
+import includes.enclos.Enclos;
+
 /**
  * Classe qui represente les lycanthopes, qui a pour interface peutCourir (et qui aura vivipare)
  */
@@ -12,8 +14,8 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @param age int age de la creature
      * @param nom String nom de la creature (ne depend pas de son espece)
      */
-    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, String nom) {
-        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, false, false, true , nom);
+    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, String nom, Enclos enclos) {
+        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, false, false, true , nom, enclos);
     }
 
     /**
@@ -27,8 +29,8 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @param sante boolean sante de la creature
      * @param nom String nom de la creature (ne depend pas de son espece)
      */
-    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom) {
-        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom);
+    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos) {
+        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom, enclos);
     }
 
 

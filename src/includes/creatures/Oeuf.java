@@ -1,13 +1,20 @@
 package includes.creatures;
 
+import includes.enclos.Enclos;
+
 public class Oeuf extends Creature{
 
     private int tempsEclosion;
     private int tempsMaturation;
-    public Oeuf(EspecesEnum espece, SexesEnum sexe, int poids, int taille, int  age, boolean faim, boolean enTrainDeDormir, boolean sante, String nom){
-        super(espece, sexe, poids, taille, age, faim, enTrainDeDormir, sante, nom);
+    public Oeuf(EspecesEnum espece, SexesEnum sexe, String nom, Enclos enclos){
+        super(espece, sexe, 3, 30, 0, false, true, true, nom, enclos);
         tempsEclosion = 60;
         tempsMaturation = 0;
+    }
+
+    @Override
+    public String toString() {
+        return "nom : " + super.getNom() + " | espece : " + super.getNomEspece() + " | age : " + super.getAge() + " | temps maturation restant : " + (tempsEclosion-tempsMaturation);
     }
 
     public int getTempsEclosion() {
