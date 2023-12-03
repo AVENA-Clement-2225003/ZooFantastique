@@ -6,10 +6,13 @@ public class Oeuf extends Creature{
 
     private int tempsEclosion;
     private int tempsMaturation;
-    public Oeuf(EspecesEnum espece, SexesEnum sexe, String nom, Enclos enclos){
+
+    private Creature mere;
+    public Oeuf(EspecesEnum espece, SexesEnum sexe, String nom, Enclos enclos, Creature mere){
         super(espece, sexe, 3, 30, 0, false, true, true, nom, enclos);
         tempsEclosion = 60;
         tempsMaturation = 0;
+        this.mere = mere;
     }
 
     @Override
@@ -32,5 +35,13 @@ public class Oeuf extends Creature{
     @Override
     public String emettreUnSon() {
         return null;
+    }
+
+    public Creature getMere() {
+        return mere;
+    }
+
+    public void setMere(Creature mere) {
+        this.mere = mere;
     }
 }

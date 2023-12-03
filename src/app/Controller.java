@@ -189,10 +189,10 @@ public class Controller {
                 }
                 switch (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece()) {
                     case DRAGON:
-                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(DRAGON, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
+                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(DRAGON, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))));
                         return "La dragonne a pondu un oeuf !";
                     case KRAKEN:
-                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(KRAKEN, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
+                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(KRAKEN, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))));
                         return "La femellekraken a pondu un oeuf !";
                     case LICORNE:
                         //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Bebe(LICORNE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), 3, 30, 0, false, true, true, nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
@@ -201,16 +201,16 @@ public class Controller {
                         //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Bebe(LYCANTHROPE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), 3, 30, 0, false, true, true, nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
                         return "Le lycanthrope femelle a un bébé!";
                     case MEGALODON:
-                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(MEGALODON, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
+                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(MEGALODON, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))));
                         return "Le mégalodon femelle a un bébé!";
                     case NYMPHE:
                         //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Bebe(NYMPHE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), 3, 30, 0, false, true, true, nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
                         return "La nymphe femelle a un bébé !";
                     case PHENIX:
-                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(PHENIX, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
+                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(PHENIX, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))));
                         return "La phénix femelle a pondu un oeuf !";
                     case SIRENE:
-                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(SIRENE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))));
+                        Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(SIRENE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))));
                         return "Le bébé sirène est né !";
                 }
             case "dev": // #290404 Ne reconnais pas les type de créatures

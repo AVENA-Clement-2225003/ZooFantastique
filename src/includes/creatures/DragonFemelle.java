@@ -2,7 +2,7 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
-public class DragonFemelle extends Dragon implements OvipareTemp{
+public class DragonFemelle extends Dragon implements Ovipare{
     /**
      * Constructeur qui permet de creer un dragon, qui n'a pas faim, est reveille et est en bonne sante
      * @param poids
@@ -19,6 +19,6 @@ public class DragonFemelle extends Dragon implements OvipareTemp{
      * @return String message de confirmation
      */
     public Oeuf pondreOeuf(String nom, SexesEnum sexe, Enclos enclos) {
-        return new Oeuf(EspecesEnum.DRAGON, sexe,  nom, enclos);
+        return new Oeuf(EspecesEnum.DRAGON, sexe,  nom, enclos, this);
     }
 }

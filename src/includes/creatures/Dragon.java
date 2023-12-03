@@ -63,7 +63,7 @@ public abstract class Dragon extends Creature implements PeutVoler, PeutCourir, 
     }
 
     /**
-     * Permet a la creature de renaitre des ses cendres, a l'age d'un ans
+     * Permet a la creature de renaitre des ses cendres, a l'age d'un an
      * @return String msg de confirmation
      */
     @Override
