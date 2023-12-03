@@ -4,6 +4,7 @@ import includes.creatures.*;
 import includes.enclos.EnclosAquarium;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
+import includes.zoo.zooFantastique;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +22,9 @@ public class Controller {
 
         return instance;
     }
-    public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
-        Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
+    public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
+        zooFantastique zoo = Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
+        return zoo;
     }
     private String choisirUnPrenom(int sexe) { // Il faut impérativement le même nombre de prénoms masculins et féminins
         ArrayList<ArrayList<String>> ListePrenoms = new ArrayList<>(

@@ -1,5 +1,7 @@
 package app;
 
+import includes.zoo.zooFantastique;
+
 import java.util.ArrayList;
 
 public class View {
@@ -24,8 +26,9 @@ public class View {
         if (commande.equals("")) return "";
         return controlleur.entreeCommande(commande);
     }
-    public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
-        controlleur.CreerUnZoo(nom, nomMaitreDeZoo);
+    public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
+        zooFantastique zoo = controlleur.CreerUnZoo(nom, nomMaitreDeZoo);
+        return zoo;
     }
     public void showScreen(int moreLengthName, ArrayList<String> nomCreatures, ArrayList<String> nomEnclos) {
         if (moreLengthName < "Créatures".length()) {

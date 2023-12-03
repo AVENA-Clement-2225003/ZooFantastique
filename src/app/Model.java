@@ -22,7 +22,7 @@ public class Model {
     private MaitreZooFantastique maitre;
     private zooFantastique unZoo;
 
-    public void CreerUnZoo(String nom, String nomMaitreDeZoo) {
+    public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
         if (nomMaitreDeZoo.equals("")) nomMaitreDeZoo = "UnMaitreSuper";
         maitre = new MaitreZooFantastique(nomMaitreDeZoo, ENUMSexe.Male, 23);
@@ -40,6 +40,7 @@ public class Model {
         verifierNomEtRenommerCreature(P2, P2.getNom());
         unZoo.getEnclosExistant().get(1).ajouterCreature(P1);
         unZoo.getEnclosExistant().get(1).ajouterCreature(P2);
+        return unZoo;
     }
 
     public void verifierNomEtRenommerCreature(Creature animal, String nom) {
