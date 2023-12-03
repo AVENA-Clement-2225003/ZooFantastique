@@ -16,7 +16,7 @@ public class DragonFemelle extends Dragon implements Ovipare{
 
     /**
      * Fonction qui permet aux femelles de pondre des oeufs
-     * @return String message de confirmation
+     * @return Oeuf
      */
     public Oeuf pondreOeuf(String nom, SexesEnum sexe, Enclos enclos) {
         return new Oeuf(EspecesEnum.DRAGON, sexe,  nom, enclos, this);

@@ -19,6 +19,6 @@ public class PhenixFemelle extends Phenix implements Ovipare{
      * @return Oeuf
      */
     public Oeuf pondreOeuf(String nom, SexesEnum sexe, Enclos enclos) {
-        return new Oeuf(EspecesEnum.DRAGON, sexe,  nom, enclos, this);
+        return new Oeuf(EspecesEnum.PHENIX, sexe,  nom, enclos, this);
     }
 }

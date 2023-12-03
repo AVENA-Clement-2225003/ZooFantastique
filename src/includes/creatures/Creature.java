@@ -98,7 +98,7 @@ public abstract class Creature {
         this.nom = nom;
         this.enclos = enclos;
         Random r = new Random();
-        this.ageMort = r.nextInt((40 - 20) + 1) + 20;
+        this.ageMort = r.nextInt((80 - 30) + 1) + 30; // Age de mort entre 30 et 80 ans
     }
 
     /**

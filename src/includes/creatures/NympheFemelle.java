@@ -16,9 +16,9 @@ public class NympheFemelle extends Nymphe implements Vivipare{
 
     /**
      * Fonction qui permet aux femelles de mettre bas
-     * @return String message de confirmation
+     * @return Bebe
      */
-    public String mettreBas() {
-        return "Le kraken " + this.getNom() + " met bas";
+    public Bebe mettreBas(String nom, SexesEnum sexe, Enclos enclos) {
+        return new Bebe(EspecesEnum.NYMPHE, sexe, nom, enclos, this);
     }
 }

@@ -16,9 +16,9 @@ public class LicorneFemelle extends Licorne implements Vivipare{
 
     /**
      * Fonction qui permet aux femelles de mettre bas
-     * @return String message de confirmation
+     * @return Bebe
      */
-    public String mettreBas() {
-        return "La sirene " + this.getNom() + " met bas";
+    public Bebe mettreBas(String nom, SexesEnum sexe, Enclos enclos) {
+        return new Bebe(EspecesEnum.LICORNE, sexe,  nom, enclos, this);
     }
 }

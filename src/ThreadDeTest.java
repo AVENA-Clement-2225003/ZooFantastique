@@ -16,10 +16,9 @@ public class ThreadDeTest extends Thread{
     public void run(){
         System.out.println("Le thread se lance");
         int rEtatEnclos;
-        //Oeuf o1 = new Oeuf(EspecesEnum.DRAGON, SexesEnum.FEMELLE, "test", );
         while(true){
             try {
-                System.out.println("1 unite de temps");
+                //System.out.println("1 unite de temps");
                 // Gerer l'etat des enclos
                 for (Enclos enclos : zoo.getEnclosExistant()){
                     rEtatEnclos = new Random().nextInt(3);      // A ajouter : verification de l'etat de l'enclos actuel pour eviter de le nettoyer
@@ -51,8 +50,9 @@ public class ThreadDeTest extends Thread{
                             } else {
                                 ((Oeuf) creature).setTempsMaturation(((Oeuf) creature).getTempsMaturation() + 1); //Il n'est pas encore prêt
                             }
-                        } /*else if (creature instanceof Bebe) { //Vérifie si la créature actuelle est un bébé ou non #290404 Faire Bebe
-                            if (((Bebe) creature).getTempsEclosion() == ((Bebe) creature).getTempsMaturation()) { //Est-ce qu'il est prêt à naitre
+                        }
+                        else if (creature instanceof Bebe) { //Vérifie si la créature actuelle est un bébé ou non #290404 Faire Bebe
+                            if (((Bebe) creature).getTempsNaissance() == ((Bebe) creature).getTempsGestation()) { //Est-ce qu'il est prêt à naitre
                                 switch (creature.getNomEspece()) {
                                     case LICORNE:
                                         if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new LicorneFemelle(new Random().nextInt(1100 - 450 + 1) + 450, new Random().nextInt(200 - 140 + 1) + 140, 1, creature.getNom(), creature.getEnclos()));
@@ -73,13 +73,13 @@ public class ThreadDeTest extends Thread{
                                 enclos.getListeCreatures().remove(creature); // Le bébé est né donc on le supprime, il deviens un animal
                                 System.out.println("Un bébé est né !");
                             } else {
-                                ((Bebe) creature).setTempsMaturation(((Bebe) creature).getTempsMaturation() + 1); // Il n'est pas prêt
+                                ((Bebe) creature).setTempsGestation(((Bebe) creature).getTempsGestation() + 1); // Il n'est pas prêt
                             }
-                        }*/
-                        //else {
+                        }
+                        else {
                             // Gerer l'age des creatures (et donc leur mort)
                             creature.vieillir();
-                        //}
+                        }
                     }
 
                 }
