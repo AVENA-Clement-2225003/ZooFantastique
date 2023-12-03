@@ -64,4 +64,51 @@ public class Model {
     public zooFantastique getZoo() {
         return unZoo;
     }
+
+    public ArrayList<String> get7erEnclos() {
+        ArrayList<String> liste = new ArrayList<>();
+        for (Enclos e:unZoo.getEnclosExistant()) {
+            if (liste.size() == 7) return liste;
+            liste.add(e.getNom());
+        }
+        int nombreAAjouter = (7 - liste.size());
+        for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
+        return liste;
+    }
+    public ArrayList<String> get7erMalades() {
+        ArrayList<String> liste = new ArrayList<>();
+        for (Enclos e:unZoo.getEnclosExistant()) {
+            for (Creature c:e.getListeCreatures()) {
+                if (liste.size() == 7) return liste;
+                if (c.isSante() == false) liste.add(c.getNom());
+            }
+        }
+        int nombreAAjouter = (7 - liste.size());
+        for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
+        return liste;
+    }
+    public ArrayList<String> get7erFaims() {
+        ArrayList<String> liste = new ArrayList<>();
+        for (Enclos e:unZoo.getEnclosExistant()) {
+            for (Creature c:e.getListeCreatures()) {
+                if (liste.size() == 7) return liste;
+                if (c.isFaim() == true) liste.add(c.getNom());
+            }
+        }
+        int nombreAAjouter = (7 - liste.size());
+        for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
+        return liste;
+    }
+    public ArrayList<String> get7erMorts() {
+        ArrayList<String> liste = new ArrayList<>();
+        for (Enclos e:unZoo.getEnclosExistant()) {
+            for (Creature c:e.getListeCreatures()) {
+                if (liste.size() == 7) return liste;
+                if (c.getAge() >= c.getAgeMort()) liste.add(c.getNom());
+            }
+        }
+        int nombreAAjouter = (7 - liste.size());
+        for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
+        return liste;
+    }
 }

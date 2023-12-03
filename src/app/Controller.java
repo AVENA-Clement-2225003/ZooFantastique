@@ -1,15 +1,13 @@
 package app;
 
 import includes.creatures.*;
+import includes.enclos.Enclos;
 import includes.enclos.EnclosAquarium;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
 import includes.zoo.zooFantastique;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static includes.creatures.EspecesEnum.*;
 
@@ -145,7 +143,7 @@ public class Controller {
                 if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature vivante!";
                 Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
                 return "Créature " + tabOption.get(0) + " morte retirée";
-            case "deplacer":
+            case "deplacer": // #290404 Faire en sorte qu'il ne puissent etre déplacer que dans un enclos qui leur conviens
                 if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomCreature, nomEnclosDestination)";
                 if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature morte!";
                 if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece() != Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece()) return "Les créatures de l'enclos de destination ne sont pas de la même espèce";
@@ -213,7 +211,7 @@ public class Controller {
                         return "La phénix femelle a pondu un oeuf !";
                     case SIRENE:
                         Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(SIRENE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))));
-                        return "Le bébé sirène est né !";
+                        return "Le sirène femelle a un bébé !";
                 }
             case "dev": // #290404 Ne reconnais pas les type de créatures
                 if (tabOption.size() < 1) return "il manque une option le nom d'une commande";
@@ -282,5 +280,19 @@ public class Controller {
             default:
                 return "Commande non reconnue";
         }
+    }
+
+
+    public ArrayList<ArrayList<String>> DonnesAffichageZoo() {
+        ArrayList<String> EnclosZoo = Model.getInstance().get7erEnclos();
+        ArrayList<String> Malades = Model.getInstance().get7erMalades();
+        ArrayList<String> Morts = Model.getInstance().get7erMorts();
+        ArrayList<String> Faim = Model.getInstance().get7erFaims();
+        ArrayList<ArrayList<String>> listeDeListes = new ArrayList<>();
+        listeDeListes.add(EnclosZoo);
+        listeDeListes.add(Malades);
+        listeDeListes.add(Morts);
+        listeDeListes.add(Faim);
+        return listeDeListes;
     }
 }

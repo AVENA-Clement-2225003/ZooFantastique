@@ -1,3 +1,4 @@
+import app.Controller;
 import app.View;
 import includes.creatures.Dragon;
 import includes.creatures.DragonFemelle;
@@ -21,6 +22,7 @@ public class Main {
          */
         String resCommande = "";
         while(true) {
+            System.out.print(View.getInstance().affichageInfos1());
             resCommande = View.getInstance().entreeCommande(myObj.nextLine()); // Lis la commande de l'utilisateur
             if (resCommande.equals("exit")) break; // Si l'utilisateur veut quitter le jeu alors on sors de la boucle
             clear();

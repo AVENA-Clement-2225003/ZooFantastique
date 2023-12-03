@@ -4,8 +4,8 @@ import includes.enclos.Enclos;
 
 public class Oeuf extends Creature{
 
-    private int tempsEclosion;
-    private int tempsMaturation;
+    private int tempsEclosion; //Temps nécessaire d'attendre avant eclosion
+    private int tempsMaturation; //Temps que l'oeuf a deja passé a maturer
 
     private Creature mere;
     public Oeuf(EspecesEnum espece, SexesEnum sexe, String nom, Enclos enclos, Creature mere){
