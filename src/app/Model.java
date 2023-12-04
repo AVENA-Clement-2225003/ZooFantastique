@@ -111,4 +111,12 @@ public class Model {
         for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
         return liste;
     }
+
+    public boolean estEnceinte(String s) {
+        Creature c = unZoo.getCreatureByNom(s);
+        for (Creature ce:c.getEnclos().getListeCreatures()) {
+            if (ce instanceof Bebe && ((Bebe) ce).getMere().equals(c)) return true;
+        }
+        return false;
+    }
 }
