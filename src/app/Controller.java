@@ -169,8 +169,8 @@ public class Controller {
             case "soigner":
                 if (tabOption.isEmpty()) return "Il manque le nom de l'animal";
                 return Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).etreSoigne();
-            case "nourir":
-                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nourir";
+            case "nourrir":
+                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nourrir";
                 Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).nourrirCreatures();
                 return "Les créatures de l'enclos " + tabOption.get(0) + " ont été nourri";
             case "nettoyer":

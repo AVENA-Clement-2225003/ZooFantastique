@@ -1,10 +1,4 @@
-import app.Controller;
 import app.View;
-import includes.creatures.Dragon;
-import includes.creatures.DragonFemelle;
-import includes.creatures.SexesEnum;
-import includes.enclos.Enclos;
-import includes.enclos.EnclosVoliere;
 import includes.zoo.zooFantastique;
 
 import java.util.Scanner;
@@ -16,10 +10,10 @@ public class Main {
         String nom = myObj.nextLine();
         System.out.print("Donnez un nom à votre maitre de zoo : ");
         zooFantastique zoo = View.getInstance().CreerUnZoo(nom, myObj.nextLine());
-        /*
-        ThreadDeTest t1 = new ThreadDeTest(zoo);
+
+        Thread t1 = new Thread(zoo);
         t1.start();
-         */
+
         String resCommande = "";
         while(true) {
             System.out.print(View.getInstance().affichageInfos1());
