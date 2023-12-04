@@ -10,9 +10,10 @@ public class Bebe extends Creature{
     private Creature mere;
     public Bebe(EspecesEnum espece, SexesEnum sexe, String nom, Enclos enclos, Creature mere){
         super(espece, sexe, 3, 30, 0, false, true, true, nom, enclos);
-        tempsNaissance = 60;
+        tempsNaissance = 2;
         tempsGestation = 0;
         this.mere = mere;
+        enclos.ajouterCreature(this);
     }
 
     @Override

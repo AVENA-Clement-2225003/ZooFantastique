@@ -165,7 +165,7 @@ public abstract class Creature {
     public String toString() {
         return "nom : " + nom + " | espece : " + nomEspece +
                 " | ID : " + ID + " | age : " + age + " | faim : " + ((faim)?" oui ":" non ") +
-                " | en bonne sante : " + ((sante)?" oui ":" non ") + " | dort : " + ((estEnTrainDeDormir)?" oui ":" non ");
+                " | en bonne sante : " + ((sante)?" oui ":" non ") + " | dort : " + ((estEnTrainDeDormir)?" oui ":" non ") + " | Enclos : " + enclos;
     }
 
     public String afficherCreature(){

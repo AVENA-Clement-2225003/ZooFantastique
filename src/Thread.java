@@ -40,11 +40,11 @@ public class Thread extends java.lang.Thread {
                     }
                     else if (action <limiteFaim){ // Une creature a faim
                         creat = enclos.getListeCreatures().get(r.nextInt(enclos.getListeCreatures().size())); // Choisi une creature aleatoire dans l'enclos
-                        creat.setFaim(true);
+                        if (!(creat instanceof Oeuf || creat instanceof Bebe)) creat.setFaim(true);
                     }
                     else if (action <limiteMalade){ // Une creature tombe malade
                         creat = enclos.getListeCreatures().get(r.nextInt(enclos.getListeCreatures().size())); // Choisi une creature aleatoire dans l'enclos
-                        creat.setSante(false);
+                        if (!(creat instanceof Oeuf || creat instanceof Bebe)) creat.setSante(false);
                     }
                     else {
                         enclos.setProprete(PropreteEnum.CORRECT);
