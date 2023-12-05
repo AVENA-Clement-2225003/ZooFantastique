@@ -178,6 +178,15 @@ public abstract class Enclos {
      */
     public String afficherCreatures() {
         if (listeCreatures.isEmpty()) return "L'enclos " + nom +  " est vide";
+        String strConteneur = "";
+        for (Creature c:listeCreatures) {
+            strConteneur += c.toString() + "\n";
+        }
+        return strConteneur;
+    }
+
+    public String afficherCreaturesEnclos() {
+        if (listeCreatures.isEmpty()) return "L'enclos " + nom +  " est vide";
         String strConteneur = "Enclos " + nom + " :";
         for (Creature c:listeCreatures) {
             strConteneur += "\n" + c.toString();

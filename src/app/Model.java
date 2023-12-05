@@ -7,6 +7,9 @@ import includes.maitreZoo.ENUMSexe;
 import includes.zoo.zooFantastique;
 import includes.maitreZoo.MaitreZooFantastique;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Model {
@@ -18,9 +21,48 @@ public class Model {
 
         return instance;
     }
-
+    private boolean devMode;
     private MaitreZooFantastique maitre;
     private zooFantastique unZoo;
+    public Model() {
+        try (BufferedReader br = new BufferedReader(new FileReader("out/production/ZooFantastique/app/config.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("devMode=")) {
+                    devMode = Boolean.parseBoolean(line.substring("devMode=".length()).trim());
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("config.txt est manquant");
+            devMode = false;
+        }
+    }
+    public EspecesEnum getEspeceByStr(String s) {
+        switch (s) {
+            case "dragon":
+                return EspecesEnum.DRAGON;
+            case "kraken":
+                return EspecesEnum.KRAKEN;
+            case "licorne":
+                return EspecesEnum.LICORNE;
+            case "lycanthrope":
+                return EspecesEnum.LYCANTHROPE;
+            case "megalodon":
+                return EspecesEnum.MEGALODON;
+            case "nymphe":
+                return EspecesEnum.NYMPHE;
+            case "phenix":
+                return EspecesEnum.PHENIX;
+            case "sirene":
+                return EspecesEnum.SIRENE;
+            default:
+                return null;
+        }
+    }
+    public boolean isDevMode() {
+        return devMode;
+    }
 
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
@@ -93,6 +135,18 @@ public class Model {
             for (Creature c:e.getListeCreatures()) {
                 if (liste.size() == 7) return liste;
                 if (c.isFaim() == true) liste.add(c.getNom());
+            }
+        }
+        int nombreAAjouter = (7 - liste.size());
+        for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
+        return liste;
+    }
+    public ArrayList<String> get7erDormir() {
+        ArrayList<String> liste = new ArrayList<>();
+        for (Enclos e:unZoo.getEnclosExistant()) {
+            for (Creature c:e.getListeCreatures()) {
+                if (liste.size() == 7) return liste;
+                if (c.isEstEnTrainDeDormir()) liste.add(c.getNom());
             }
         }
         int nombreAAjouter = (7 - liste.size());

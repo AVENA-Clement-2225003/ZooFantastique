@@ -27,27 +27,14 @@ public class View {
         return controlleur.entreeCommande(commande);
     }
     public String affichageInfos() {
-        String str = "Enclos\t | Malade\t | Mort | \tFaim | \n";
-        ArrayList<ArrayList<String>> liste = Controller.getInstance().DonnesAffichageZoo();
-        for (int i = 0; i < 7; ++i) {
-            if (liste.get(0).get(i).equals("\t") && liste.get(1).get(i).equals("\t") && liste.get(2).get(i).equals("\t") && liste.get(3).get(i).equals("\t")) break;
-            str += ((liste.get(0).get(i).equals("\t"))?"":liste.get(0).get(i)) + "\t | " +
-                    ((liste.get(1).get(i).equals("\t"))?"":liste.get(1).get(i)) + "\t | " +
-                    ((liste.get(2).get(i).equals("\t"))?"":liste.get(2).get(i)) + "\t | " +
-                    ((liste.get(3).get(i).equals("\t"))?"":liste.get(3).get(i)) + "\t |\n";
-        }
-        str += ((liste.get(0).get(liste.size()-1).equals("\t"))?"\t":"...\t") + ((liste.get(1).get(liste.size()-1).equals("\t"))?"\t":"...\t") + ((liste.get(2).get(liste.size()-1).equals("\t"))?"\t":"...\t") + ((liste.get(3).get(liste.size()-1).equals("\t"))?"\t":"...\t");
-        str += "\nSaisir votre commande : ";
-        return str;
-    }
-    public String affichageInfos1() {
         ArrayList<ArrayList<String>> liste = Controller.getInstance().DonnesAffichageZoo();
         int enclosWidth = 15;
         int maladeWidth = 15;
         int mortWidth = 15;
         int faimWidth = 15;
+        int dormirWidth = 15;
 
-        String str = "| " + formatColumn("Enclos", enclosWidth) + " | " + formatColumn("Malades", enclosWidth) + " | " + formatColumn("Morts", enclosWidth) + " | " + formatColumn("Faim", enclosWidth) + " |\n|";
+        String str = "| " + formatColumn("Enclos", enclosWidth) + " | " + formatColumn("Malades", maladeWidth) + " | " + formatColumn("Morts", mortWidth) + " | " + formatColumn("Faim", faimWidth) + " | " + formatColumn("Dors", dormirWidth) + " |\n|";
         for (int i = 0; i < enclosWidth+2; ++i) {str += "-";}
         str += "|";
         for (int i = 0; i < maladeWidth+2; ++i) {str += "-";}
@@ -55,16 +42,19 @@ public class View {
         for (int i = 0; i < mortWidth+2; ++i) {str += "-";}
         str += "|";
         for (int i = 0; i < faimWidth+2; ++i) {str += "-";}
+        str += "|";
+        for (int i = 0; i < dormirWidth+2; ++i) {str += "-";}
         str += "|\n";
         for (int i = 0; i < 7; ++i) {
             if (liste.get(0).get(i).equals(" ") && liste.get(1).get(i).equals(" ") &&
-                    liste.get(2).get(i).equals(" ") && liste.get(3).get(i).equals(" ")) {
+                    liste.get(2).get(i).equals(" ") && liste.get(3).get(i).equals(" ") && liste.get(4).get(i).equals(" ")) {
                 break;
             }
             str += "| " + formatColumn(liste.get(0).get(i), enclosWidth) + " | " +
                     formatColumn(liste.get(1).get(i), maladeWidth) + " | " +
                     formatColumn(liste.get(2).get(i), mortWidth) + " | " +
-                    formatColumn(liste.get(3).get(i), faimWidth) + " |\n";
+                    formatColumn(liste.get(3).get(i), faimWidth) + " | " +
+                    formatColumn(liste.get(4).get(i), dormirWidth) + " |\n";
         }
         str += "\nSaisir votre commande : ";
         return str;

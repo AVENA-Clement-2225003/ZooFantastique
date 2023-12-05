@@ -116,11 +116,11 @@ public class zooFantastique {
      * @return
      */
     public String afficherCreature() {
-        String strConteneur = "Le zoo : " + nom + " avec les créatures :  {" + enclosExistant.get(0).afficherCreatures();
-        for (int i = 1; i < enclosExistant.size(); i++) {
-            strConteneur += ", " + enclosExistant.get(i).afficherCreatures();
+        String strConteneur = "Le zoo : " + nom + " comporte les créatures suivantes :\n";
+        for (int i = 0; i < enclosExistant.size(); i++) {
+            strConteneur += enclosExistant.get(i).afficherCreatures();
         }
-        return strConteneur + '}';
+        return strConteneur;
     }
 
     /**
