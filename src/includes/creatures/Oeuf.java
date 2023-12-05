@@ -10,9 +10,10 @@ public class Oeuf extends Creature{
     private Creature mere;
     public Oeuf(EspecesEnum espece, SexesEnum sexe, String nom, Enclos enclos, Creature mere){
         super(espece, sexe, 3, 30, 0, false, true, true, nom, enclos);
-        tempsEclosion = 60;
+        tempsEclosion = 1;
         tempsMaturation = 0;
         this.mere = mere;
+        enclos.ajouterCreature(this);
     }
 
     @Override

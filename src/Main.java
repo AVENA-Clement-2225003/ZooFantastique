@@ -9,10 +9,10 @@ public class Main {
         String nom = myObj.nextLine();
         System.out.print("Donnez un nom à votre maitre de zoo : ");
         zooFantastique zoo = View.getInstance().CreerUnZoo(nom, myObj.nextLine());
-        /*
-        ThreadDeTest t1 = new ThreadDeTest(zoo);
+
+        Thread t1 = new Thread(zoo);
         t1.start();
-         */
+
         String resCommande = "";
         while(true) {
             System.out.print(View.getInstance().affichageInfos());
