@@ -143,6 +143,18 @@ public class Controller {
                 if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature vivante!";
                 Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
                 return "Créature " + tabOption.get(0) + " morte retirée";
+            case "trier":
+                if (tabOption.size() < 1) return "Il manque une option (zoo ou enclos)";
+                if (tabOption.get(0).equals("zoo")) {
+                    Model.getInstance().trierEnclos();
+                    return "Les enclos sont triés";
+                } else if (tabOption.get(0).equals("enclos")) {
+                    if (tabOption.size() < 2) return "Il manque le nom de l'enclos a trier";
+                    Model.getInstance().trierUnEnclos(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)));
+                    return "L'enclos " + tabOption.get(1) + " est a été trié";
+                }
+                Model.getInstance().getZoo().getEnclosExistant().remove(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0))); //Supprime l'enclos dans la liste des enclos
+                return "Créature " + tabOption.get(0) + " morte retirée";
             case "deplacer":
                 if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque des options (nomCreature, nomEnclosDestination)";
                 if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature morte! Il faut retirer son cadavre";

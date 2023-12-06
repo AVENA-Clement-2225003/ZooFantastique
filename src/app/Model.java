@@ -10,6 +10,8 @@ import includes.maitreZoo.MaitreZooFantastique;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.RuleBasedCollator;
 import java.util.ArrayList;
 
 public class Model {
@@ -71,9 +73,13 @@ public class Model {
         unZoo = new zooFantastique(nom, nomMaitreDeZoo/*maitre*/, 15, new ArrayList<>());
         unZoo.ajouterEnclos(new EnclosStandard("Tuto", 45, 5));
         Licorne L1 = new LicorneMale(50, 150, 25, "James", unZoo.getEnclosByNom("Tuto"));
+        Licorne L3 = new LicorneMale(50, 150, 25, "Albert", unZoo.getEnclosByNom("Tuto"));
+        Licorne L4 = new LicorneMale(50, 150, 25, "Béatrice", unZoo.getEnclosByNom("Tuto"));
         Licorne L2 = new LicorneFemelle(50, 150, 25, "Maria", unZoo.getEnclosByNom("Tuto"));
         unZoo.getEnclosExistant().get(0).ajouterCreature(L1);
         unZoo.getEnclosExistant().get(0).ajouterCreature(L2);
+        unZoo.getEnclosExistant().get(0).ajouterCreature(L3);
+        unZoo.getEnclosExistant().get(0).ajouterCreature(L4);
 
         unZoo.ajouterEnclos(new EnclosVoliere("T1", 45, 5, 15));
         Phenix P1 = new PhenixMale(50, 150, 25, "James", unZoo.getEnclosByNom("T1"));
@@ -175,11 +181,52 @@ public class Model {
     }
 
     public void trierEnclos() {
-        Enclos min = unZoo.getEnclosExistant().get(0);
-        for (int i = 0; i < unZoo.getEnclosExistant().size(); i+=1) {
-            for (int j = i; j < unZoo.getEnclosExistant().size(); j+=1) {
-                if min.getNom()
+        ArrayList<Enclos> liste = unZoo.getEnclosExistant();
+        int min = 0;
+        for (int i = 1; i < liste.size(); i+=1) {
+            for (int j = i; j < liste.size(); j+=1) {
+                if (comparerASCII(liste.get(min).getNom(), liste.get(j).getNom()) == 1) {
+                    min = j;
+                } else if (comparerASCII(liste.get(min).getNom(), liste.get(j).getNom()) == 2) {
+                    if (liste.get(j).getID() < liste.get(min).getID()) min = j;
+                }
             }
+            Enclos tmp = liste.get(0);
+            liste.set(0, liste.get(min));
+            liste.set(min, tmp);
+        }
+    }
+
+    private static int comparerASCII(String str1, String str2) {
+        int minLength = Math.min(str1.length(), str2.length());
+
+        for (int i = 0; i < minLength; i++) {
+            char char1 = str1.charAt(i);
+            char char2 = str2.charAt(i);
+
+            if (char1 < char2) {
+                return 0;
+            } else if (char1 > char2) {
+                return 1;
+            }
+        }
+        return 2;
+    }
+
+    public void trierUnEnclos(Enclos enclos) {
+        ArrayList<Creature> liste = enclos.getListeCreatures();
+        int min = 0;
+        for (int i = 0; i < liste.size(); i+=1) {
+            for (int j = i; j < liste.size(); j+=1) {
+                if (comparerASCII(liste.get(min).getNom(), liste.get(j).getNom()) == 1) {
+                    min = j;
+                } else if (comparerASCII(liste.get(min).getNom(), liste.get(j).getNom()) == 2) {
+                    if (liste.get(j).getID() < liste.get(min).getID()) min = j;
+                }
+            }
+            Creature tmp = liste.get(i);
+            liste.set(i, liste.get(min));
+            liste.set(min, tmp);
         }
     }
 }
