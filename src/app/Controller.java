@@ -63,7 +63,7 @@ public class Controller {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
-                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, trier, exit\nPour plus d'aide: help nomCommande";
+                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, trier, reveiller, endormir, exit\nPour plus d'aide: help nomCommande";
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
@@ -88,6 +88,10 @@ public class Controller {
                             return "Commande pour trier\nTapez reproduire nom1erParent nom2eParent";
                         case "infos":
                             return "Permet de visualiser les informations en fonction de l'option \"zoo\", \"maitreZoo\" ou \"Enclos nomEnclos\"";
+                        case "reveiller":
+                            return "Permet de reveiller une créature\n Tapez reveiller leNomAnimal";
+                        case "endormir":
+                            return "Permet d'endormir une créature\n Tapez endormir leNomAnimal";
                         case "deplacer":
                             return "Pas encore de description\nA faire";
                         case "exit":
@@ -185,9 +189,13 @@ public class Controller {
                 return "Créature " + tabOption.get(0) + " renommé " + tabOption.get(1);
             case "soigner":
                 if (tabOption.isEmpty()) return "Il manque le nom de l'animal";
+                if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)) == null){
+                    return "Cette creature n existe pas";
+                }
                 return Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).etreSoigne();
-            case "nourir":
-                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nourir";
+            case "nourrir":
+                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nourrir";
+                if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)) == null) return "Cet enclos n'existe pas";
                 Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).nourrirCreatures();
                 return "Les créatures de l'enclos " + tabOption.get(0) + " ont été nourri";
             case "reveiller":
@@ -351,7 +359,7 @@ public class Controller {
                         if(tabOption.size() < 2) {
                             return "Commandes : creerCreature, endormir, ChangerAge";
                         }else {
-                            switch (tabOption.get(1)) {
+                            switch (tabOption.get(0)) {
                             case "creerCreature":
                                 return "Commande pour creer une créture\nTapez creerCreature enclos type sexe nom age taille poid";
                             case "endormir":
@@ -359,7 +367,7 @@ public class Controller {
                             case "changerAge":
                                 return "Commande pour changer l'age d'une créature\nTapez changerAge nomCreature nvAge";
                             default:
-                                return "Erreur dev help: commande non reconnue";
+                                return "Erreur help: commande non reconnue";
                             }
                         }
                     case "changerAge":
