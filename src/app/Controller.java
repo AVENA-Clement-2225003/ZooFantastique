@@ -63,7 +63,7 @@ public class Controller {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
-                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, exit\nPour plus d'aide: help nomCommande";
+                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, trier, exit\nPour plus d'aide: help nomCommande";
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
@@ -84,6 +84,8 @@ public class Controller {
                             return "Commande pour supprimer un enclos VIDE\nTapez supprimer leNomAnimal";
                         case "reproduire":
                             return "Commande pour faire reproduire deux créature de même espèce\nTapez reproduire nom1erParent nom2eParent";
+                        case "trier":
+                            return "Commande pour trier\nTapez reproduire nom1erParent nom2eParent";
                         case "infos":
                             return "Permet de visualiser les informations en fonction de l'option \"zoo\", \"maitreZoo\" ou \"Enclos nomEnclos\"";
                         case "deplacer":
@@ -267,8 +269,9 @@ public class Controller {
                         if ((tabOption.get(2).equals("dragon") || tabOption.get(2).equals("phenix")) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosVoliere)) return "Cet enclos n'est pas adapté pour cette créature, essayez une volière";
                         if ((tabOption.get(2).equals("kraken") || tabOption.get(2).equals("megalodon") || tabOption.get(2).equals("sirene")) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosAquarium)) return "Cet enclos n'est pas adapté pour cette créature, essayez un aquarium";
                         if ((tabOption.get(2).equals("licorne") || tabOption.get(2).equals("lycanthrope") || tabOption.get(2).equals("nymphe")) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosStandard)) return "Cet enclos n'est pas adapté pour cette créature, essayez un enclos standard";
-                        if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece().equals(Model.getInstance().getEspeceByStr(tabOption.get(2)))) return "Les crétures de cet enclos ne sont pas de la même espèce !";
-                        Creature c;
+                        if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().isEmpty()) {
+                            if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece().equals(Model.getInstance().getEspeceByStr(tabOption.get(2)))) return "Les crétures de cet enclos ne sont pas de la même espèce !";
+                        } Creature c;
                         switch (tabOption.get(2)) {
                             case "dragon":
                                 if (tabOption.get(3).equals("male")) {
@@ -348,7 +351,7 @@ public class Controller {
                         if(tabOption.size() < 2) {
                             return "Commandes : creerCreature, endormir, ChangerAge";
                         }else {
-                            switch (tabOption.get(0)) {
+                            switch (tabOption.get(1)) {
                             case "creerCreature":
                                 return "Commande pour creer une créture\nTapez creerCreature enclos type sexe nom age taille poid";
                             case "endormir":
@@ -356,7 +359,7 @@ public class Controller {
                             case "changerAge":
                                 return "Commande pour changer l'age d'une créature\nTapez changerAge nomCreature nvAge";
                             default:
-                                return "Erreur help: commande non reconnue";
+                                return "Erreur dev help: commande non reconnue";
                             }
                         }
                     case "changerAge":
