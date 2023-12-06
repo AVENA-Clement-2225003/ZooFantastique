@@ -61,7 +61,7 @@ class zooFantastiqueTest {
         listeEnclos.add(E2);
         listeEnclos2.add(E3);
         zoo.setEnclosExistant(listeEnclos2);
-        assertEquals("[Enclos{nom='Enclos de Megalodon', superficie=100, capaciteEnclos=10, listeCreatures=[], proprete=BON}]", zoo.getEnclosExistant().toString(), "La fonction setEnclosExistant ne marche pas");
+        assertEquals("[Enclos: Enclos de Megalodon | Superficie: 100 | Capacitée: 10 | Propretée: BON]", zoo.getEnclosExistant().toString(), "La fonction setEnclosExistant ne marche pas");
 
     }
 
@@ -94,8 +94,7 @@ class zooFantastiqueTest {
         listeEnclos.add(E1);
         E1.ajouterCreature(Ly1);
         E1.ajouterCreature(Ly2);
-        assertEquals("zooFantastique{nom='L'amnéstie', maitreZoo='Pierre', maxEnclos=10, enclosExistant=[Enclos{nom='Enclos de Lycanthrope', superficie=100, capaciteEnclos=10, listeCreatures=[Lycanthrope{ Creature{ID=0, nomEspece=LYCANTROPE, sexe=MALE, poids=100, taille=180, age=10, faim=false, estEnTrainDeDormir=false, sante=true, nom=Micheline, ageMort=\'"  + Ly1.getAgeMort() + "\'}}, Lycanthrope{ Creature{ID=1, nomEspece=LYCANTROPE, sexe=FEMELLE, poids=100, taille=180, age=10, faim=false, estEnTrainDeDormir=false, sante=true, nom=Jeanne, ageMort=\'"  + Ly2.getAgeMort() + "\'}}], proprete=BON}]}", zoo.toString(), "Le message 'toString' est incorrect");
-
+        assertEquals("zooFantastique{nom='L'amnéstie', maitreZoo='Pierre', maxEnclos=10, enclosExistant=[Enclos: Enclos de Lycanthrope | Superficie: 100 | Capacitée: 10 | Propretée: BON]}", zoo.toString(), "Le message 'toString' est incorrect");
     }
 
     @Test
@@ -114,7 +113,11 @@ class zooFantastiqueTest {
         E1.ajouterCreature(Ly2);
         E2.ajouterCreature(L1);
         E2.ajouterCreature(L2);
-        assertEquals("Le zoo : L'amnéstie avec les créatures :  {Enclos de Lycanthrope = {La creature Micheline de type LYCANTROPE, d'identifiant " + Ly1.getID() +" et de sexe MALE fait 180 cm, 100 kg, a 10 ans, n'a pas faim, n'a pas sommeil et est en bonne sante, La creature Jeanne de type LYCANTROPE, d'identifiant " + Ly2.getID() +" et de sexe FEMELLE fait 180 cm, 100 kg, a 10 ans, n'a pas faim, n'a pas sommeil et est en bonne sante}, Enclos de Licorne = {La creature Petit Poney de type LICORNE, d'identifiant " + L1.getID() +" et de sexe MALE fait 180 cm, 350 kg, a 10 ans, n'a pas faim, n'a pas sommeil et est en bonne sante, La creature Petit Tonerre de type LICORNE, d'identifiant " + L2.getID() +" et de sexe FEMELLE fait 180 cm, 300 kg, a 11 ans, n'a pas faim, n'a pas sommeil et est en bonne sante}}",zoo.afficherCreature(),"L'affichage des créatures ne fonctionne pas");
+        assertEquals("Le zoo : L'amnéstie comporte les créatures suivantes :\n" +
+                "nom : Micheline | espece : LYCANTHROPE | age : 10 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Enclos de Lycanthrope\n" +
+                "nom : Jeanne | espece : LYCANTHROPE | age : 10 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Enclos de Lycanthrope\n" +
+                "nom : Petit Poney | espece : LICORNE | age : 10 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Enclos de Lycanthrope\n" +
+                "nom : Petit Tonerre | espece : LICORNE | age : 11 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Enclos de Lycanthrope\n",zoo.afficherCreature(),"La fonction afficherCreatures ne fonctionne pas");
 
     }
 
@@ -138,12 +141,18 @@ class zooFantastiqueTest {
         listeEnclos.add(E1);
         E1.ajouterCreature(Ly1);
         E1.ajouterCreature(Ly2);
-        assertEquals("Lycanthrope{ \n nom : Micheline | espece : LYCANTROPE | ID : 0 | age : 10 | faim :  non  | en bonne sante :  oui  | dort :  non }", zoo.getCreatureByNom("Micheline").toString(),"La fonction getCreatureByNom ne fonctionne pas");
+        assertEquals("nom : Micheline | espece : LYCANTHROPE | age : 10 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Enclos de Lycanthrope", zoo.getCreatureByNom("Micheline").toString(),"La fonction getCreatureByNom ne fonctionne pas");
     }
 
     @Test
     void ajouterEnclos() {
-
+        ArrayList<Enclos> listeEnclos = new ArrayList<>() ;
+        zooFantastique zoo = new zooFantastique("L'amnéstie","Pierre", 10, listeEnclos);
+        EnclosStandard E1 = new EnclosStandard("Enclos de Lycanthrope", 100, 10);
+        ArrayList<Enclos> enclosExistant = new ArrayList<>();
+        enclosExistant.add(E1);
+        zoo.ajouterEnclos(E1);
+        assertEquals( enclosExistant,zoo.getEnclosExistant(),"La fonction ajouterEnclos ne fonctionne pas.");
     }
 
 }
