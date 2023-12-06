@@ -63,7 +63,7 @@ public class Controller {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
-                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, exit\nPour plus d'aide: help nomCommande";
+                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, reveiller, endormir, exit\nPour plus d'aide: help nomCommande";
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
@@ -86,6 +86,10 @@ public class Controller {
                             return "Commande pour faire reproduire deux créature de même espèce\nTapez reproduire nom1erParent nom2eParent";
                         case "infos":
                             return "Permet de visualiser les informations en fonction de l'option \"zoo\", \"maitreZoo\" ou \"Enclos nomEnclos\"";
+                        case "reveiller":
+                            return "Permet de reveiller une créature\n Tapez reveiller leNomAnimal";
+                        case "endormir":
+                            return "Permet d'endormir une créature\n Tapez endormir leNomAnimal";
                         case "deplacer":
                             return "Pas encore de description\nA faire";
                         case "exit":
