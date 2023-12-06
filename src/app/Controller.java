@@ -277,7 +277,7 @@ public class Controller {
                         if ((tabOption.get(2).equals("dragon") || tabOption.get(2).equals("phenix")) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosVoliere)) return "Cet enclos n'est pas adapté pour cette créature, essayez une volière";
                         if ((tabOption.get(2).equals("kraken") || tabOption.get(2).equals("megalodon") || tabOption.get(2).equals("sirene")) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosAquarium)) return "Cet enclos n'est pas adapté pour cette créature, essayez un aquarium";
                         if ((tabOption.get(2).equals("licorne") || tabOption.get(2).equals("lycanthrope") || tabOption.get(2).equals("nymphe")) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosStandard)) return "Cet enclos n'est pas adapté pour cette créature, essayez un enclos standard";
-                        if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().isEmpty()) {
+                        if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().isEmpty()) {
                             if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece().equals(Model.getInstance().getEspeceByStr(tabOption.get(2)))) return "Les crétures de cet enclos ne sont pas de la même espèce !";
                         } Creature c;
                         switch (tabOption.get(2)) {
