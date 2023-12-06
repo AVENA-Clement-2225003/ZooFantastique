@@ -37,6 +37,7 @@ public class EnclosAquarium extends Enclos {
      * @param propreteEnum Niveau de propreté de l'enclos
      * @param listeCreatures Liste des créatures
      * @param profondeur Profondeur du bassin
+     * @param saliniteBassin de l'enclos
      */
     public EnclosAquarium(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, int profondeur, boolean saliniteBassin) {
         super(nom, superficie, capaciteEnclos, propreteEnum, listeCreatures);
@@ -46,7 +47,7 @@ public class EnclosAquarium extends Enclos {
 
     /**
      * Permet de récupérer la valeur de la variable profondeur
-     * @return
+     * @return profondeur de l'aquarium
      */
     public int getProfondeur() {
         return profondeur;

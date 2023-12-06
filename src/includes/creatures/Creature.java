@@ -348,7 +348,7 @@ public abstract class Creature {
 
     /**
      * Setter de l'enclos
-     * @param enclos
+     * @param enclos Enclos
      */
     public void setEnclos(Enclos enclos) {
         this.enclos = enclos;

@@ -1,7 +1,3 @@
-unnamed package
 app
 includes.creatures
 includes.enclos
-includes.maitreZoo
-includes.zoo
-tests.enclos

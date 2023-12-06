@@ -10,8 +10,6 @@ import includes.maitreZoo.MaitreZooFantastique;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.RuleBasedCollator;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +23,7 @@ public class Model {
 
     /**
      * Fonction permettant de n'avoir qu'une isntance de la classe Model
-     * @return
+     * @return instance de Model
      */
     public static Model getInstance() {
         if (instance == null) {
@@ -68,8 +66,8 @@ public class Model {
 
     /**
      * Fonction permettant de récupérer l'ENUM correspondant au string passé en parametre
-     * @param s
-     * @return
+     * @param s nom de l'espèce recherchée
+     * @return un ENUM correspondant
      */
     public EspecesEnum getEspeceByStr(String s) {
         switch (s) {
@@ -96,7 +94,7 @@ public class Model {
 
     /**
      * Fonction qui permet de savoir si l'utilisateur est en mode développement
-     * @return
+     * @return true si l'utilisateur est un dev mode false sinon
      */
     public boolean isDevMode() {
         return devMode;
@@ -104,9 +102,9 @@ public class Model {
 
     /**
      * Fonction qui va créer un zoo et un maitre de zoo à partir des éléments passés en paramètres
-     * @param nom
-     * @param nomMaitreDeZoo
-     * @return
+     * @param nom du zoo
+     * @param nomMaitreDeZoo du maitre de zoo
+     * @return une instance de Zoo
      */
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
@@ -135,8 +133,8 @@ public class Model {
 
     /**
      * Fonction qui permet de vérifier si un nom n'est pas déja utilisé et le change si c'est le cas pour simplifer les recherches de crétures
-     * @param animal
-     * @param nom
+     * @param animal à vérifier et renommer si nécessaire
+     * @param nom que l'on veut lui donner
      */
     public void verifierNomEtRenommerCreature(Creature animal, String nom) {
         int id = 1;
@@ -154,7 +152,7 @@ public class Model {
 
     /**
      * Getter de maitre
-     * @return
+     * @return instance de maitreDeZoo
      */
     public MaitreZooFantastique getMaitre() {
         return maitre;
@@ -162,7 +160,7 @@ public class Model {
 
     /**
      * Getter de unZoo
-     * @return
+     * @return instance de Zoo
      */
     public zooFantastique getZoo() {
         return unZoo;
@@ -170,7 +168,7 @@ public class Model {
 
     /**
      * Fonction permettant de récupérer les 7 premier enclos du zoo
-     * @return
+     * @return liste d'informations
      */
     public ArrayList<String> get7erEnclos() {
         ArrayList<String> liste = new ArrayList<>();
@@ -185,7 +183,7 @@ public class Model {
 
     /**
      * Fonction permettant de récupérer les 7 premières créatures malades du zoo
-     * @return
+     * @return liste d'informations
      */
     public ArrayList<String> get7erMalades() {
         ArrayList<String> liste = new ArrayList<>();
@@ -202,7 +200,7 @@ public class Model {
 
     /**
      * Fonction permettant de récupérer les 7 premières créatures qui ont faim du zoo
-     * @return
+     * @return liste d'informations
      */
     public ArrayList<String> get7erFaims() {
         ArrayList<String> liste = new ArrayList<>();
@@ -219,7 +217,7 @@ public class Model {
 
     /**
      * Fonction permettant de récupérer les 7 premières créatures qui dorment du zoo
-     * @return
+     * @return liste d'informations
      */
     public ArrayList<String> get7erDormir() {
         ArrayList<String> liste = new ArrayList<>();
@@ -236,7 +234,7 @@ public class Model {
 
     /**
      * Fonction permettant de récupérer les 7 premières créatures mortes du zoo
-     * @return
+     * @return liste d'informations
      */
     public ArrayList<String> get7erMorts() {
         ArrayList<String> liste = new ArrayList<>();
@@ -253,8 +251,8 @@ public class Model {
 
     /**
      * Fonction permettant de savoir si une créature est enceinte
-     * @param s
-     * @return
+     * @param s nom de la créature recherchée
+     * @return true si elle l'est false sinon
      */
     public boolean estEnceinte(String s) {
         Creature c = unZoo.getCreatureByNom(s);
@@ -286,9 +284,9 @@ public class Model {
 
     /**
      * Fonction qui permet de savoir si un string est plus petit alphabétiquemement que le second
-     * @param str1
-     * @param str2
-     * @return
+     * @param str1 premier nom
+     * @param str2 deuxième nom
+     * @return 0 pour 1er < 2e, 1 pour 2e < 1er et 2 pour 1er == 2e
      */
     private static int comparerASCII(String str1, String str2) {
         int minLength = Math.min(str1.length(), str2.length());
@@ -308,7 +306,7 @@ public class Model {
 
     /**
      * Fonction permettant de trier les créatures d'un enclos passé en parametre
-     * @param enclos
+     * @param enclos a trier
      */
     public void trierUnEnclos(Enclos enclos) {
         ArrayList<Creature> liste = enclos.getListeCreatures();

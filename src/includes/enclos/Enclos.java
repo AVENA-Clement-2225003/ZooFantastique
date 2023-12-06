@@ -71,7 +71,7 @@ public abstract class Enclos {
 
     /**
      * Permet de récupérer la valeur de la variable lastID
-     * @return
+     * @return dernier ID utilisé
      */
     public static int getLastID() {
         return lastID;
@@ -79,7 +79,7 @@ public abstract class Enclos {
 
     /**
      * Permet de récupérer la valeur de la variable ID
-     * @return
+     * @return ID de l'enclos
      */
     public int getID() {
         return ID;
@@ -87,7 +87,7 @@ public abstract class Enclos {
 
     /**
      * Permet de récupérer la valeur de la variable nom
-     * @return
+     * @return nom de l'enclos
      */
     public String getNom() {
         return nom;
@@ -95,63 +95,63 @@ public abstract class Enclos {
 
     /**
      * Permet de changer la valeur de la variable nom
-     * @return
+     * @param nom nouveau nom de l'enclos
      */
     public void setNom(String nom) {
         this.nom = nom;
     }
     /**
      * Permet de récupérer la valeur de la variable superficie
-     * @return
+     * @return superficie de l'enclos
      */
     public int getSuperficie() {
         return superficie;
     }
     /**
      * Permet de changer la valeur de la variable superficie
-     * @return
+     * @param superficie nouvelle superficie de l'enclos
      */
     public void setSuperficie(int superficie) {
         this.superficie = superficie;
     }
     /**
      * Permet de récupérer la valeur de la variable capaciteEnclos
-     * @return
+     * @return la capacité de l'enclos
      */
     public int getCapaciteEnclos() {
         return capaciteEnclos;
     }
     /**
      * Permet de changer la valeur de la variable capaciteEnclos
-     * @return
+     * @param capaciteEnclos nouvelle capacitée de l'enclos
      */
     public void setCapaciteEnclos(int capaciteEnclos) {
         this.capaciteEnclos = capaciteEnclos;
     }
     /**
      * Permet de récupérer la valeur de la variable listeCreatures
-     * @return
+     * @return liste des créature de l'enclos
      */
     public ArrayList<Creature> getListeCreatures() {
         return listeCreatures;
     }
     /**
      * Permet de changer la valeur de la variable listeCreatures
-     * @return
+     * @param listeCreatures la nouvelle liste de créatures
      */
     public void setListeCreatures(ArrayList<Creature> listeCreatures) {
         this.listeCreatures = listeCreatures;
     }
     /**
      * Permet de récupérer la valeur de la variable proprete
-     * @return
+     * @return propretée de l'enclos
      */
     public PropreteEnum getProprete() {
         return propreteEnum;
     }
     /**
      * Permet de changer la valeur de la variable proprete
-     * @return
+     * @param propreteEnum propretée a mettre
      */
     public void setProprete(PropreteEnum propreteEnum) {
         this.propreteEnum = propreteEnum;
@@ -159,13 +159,13 @@ public abstract class Enclos {
 
     /**
      * Fonction permettant l'entretient de l'enclos
-     * @return
+     * @return le code d'erreur si 0 tout va bien
      */
     public abstract int entretientEnclos();
 
     /**
      * Fonction d'affichage de l'enclos
-     * @return
+     * @return l'affichage de la créature à l'utilisateur
      */
     @Override
     public String toString() {
@@ -195,8 +195,8 @@ public abstract class Enclos {
 
     /**
      * Fonction qui permet la comparaison de deux créature et savoir si il s'agit de la même
-     * @param enclos
-     * @return
+     * @param enclos à vérifier
+     * @return true si ils sont égaux et fasle sinon
      */
     public boolean equals(Enclos enclos) {
         return this.ID == enclos.ID;
@@ -204,9 +204,9 @@ public abstract class Enclos {
 
     /**
      * Fonction permettant le transfert d'une créature vers un autre enclos
-     * @param creature
-     * @param enclos
-     * @return
+     * @param creature à transferer
+     * @param enclos enclos de desination
+     * @return 0 si tout est Ok et 1,2,3,4 en fonction des problèmes
      */
     public int deplacerCreatureEnclos(Creature creature, Enclos enclos) {
         if (this.equals(enclos)) return 1; //Si l'enclos de destination est celui ou se trouve acutellement la créature
@@ -236,7 +236,7 @@ public abstract class Enclos {
         if (listeCreatures.size() >= capaciteEnclos) return 2; // Si il n'y a plus de place
         for (Creature creature1 : listeCreatures) {
             if (creature1.getID() == creature.getID()) return 1; // Si la créature est déjà présente
-            if (creature1.getNom() == creature.getNom()) {
+            if (creature1.getNom().equals(creature.getNom())) {
                 creature.setNom(creature.getNom() + creature.getID());
                 listeCreatures.add(creature);
                 return 0;
@@ -248,6 +248,7 @@ public abstract class Enclos {
 
     /**
      * Fonction permmettant la suppression d'un créature dans l'enclos
+     * @param creature à retirer
      * @return 0 si la suppression à fonctionner
      */
     public int retirerCreature(Creature creature){
@@ -259,7 +260,7 @@ public abstract class Enclos {
     /**
      * Fonction qui permet de récupérer l'indice d'une créature dans la liste des créatures
      * @param creature Créature recherché
-     * @return
+     * @return la position d'une créature dans la liste de l'enclos
      */
     public int getIndexCreature(Creature creature){
         if (!existInListeCreature(creature)) return listeCreatures.size();

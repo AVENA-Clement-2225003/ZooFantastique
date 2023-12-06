@@ -18,6 +18,7 @@ public class EnclosVoliere extends Enclos {
      * @param nom Nom de l'enclos
      * @param superficie Superficie de l'enclos
      * @param capaciteEnclos Capacité de l'enclos
+     * @param hauteur de l'enclos
      */
     public EnclosVoliere(String nom, int superficie, int capaciteEnclos, int hauteur) {
         super(nom, superficie, capaciteEnclos);
@@ -33,6 +34,7 @@ public class EnclosVoliere extends Enclos {
      * @param propreteEnum Niveau de propreté de l'enclos
      * @param listeCreatures Liste des créatures
      * @param toitCageOK true si le toit est OK false sinon
+     * @param hauteur de la cage
      */
     public EnclosVoliere(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, boolean toitCageOK, int hauteur) {
         super(nom, superficie, capaciteEnclos, propreteEnum, listeCreatures);
@@ -55,7 +57,7 @@ public class EnclosVoliere extends Enclos {
 
     /**
      * Fonction d'affichage utilisant celle de la classe super en concaténant les informations supplémentaires
-     * @return
+     * @return l'affichage pour l'utilisateur
      */
     @Override
     public String toString() {

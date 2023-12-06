@@ -26,7 +26,7 @@ public class View {
 
     /**
      * Fonction permettant de n'avoir qu'une seule instance de classe de View
-     * @return
+     * @return instance de View
      */
     public static View getInstance() {
         if (instance == null) {
@@ -38,8 +38,8 @@ public class View {
 
     /**
      * Fonction qui va traiter le cas de la commande exit et vide, ou la transmettre pour découpage et execution
-     * @param commande
-     * @return
+     * @param commande a traiter
+     * @return résultat de la commande
      */
     public String entreeCommande(String commande) {
         if (commande.equals("exit")) return "exit";
@@ -49,7 +49,7 @@ public class View {
 
     /**
      * Fonction qui va afficher les informations sous forme de tableau dans le shell
-     * @return
+     * @return un string d'apparence tableau avec des informations
      */
     public String affichageInfos() {
         ArrayList<ArrayList<String>> liste = Controller.getInstance().DonnesAffichageZoo();
@@ -87,9 +87,9 @@ public class View {
 
     /**
      * Fonction qui permet de généer les lignes en fonction de l'espacement donné (sert à aligner les colonnes du tableau)
-     * @param value
-     * @param width
-     * @return
+     * @param value a afficher
+     * @param width espaces pour l'affichage
+     * @return la partie de ligne pour l'affichage
      */
     private String formatColumn(String value, int width) {
         return String.format("%-" + (width) + "s", value);
@@ -97,9 +97,9 @@ public class View {
 
     /**
      * Fonction qui va appeller la fonction CreerUnZoo() du controlleur
-     * @param nom
-     * @param nomMaitreDeZoo
-     * @return
+     * @param nom du zoo
+     * @param nomMaitreDeZoo du maitre de zoo
+     * @return instance de Zoo
      */
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         zooFantastique zoo = controlleur.CreerUnZoo(nom, nomMaitreDeZoo);

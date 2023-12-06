@@ -19,7 +19,7 @@ public class Controller {
 
     /**
      * Fonction permettant de n'avoir qu'une isntance de la classe Model
-     * @return
+     * @return une instance
      */
     public static Controller getInstance() {
         if (instance == null) {
@@ -30,9 +30,9 @@ public class Controller {
 
     /**
      * Fonction permettant d'appeller la fonction qui créera un zoo
-     * @param nom
-     * @param nomMaitreDeZoo
-     * @return
+     * @param nom du zoo
+     * @param nomMaitreDeZoo du maitre de zoo
+     * @return une instance de Zoo
      */
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         zooFantastique zoo = Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
@@ -41,8 +41,8 @@ public class Controller {
 
     /**
      * Fonction qui permet de choisir aléatoirement un prénom lorsque l'utilisateur n'en a pas donné
-     * @param sexe
-     * @return
+     * @param sexe 0 si c'est un garcon sinon 1
+     * @return un prénom aléatoire
      */
     private String choisirUnPrenom(int sexe) { // Il faut impérativement le même nombre de prénoms masculins et féminins
         ArrayList<ArrayList<String>> ListePrenoms = new ArrayList<>(
@@ -55,8 +55,8 @@ public class Controller {
 
     /**
      * Fonction permettant de récuperer le nom d'une commande est les options associées, puis de renvoyer le résultat de la fonction executecommande()
-     * @param commande
-     * @return
+     * @param commande a découper
+     * @return le résultat de la commande
      */
     public String entreeCommande(String commande) {
         if (!Character.isLetter(commande.charAt(0))) {
@@ -90,9 +90,9 @@ public class Controller {
 
     /**
      * Fonction qui va effectuer les traitements nécessaires en fonction de la commande passée en parametre et des ses options, puis renvoyer le résultat de cette commande
-     * @param nomCommande
-     * @param tabOption
-     * @return
+     * @param nomCommande a effectuer
+     * @param tabOption options associées
+     * @return résultat du traitement de la commande
      */
     public String executerCommande(String nomCommande, ArrayList<String> tabOption) {
         switch (nomCommande) {
@@ -421,7 +421,7 @@ public class Controller {
 
     /**
      * Fonction qui permet de fusionner les listes d'informations pour l'affichage
-     * @return
+     * @return une liste de liste avec les informations a afficher
      */
     public ArrayList<ArrayList<String>> DonnesAffichageZoo() {
         ArrayList<String> EnclosZoo = Model.getInstance().get7erEnclos();
