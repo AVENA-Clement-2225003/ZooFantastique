@@ -35,7 +35,7 @@ public abstract class Dragon extends Creature implements PeutVoler, PeutCourir, 
      * @return Le dragon vole.
      */
     public String voler() {
-        return "Le dragon " + this.getNom() + " voler.";
+        return "Le dragon " + this.getNom() + " vole.";
     }
     /**
      * Fonction qui permet a un dragon de courir
@@ -68,7 +68,7 @@ public abstract class Dragon extends Creature implements PeutVoler, PeutCourir, 
      */
     @Override
     public String vieillir(){
-        setAge(getAge()+1);;
+        setAge(getAge()+1);
         if (getAge() >= getAgeMort()){
             this.setAge(1);
             return "Le dragon " + getNom() + " est mort. Il renait de ses cendres";

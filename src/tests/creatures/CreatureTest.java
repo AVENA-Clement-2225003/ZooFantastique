@@ -1,18 +1,43 @@
 package tests.creatures;
 
 import includes.creatures.*;
+import includes.enclos.Enclos;
+import includes.enclos.EnclosStandard;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CreatureTest {
 
+    Enclos Tuto = new EnclosStandard("Tuto", 20, 5);
+
+    @Test
+    void getLastID() {
+        Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
+        assertEquals(L1.getID()+1, Creature.getLastID());
+        Licorne L2 = new LicorneMale(50, 150, 25, "James", null);
+        assertEquals(L1.getID()+2, Creature.getLastID());
+    }
+
+    @Test
+    void getID() {
+        Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
+        assertEquals(13, L1.getID());
+    }
+
+    @Test
+    void setID() {
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertEquals(15, d1.getID());
+        d1.setID(200);
+        assertEquals(200, d1.getID());
+    }
+
     @Test
     void Creature(){
-        Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
+        Licorne L1 = new LicorneMale(50, 150, 25, "James", Tuto);
         L1.setID(0);
-        assertEquals("Licorne{ \n" +
-                " nom : James | espece : LICORNE | ID : 0 | age : 25 | faim :  non  | en bonne sante :  oui  | dort :  non }", L1.toString());
+        assertEquals("nom : James | espece : LICORNE | age : 25 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Tuto", L1.toString());
     }
     @Test
     void manger() {
@@ -41,14 +66,15 @@ class CreatureTest {
 
     @Test
     void vieillir() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", Tuto);
+        d1.vieillir();
+        assertEquals(26, d1.getAge());
     }
 
     @Test
     void testToString() {
-        Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
-        assertEquals("Licorne{ \n" +
-                " nom : James | espece : LICORNE | ID : 0 | age : 25 | faim :  non  | en bonne sante :  oui  | dort :  non }", L1.toString());
+        Dragon d1 = new DragonMale(50, 150, 25, "James", Tuto);
+        assertEquals("nom : James | espece : DRAGON | age : 25 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Tuto", d1.toString());
     }
 
     @Test
@@ -56,28 +82,6 @@ class CreatureTest {
         Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
         L1.setID(0);
         assertEquals("La creature James de type LICORNE, d'identifiant 0 et de sexe MALE fait 150 cm, 50 kg, a 25 ans, n'a pas faim, n'a pas sommeil et est en bonne sante", L1.afficherCreature());
-    }
-
-    @Test
-    void getLastID() {
-        Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
-        Licorne L2 = new LicorneMale(50, 150, 25, "James", null);
-        assertEquals(2, L1.getLastID());
-        assertEquals(2, L2.getLastID());
-    }
-
-    @Test
-    void getID() {
-        Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
-        assertEquals(0, L1.getID());
-    }
-
-    @Test
-    void setID() {
-        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
-        assertEquals(0, d1.getID());
-        d1.setID(200);
-        assertEquals(200, d1.getID());
     }
 
     @Test
@@ -95,101 +99,152 @@ class CreatureTest {
 
     @Test
     void getSexe() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertEquals("MALE", d1.getSexe().toString());
     }
 
     @Test
     void setSexe() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setSexe(SexesEnum.FEMELLE);
+        assertEquals("FEMELLE", d1.getSexe().toString());
     }
 
     @Test
     void getPoids() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertEquals(50, d1.getPoids());
     }
 
     @Test
     void setPoids() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setPoids(500);
+        assertEquals(500, d1.getPoids());
     }
 
     @Test
     void getTaille() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertEquals(150, d1.getTaille());
     }
 
     @Test
     void setTaille() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setTaille(900);
+        assertEquals(900, d1.getTaille());
     }
 
     @Test
     void getAge() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertEquals(25, d1.getAge());
     }
 
     @Test
     void setAge() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setAge(230);
+        assertEquals(230, d1.getAge());
     }
 
     @Test
     void isFaim() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertFalse(d1.isFaim());
     }
 
     @Test
     void setFaim() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setFaim(true);
+        assertTrue(d1.isFaim());
     }
 
     @Test
     void isEstEnTrainDeDormir() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertFalse(d1.isEstEnTrainDeDormir());
     }
 
     @Test
     void setEstEnTrainDeDormir() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setEstEnTrainDeDormir(true);
+        assertTrue(d1.isEstEnTrainDeDormir());
     }
 
     @Test
     void isSante() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertTrue(d1.isSante());
     }
 
     @Test
     void setSante() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setSante(false);
+        assertFalse(d1.isSante());
     }
 
     @Test
     void getNom() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        assertEquals("James", d1.getNom());
     }
 
     @Test
     void setNom() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setNom("Maria");
+        assertEquals("Maria", d1.getNom());
     }
 
     @Test
     void getEnclos() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", Tuto);
+        assertEquals("Tuto", d1.getEnclos().getNom());
     }
 
     @Test
     void setEnclos() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", Tuto);
+        d1.setEnclos(new EnclosStandard("SuperEnclos", 55, 5));
+        assertEquals("SuperEnclos", d1.getEnclos().getNom());
     }
 
     @Test
     void getAgeMort() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setAgeMort(30);
+        assertEquals(30, d1.getAgeMort());
     }
 
     @Test
     void setAgeMort() {
-        fail("Not implemented");
+        Dragon d1 = new DragonMale(50, 150, 25, "James", null);
+        d1.setAgeMort(39);
+        assertEquals(39, d1.getAgeMort());
     }
+
+    @Test
+    void courir(){
+        Dragon d1 = new DragonMale(50, 150, 25, "James", Tuto);
+        assertEquals("Le dragon James court." , d1.courir());
+     }
+
+    @Test
+    void nager(){
+        Dragon d1 = new DragonMale(50, 150, 25, "James", Tuto);
+        assertEquals("Le dragon James nage." , d1.nager());
+    }
+
+    @Test
+    void voler(){
+        Dragon d1 = new DragonMale(50, 150, 25, "James", Tuto);
+        assertEquals("Le dragon James vole." , d1.voler());
+    }
+
+
 }

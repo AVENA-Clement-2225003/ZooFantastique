@@ -84,6 +84,7 @@ public abstract class Creature {
      * @param estEnTrainDeDormir sommeil de la creature
      * @param sante sante de la creature
      * @param nom nom de la creature (ne depend pas de son espece)
+     * @param enclos Enclos de la creature
      */
     public Creature(EspecesEnum nomEspece, SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos) {
         this.ID = lastID++;
@@ -155,12 +156,7 @@ public abstract class Creature {
      */
     public String vieillir() {
         age++;
-        if (age >= ageMort){
-            return("A IMPLEMENTER : la creature meurt");
-        }
-        else {
-            return "" + age;
-        }
+        return "" + age;
     }
 
     /**
