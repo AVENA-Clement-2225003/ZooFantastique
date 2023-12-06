@@ -11,6 +11,7 @@ public abstract class Kraken extends Creature implements PeutNager {
      * @param taille int taille de la creature
      * @param age int age de la creature
      * @param nom String nom de la creature (ne depend pas de son espece)
+     * @param enclos Enclos du kraken
      */
     public Kraken(SexesEnum sexe, int poids, int taille, int age, String nom, Enclos enclos) {
         super(EspecesEnum.KRAKEN, sexe, poids, taille, age, false, false, true , nom, enclos);
@@ -26,6 +27,7 @@ public abstract class Kraken extends Creature implements PeutNager {
      * @param estEnTrainDeDormir boolean sommeil de la creature
      * @param sante boolean sante de la creature
      * @param nom String nom de la creature (ne depend pas de son espece)
+     * @param enclos Enclos du kraken
      */
     public Kraken(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos) {
         super(EspecesEnum.KRAKEN, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom, enclos);

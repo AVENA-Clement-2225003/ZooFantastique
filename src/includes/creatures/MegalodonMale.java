@@ -9,6 +9,7 @@ public class MegalodonMale extends Megalodon{
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos du megalodon
      */
     public MegalodonMale( int poids, int taille, int age, String nom, Enclos enclos) {
         super( SexesEnum.MALE, poids, taille, age, false, false, true , nom, enclos);

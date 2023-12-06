@@ -9,6 +9,7 @@ public class LicorneMale extends Licorne{
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos de la licorne
      */
     public LicorneMale( int poids, int taille, int age, String nom, Enclos enclos) {
         super( SexesEnum.MALE, poids, taille, age, false, false, true , nom, enclos);

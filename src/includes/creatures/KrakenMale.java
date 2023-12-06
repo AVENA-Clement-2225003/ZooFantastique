@@ -9,6 +9,7 @@ public class KrakenMale extends Kraken {
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos du kraken
      */
     public KrakenMale( int poids, int taille, int age, String nom, Enclos enclos) {
         super( SexesEnum.MALE, poids, taille, age, false, false, true , nom, enclos);

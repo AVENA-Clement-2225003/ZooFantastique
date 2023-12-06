@@ -10,6 +10,7 @@ public abstract class Phenix extends Creature implements PeutVoler{
      * @param taille int taille de la creature
      * @param age int age de la creature
      * @param nom String nom de la creature (ne depend pas de son espece)
+     * @param enclos Enclos du phenix
      */
     public Phenix(SexesEnum sexe, int poids, int taille, int age, String nom, Enclos enclos) {
         super(EspecesEnum.PHENIX, sexe, poids, taille, age, false, false, true , nom, enclos);
@@ -25,6 +26,7 @@ public abstract class Phenix extends Creature implements PeutVoler{
      * @param estEnTrainDeDormir boolean sommeil de la creature
      * @param sante boolean sante de la creature
      * @param nom String nom de la creature (ne depend pas de son espece)
+     * @param enclos Enclos du phenix
      */
     public Phenix(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos) {
         super(EspecesEnum.PHENIX, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom, enclos);

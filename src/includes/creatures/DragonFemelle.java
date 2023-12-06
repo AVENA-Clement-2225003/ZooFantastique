@@ -9,6 +9,7 @@ public class DragonFemelle extends Dragon implements Ovipare{
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos du dragon
      */
     public DragonFemelle( int poids, int taille, int age, String nom, Enclos enclos) {
         super(SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom, enclos);

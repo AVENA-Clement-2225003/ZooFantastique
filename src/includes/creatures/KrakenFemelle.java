@@ -9,6 +9,7 @@ public class KrakenFemelle extends Kraken implements Ovipare{
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos du kraken
      */
     public KrakenFemelle( int poids, int taille, int age, String nom, Enclos enclos) {
         super(SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom, enclos);

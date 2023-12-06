@@ -9,6 +9,7 @@ public class LicorneFemelle extends Licorne implements Vivipare{
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos de la licorne
      */
     public LicorneFemelle( int poids, int taille, int age, String nom, Enclos enclos) {
         super(SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom, enclos);

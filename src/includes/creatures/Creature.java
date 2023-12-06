@@ -163,7 +163,6 @@ public abstract class Creature {
      * Fonction qui permet d'afficher les caracteristiques de la creature
      * @return String toString
      */
-
     @Override
     public String toString() {
         return "nom : " + nom + " | espece : " + nomEspece + " | age : " + age + " | a faim : " + ((faim)?" oui ":" non ") +
@@ -194,6 +193,7 @@ public abstract class Creature {
 
     /**
      * Setter de ID
+     * @param ID ID de la creature
      */
     public void setID(int ID) {
         this.ID = ID;
@@ -209,6 +209,7 @@ public abstract class Creature {
 
     /**
      * Setter de nomEspece
+     * @param nomEspece nom de l'espece de la creature
      */
     public void setNomEspece(EspecesEnum nomEspece) {
         this.nomEspece = nomEspece;
@@ -224,6 +225,7 @@ public abstract class Creature {
 
     /**
      * Setter du sexe
+     * @param sexe sexe de la creature
      */
     public void setSexe(SexesEnum sexe) {
         this.sexe = sexe;
@@ -239,6 +241,7 @@ public abstract class Creature {
 
     /**
      * Setter du poids
+     * @param poids poids de la creature
      */
     public void setPoids(int poids) {
         this.poids = poids;
@@ -254,6 +257,7 @@ public abstract class Creature {
 
     /**
      * Setter de la taille
+     * @param taille taille de la creature
      */
     public void setTaille(int taille) {
         this.taille = taille;
@@ -269,6 +273,7 @@ public abstract class Creature {
 
     /**
      * Setter de l age
+     * @param age age de la creature
      */
     public void setAge(int age) {
         this.age = age;
@@ -284,6 +289,7 @@ public abstract class Creature {
 
     /**
      * Setter de la faim
+     * @param faim faim de la creature
      */
     public void setFaim(boolean faim) {
         this.faim = faim;
@@ -299,6 +305,7 @@ public abstract class Creature {
 
     /**
      * Setter du sommeil de la creature
+     * @param estEnTrainDeDormir sommeil de la creature
      */
     public void setEstEnTrainDeDormir(boolean estEnTrainDeDormir) {
         this.estEnTrainDeDormir = estEnTrainDeDormir;
@@ -314,6 +321,7 @@ public abstract class Creature {
 
     /**
      * Setter de la sante de la creature
+     * @param sante sante de la creature
      */
     public void setSante(boolean sante) {
         this.sante = sante;
@@ -329,6 +337,7 @@ public abstract class Creature {
 
     /**
      * Setter du nom
+     * @param nom nom de la creature
      */
     public void setNom(String nom) {
         this.nom = nom;

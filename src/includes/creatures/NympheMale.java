@@ -9,6 +9,7 @@ public class NympheMale extends Nymphe{
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos de la nymphe
      */
     public NympheMale( int poids, int taille, int age, String nom, Enclos enclos) {
         super( SexesEnum.MALE, poids, taille, age, false, false, true , nom, enclos);

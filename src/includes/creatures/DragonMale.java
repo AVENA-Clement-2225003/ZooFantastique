@@ -9,6 +9,7 @@ public class DragonMale extends Dragon{
      * @param taille
      * @param age
      * @param nom
+     * @param enclos Enclos du dragon
      */
     public DragonMale( int poids, int taille, int age, String nom, Enclos enclos) {
         super( SexesEnum.MALE, poids, taille, age, false, false, true , nom, enclos);

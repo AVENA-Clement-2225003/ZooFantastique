@@ -8,16 +8,28 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+/**
+ * Classe du thread qui gere le temps en jeu
+ */
 public class Thread extends java.lang.Thread {
 
+    /**
+     * Zoo avec lequel on joue
+     */
     private zooFantastique zoo;
 
+    /**
+     * Contructeur du thread
+     * @param zoo Zoo avec lequel on joue
+     */
     public Thread(zooFantastique zoo){
         this.zoo = zoo;
     }
 
+    /**
+     * methode run du thread, qui gere les actions, les naissances et le vieillissement des creatures
+     */
     public void run(){
-        System.out.println("Le thread se lance");
         int temps = 0;
         int action;
         int limiteSommeil = 5;
@@ -151,7 +163,6 @@ public class Thread extends java.lang.Thread {
                                 creature.vieillir();
                             }
                         }
-
                     }
                     for (Creature c : lTempCreatureAAjouter){
                         c.getEnclos().ajouterCreature(c);
