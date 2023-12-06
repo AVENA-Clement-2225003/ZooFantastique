@@ -10,11 +10,11 @@ public class EnclosVoliereTest {
     @Test
     public void testEnclosVoliereSimple() {
         EnclosVoliere EV1 = new EnclosVoliere("Enclos1", 140, 20, 15);
-        assertEquals("EnclosVoliere{Enclos{nom='Enclos1', superficie=140, capaciteEnclos=20, nbCreaturesDansEnclos=0, listeCreatures=[], proprete=BON}, toitCageOK=true, hauteur=15}", EV1.toString());
+        assertEquals("Enclos: Enclos1 | Superficie: 140 | Capacitée: 20 | Propretée: BON | toit ok: oui | hauteur: 15", EV1.toString());
     }
     @Test
     public void testEnclosVoliereToutParametres() {
         EnclosVoliere EV1 = new EnclosVoliere("Enclos1", 140, 20, includes.enclos.PropreteEnum.BON, new ArrayList<>(), true, 15);
-        assertEquals("EnclosVoliere{Enclos{nom='Enclos1', superficie=140, capaciteEnclos=20, nbCreaturesDansEnclos=0, listeCreatures=[], proprete=BON}, toitCageOK=true, hauteur=15}", EV1.toString());
+        assertEquals("Enclos: Enclos1 | Superficie: 140 | Capacitée: 20 | Propretée: BON | toit ok: oui | hauteur: 15", EV1.toString());
     }
 }

@@ -13,12 +13,12 @@ public class EnclosStandardTest {
     @Test
     public void testEnclosStandardSimple() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 140, 25);
-        assertEquals("Enclos{nom='Enclos1', superficie=140, capaciteEnclos=20, nbCreaturesDansEnclos=0, listeCreatures=[], proprete=BON}", E1.toString());
+        assertEquals("Enclos: Enclos1 | Superficie: 140 | Capacitée: 25 | Propretée: BON", E1.toString());
     }
     @Test
     public void testEnclosStandardToutParametre() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 140, 25, includes.enclos.PropreteEnum.BON, new ArrayList<>());
-        assertEquals("Enclos{nom='Enclos1', superficie=140, capaciteEnclos=20, nbCreaturesDansEnclos=0, listeCreatures=[], proprete=BON}", E1.toString());
+        assertEquals("Enclos: Enclos1 | Superficie: 140 | Capacitée: 25 | Propretée: BON", E1.toString());
     }
     @Test
     void entretientEnclos() {

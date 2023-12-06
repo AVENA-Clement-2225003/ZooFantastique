@@ -173,4 +173,13 @@ public class Model {
         }
         return false;
     }
+
+    public void trierEnclos() {
+        Enclos min = unZoo.getEnclosExistant().get(0);
+        for (int i = 0; i < unZoo.getEnclosExistant().size(); i+=1) {
+            for (int j = i; j < unZoo.getEnclosExistant().size(); j+=1) {
+                if min.getNom()
+            }
+        }
+    }
 }

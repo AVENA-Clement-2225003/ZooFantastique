@@ -55,9 +55,6 @@ public class EnclosVoliere extends Enclos {
 
     @Override
     public String toString() {
-        return "EnclosVoliere{" + super.toString() +
-                ", toitCageOK=" + toitCageOK +
-                ", hauteur=" + hauteur +
-                '}';
+        return super.toString() + " | toit ok: " + (toitCageOK?"oui":"non") + " | hauteur: " + hauteur;
     }
 }

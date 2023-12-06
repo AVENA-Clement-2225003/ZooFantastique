@@ -16,7 +16,6 @@ public class Controller {
         if (instance == null) {
             instance = new Controller();
         }
-
         return instance;
     }
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
@@ -68,7 +67,7 @@ public class Controller {
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
-                            return "Commande pour soigner un animal\nTapez " + "\\u001B[32m" + "soigner leNomAnimal" + "\\u001B[0m";
+                            return "Commande pour soigner un animal\nTapez soigner leNomAnimal";
                         case "nourrir":
                             return "Commande pour nourrir les animaux d'un enclos\nTapez nourrir nomEnclos";
                         case "renommerCreature":
@@ -110,7 +109,7 @@ public class Controller {
                     case "creature":
                         if (tabOption.size() < 2) return "Donnez le nom de la créature";
                         if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)) == null ) return "Pas de créature à ce nom";
-                        return Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).toString();
+                        return Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).toString(); //#290404 faire l'afficahge détaillé avec  poid et taille
                     case "creatures":
                         return Model.getInstance().getZoo().afficherCreature();
                     default:
@@ -151,7 +150,9 @@ public class Controller {
                 if ((especeCreature.equals(DRAGON) || especeCreature.equals(PHENIX)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosVoliere)) return "Cet enclos n'est pas adapté pour cette créature, essayez une volière";
                 if ((especeCreature.equals(KRAKEN) || especeCreature.equals(MEGALODON) || especeCreature.equals(SIRENE)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosAquarium)) return "Cet enclos n'est pas adapté pour cette créature, essayez un aquarium";
                 if ((especeCreature.equals(LICORNE) || especeCreature.equals(LYCANTHROPE) || especeCreature.equals(NYMPHE)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosStandard)) return "Cet enclos n'est pas adapté pour cette créature, essayez un enclos standard";
-                if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece() != Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece()) return "Les créatures de l'enclos de destination ne sont pas de la même espèce";
+                if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().isEmpty()) {
+                    if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece().equals(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece())) return "Les créatures de l'enclos de destination ne sont pas de la même espèce";
+                }
                 int code = Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).ajouterCreature(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)));
                 if (code == 2) return "Enclos de destination complet";
                 if (code == 1) return "La créature est déjà présente dans l'enclos de destination";
@@ -332,7 +333,20 @@ public class Controller {
                                 return "type " + tabOption.get(2) + " non connu";
                         }
                     case "help":
-                        return "Commandes : creerCreature";
+                        if(tabOption.size() < 2) {
+                            return "Commandes : creerCreature, endormir, ChangerAge";
+                        }else {
+                            switch (tabOption.get(0)) {
+                            case "creerCreature":
+                                return "Commande pour creer une créture\nTapez creerCreature enclos type sexe nom age taille poid";
+                            case "endormir":
+                                return "Commande pour endormir une créature\nTapez endormir nomCreature";
+                            case "changerAge":
+                                return "Commande pour changer l'age d'une créature\nTapez changerAge nomCreature nvAge";
+                            default:
+                                return "Erreur help: commande non reconnue";
+                            }
+                        }
                     case "changerAge":
                         if (tabOption.size() < 3) return "Il manque des options (nomCreature, nvAge)";
                         Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).setAge(Integer.parseInt(tabOption.get(2)));
