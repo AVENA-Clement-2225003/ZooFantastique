@@ -3,7 +3,7 @@ package includes.creatures;
 import includes.enclos.Enclos;
 
 /**
- * Classe qui represente les lycanthopes, qui a pour interface peutCourir (et qui aura vivipare)
+ * Classe qui represente les lycanthopes, qui a pour interface peutCourir
  */
 public abstract class Lycanthrope extends Creature implements PeutCourir {
     /**

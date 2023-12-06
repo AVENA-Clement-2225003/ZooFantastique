@@ -2,6 +2,9 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+/**
+ * Classe qui represente un megalodon
+ */
 public abstract class Megalodon extends Creature implements PeutNager{
     /**
      * Constructeur qui permet de creer un megalodon, qui n'a pas faim, est reveille et est en bonne sante

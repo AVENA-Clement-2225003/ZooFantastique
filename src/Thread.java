@@ -3,7 +3,6 @@ import includes.enclos.Enclos;
 import includes.enclos.PropreteEnum;
 import includes.zoo.zooFantastique;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;

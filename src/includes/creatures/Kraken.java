@@ -2,6 +2,9 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+/**
+ * Classe qui represente un kraken
+ */
 public abstract class Kraken extends Creature implements PeutNager {
 
     /**

@@ -2,16 +2,19 @@ import app.View;
 import includes.zoo.zooFantastique;
 import java.util.Scanner;
 
+/**
+ * Classe Main de l'application, qui lance le systeme de commande et le thread de jeu
+ */
 public class Main {
     public static void main(String[] args){
         Scanner myObj = new Scanner(System.in);
         System.out.print("Donnez un nom à votre zoo : ");
         String nom = myObj.nextLine();
         System.out.print("Donnez un nom à votre maitre de zoo : ");
-        View.getInstance().CreerUnZoo(nom, myObj.nextLine());
+        zooFantastique zoo = View.getInstance().CreerUnZoo(nom, myObj.nextLine());
 
-        /*Thread t1 = new Thread(zoo);
-        t1.start();*/
+        Thread t1 = new Thread(zoo);
+        t1.start();
 
         String resCommande = "";
         while(true) {

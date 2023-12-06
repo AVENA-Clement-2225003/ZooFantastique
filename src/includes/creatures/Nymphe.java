@@ -2,6 +2,9 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+/**
+ * Classe qui represente une nymphe
+ */
 public abstract class Nymphe extends Creature{
     /**
      * Constructeur qui permet de creer une nymphe, qui n'a pas faim, est reveille et est en bonne sante

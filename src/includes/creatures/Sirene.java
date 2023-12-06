@@ -2,6 +2,9 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+/**
+ * Classe qui represente une sirene
+ */
 public abstract class Sirene extends Creature implements PeutNager{
     /**
      * Constructeur qui permet de creer une sirene, qui n'a pas faim, est reveille et est en bonne sante

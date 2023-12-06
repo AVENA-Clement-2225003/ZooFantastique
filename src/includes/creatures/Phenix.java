@@ -2,6 +2,9 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+/**
+ * Classe qui represente un phenix
+ */
 public abstract class Phenix extends Creature implements PeutVoler{
     /**
      * Constructeur qui permet de creer un phenixs, qui n'a pas faim, est reveille et est en bonne sante

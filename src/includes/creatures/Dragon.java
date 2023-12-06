@@ -2,6 +2,9 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+/**
+ * Classe qui represente un dragon
+ */
 public abstract class Dragon extends Creature implements PeutVoler, PeutCourir, PeutNager{
     /**
      * Constructeur qui permet de creer un dragon, qui n'a pas faim, est reveille et est en bonne sante

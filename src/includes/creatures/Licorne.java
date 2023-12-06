@@ -2,6 +2,9 @@ package includes.creatures;
 
 import includes.enclos.Enclos;
 
+/**
+ * Classe qui represente une licorne
+ */
 public abstract class Licorne extends Creature implements PeutCourir {
     /**
      * Constructeur qui permet de creer une licorne, qui n'a pas faim, est reveille et est en bonne sante
