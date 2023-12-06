@@ -51,4 +51,5 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
     public String emettreUnSon(){
         return "Le lycanthrope " + this.getNom() + " fait un hurlement";
     }
+
 }

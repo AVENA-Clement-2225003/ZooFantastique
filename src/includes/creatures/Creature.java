@@ -1,7 +1,6 @@
 package includes.creatures;
 
 import includes.enclos.Enclos;
-
 import java.util.Random;
 
 /**
