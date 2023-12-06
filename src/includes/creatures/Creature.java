@@ -105,7 +105,14 @@ public abstract class Creature {
      * Fonction qui permet a la creature de manger
      */
     public String manger(){
-        return (this.nomEspece + " " + this.nom + " est en train de manger");
+        if (this.estEnTrainDeDormir){
+            return (this.nomEspece + " " + this.nom + " ne peut pas manger, il dort");
+        }
+        else {
+            faim = false;
+            return (this.nomEspece + " " + this.nom + " est en train de manger");
+        }
+
     }
 
     /**

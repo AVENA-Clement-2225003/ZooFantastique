@@ -3,6 +3,9 @@ import includes.enclos.Enclos;
 import includes.enclos.PropreteEnum;
 import includes.zoo.zooFantastique;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Thread extends java.lang.Thread {
@@ -21,11 +24,11 @@ public class Thread extends java.lang.Thread {
         int limiteFaim = 20;
         int limiteMalade = 23;
         Creature creat;
+        ArrayList<Creature> lTempCreatureAAjouter = new ArrayList<>();
+        ArrayList<Creature> lTempCreatureASupprimer = new ArrayList<>();
         Random r = new Random();
         while(true){
             try {
-                //System.out.println("1 unite de temps");
-
                 if (temps % 5 == 0){
                     // Gerer la faim, le sommeil et la maladie des creatures et l'etat des enclos
                     action = r.nextInt(26); // Genere un entier entre 0 et 25
@@ -52,23 +55,42 @@ public class Thread extends java.lang.Thread {
                 }
                 if (temps % 30 == 0){
                     // Faire viellir et naitre
-                    for (Enclos enclos : zoo.getEnclosExistant()){
-                        for (Creature creature : enclos.getListeCreatures()){ // Faire naitre les oeufs quand ils sont à maturité les faire maturer sinon #290404 Il faut faire aussi pour ceux dont c'est des bébés
+                    // reproduire James Maria
+                    for (Iterator<Enclos> iteratorEnclos = zoo.getEnclosExistant().iterator(); iteratorEnclos.hasNext();) {
+                        Enclos enclos = iteratorEnclos.next();
+                        for (Iterator<Creature> iterator = enclos.getListeCreatures().iterator(); iterator.hasNext();) {
+                            Creature creature = iterator.next();
+
                             if (creature instanceof Oeuf) { //Vérifie si la créature actuelle est un oeuf ou non
                                 if (((Oeuf) creature).getTempsEclosion() == ((Oeuf) creature).getTempsMaturation()) { //Est-ce qu'il est prêt à éclore
                                     switch (creature.getNomEspece()) {
                                         case DRAGON:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new DragonFemelle(new Random().nextInt(600 - 300 + 1) + 300, new Random().nextInt(2000 - 1000 + 1) + 1000, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new DragonMale(new Random().nextInt(600 - 300 + 1) + 300, new Random().nextInt(2000 - 1000 + 1) + 1000, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new DragonFemelle(new Random().nextInt(600 - 300 + 1) + 300, new Random().nextInt(2000 - 1000 + 1) + 1000, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new DragonMale(new Random().nextInt(600 - 300 + 1) + 300, new Random().nextInt(2000 - 1000 + 1) + 1000, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            break;
                                         case KRAKEN:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new KrakenFemelle(new Random().nextInt(1000 - 500 + 1) + 500, new Random().nextInt(10000 - 5000 + 1) + 5000, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new KrakenMale(new Random().nextInt(1000 - 500 + 1) + 500, new Random().nextInt(10000 - 5000 + 1) + 5000, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new KrakenFemelle(new Random().nextInt(1000 - 500 + 1) + 500, new Random().nextInt(10000 - 5000 + 1) + 5000, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new KrakenMale(new Random().nextInt(1000 - 500 + 1) + 500, new Random().nextInt(10000 - 5000 + 1) + 5000, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            break;
                                         case PHENIX:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new PhenixFemelle(new Random().nextInt(15 - 5 + 1) + 5, new Random().nextInt(3000 - 2000 + 1) + 2000, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new PhenixMale(new Random().nextInt(15 - 5 + 1) + 5, new Random().nextInt(3000 - 2000 + 1) + 2000, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new PhenixFemelle(new Random().nextInt(15 - 5 + 1) + 5, new Random().nextInt(3000 - 2000 + 1) + 2000, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new PhenixMale(new Random().nextInt(15 - 5 + 1) + 5, new Random().nextInt(3000 - 2000 + 1) + 2000, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            break;
                                     }
-                                    enclos.getListeCreatures().remove(creature); // L'oeuf à éclo donc on le supprime
-                                    System.out.println("Un oeuf a éclo !");
+                                    lTempCreatureASupprimer.add(creature); // L'oeuf a éclot donc on le supprime
+                                    System.out.println("Un oeuf a éclot !");
                                 } else {
                                     ((Oeuf) creature).setTempsMaturation(((Oeuf) creature).getTempsMaturation() + 1); //Il n'est pas encore prêt
                                 }
@@ -77,22 +99,48 @@ public class Thread extends java.lang.Thread {
                                 if (((Bebe) creature).getTempsNaissance() == ((Bebe) creature).getTempsGestation()) { //Est-ce qu'il est prêt à naitre
                                     switch (creature.getNomEspece()) {
                                         case LICORNE:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new LicorneFemelle(new Random().nextInt(1100 - 450 + 1) + 450, new Random().nextInt(200 - 140 + 1) + 140, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new LicorneMale(new Random().nextInt(1100 - 450 + 1) + 450, new Random().nextInt(200 - 140 + 1) + 140, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new LicorneFemelle(new Random().nextInt(1100 - 450 + 1) + 450, new Random().nextInt(200 - 140 + 1) + 140, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new LicorneMale(new Random().nextInt(1100 - 450 + 1) + 450, new Random().nextInt(200 - 140 + 1) + 140, 1, creature.getNom(), creature.getEnclos()));
+                                           }
+                                            break;
                                         case LYCANTHROPE:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new LycanthropeFemelle(new Random().nextInt(100 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new LycanthropeMale(new Random().nextInt(100 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new LycanthropeFemelle(new Random().nextInt(100 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new LycanthropeMale(new Random().nextInt(100 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            break;
                                         case MEGALODON:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new MegalodonFemelle(new Random().nextInt(100000 - 50000 + 1) + 50000, new Random().nextInt(2500 - 1500 + 1) + 1500, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new MegalodonMale(new Random().nextInt(100000 - 50000 + 1) + 50000, new Random().nextInt(2500 - 1500 + 1) + 1500, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new MegalodonFemelle(new Random().nextInt(100000 - 50000 + 1) + 50000, new Random().nextInt(2500 - 1500 + 1) + 1500, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new MegalodonMale(new Random().nextInt(100000 - 50000 + 1) + 50000, new Random().nextInt(2500 - 1500 + 1) + 1500, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            break;
                                         case NYMPHE:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new NympheFemelle(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new NympheMale(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new NympheFemelle(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new NympheMale(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            break;
                                         case SIRENE:
-                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) enclos.ajouterCreature(new SireneFemelle(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
-                                            else enclos.ajouterCreature(new SireneMale(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            if (creature.getSexe().equals(SexesEnum.FEMELLE)) {
+                                                lTempCreatureAAjouter.add(new SireneFemelle(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            else {
+                                                lTempCreatureAAjouter.add(new SireneMale(new Random().nextInt(90 - 50 + 1) + 50, new Random().nextInt(200 - 150 + 1) + 150, 1, creature.getNom(), creature.getEnclos()));
+                                            }
+                                            break;
                                     }
-                                    enclos.getListeCreatures().remove(creature); // Le bébé est né donc on le supprime, il deviens un animal
+
+                                    lTempCreatureASupprimer.add(creature);
                                     System.out.println("Un bébé est né !");
                                 } else {
                                     ((Bebe) creature).setTempsGestation(((Bebe) creature).getTempsGestation() + 1); // Il n'est pas prêt
@@ -103,6 +151,14 @@ public class Thread extends java.lang.Thread {
                                 creature.vieillir();
                             }
                         }
+
+                    }
+                    for (Creature c : lTempCreatureAAjouter){
+                        c.getEnclos().ajouterCreature(c);
+                    }
+                    for (Creature c : lTempCreatureASupprimer){
+                        c.getEnclos().getListeCreatures().remove(c);
+
                     }
                 }
                 temps += 5;

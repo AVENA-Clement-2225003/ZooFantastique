@@ -170,9 +170,13 @@ public class Controller {
                 return "Créature " + tabOption.get(0) + " renommé " + tabOption.get(1);
             case "soigner":
                 if (tabOption.isEmpty()) return "Il manque le nom de l'animal";
+                if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)) == null){
+                    return "Cette creature n existe pas";
+                }
                 return Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).etreSoigne();
-            case "nourir":
-                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nourir";
+            case "nourrir":
+                if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nourrir";
+                if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)) == null) return "Cet enclos n'existe pas";
                 Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).nourrirCreatures();
                 return "Les créatures de l'enclos " + tabOption.get(0) + " ont été nourri";
             case "reveiller":
