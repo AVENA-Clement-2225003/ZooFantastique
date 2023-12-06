@@ -14,8 +14,19 @@ import java.text.ParseException;
 import java.text.RuleBasedCollator;
 import java.util.ArrayList;
 
+/**
+ * Classe Modèle de notre appilication
+ */
 public class Model {
+    /**
+     * Instance de la classe Model
+     */
     private static Model instance = null;
+
+    /**
+     * Fonction permettant de n'avoir qu'une isntance de la classe Model
+     * @return
+     */
     public static Model getInstance() {
         if (instance == null) {
             instance = new Model();
@@ -23,9 +34,23 @@ public class Model {
 
         return instance;
     }
+
+    /**
+     * true si le mode de développement est actif, false sinon
+     */
     private boolean devMode;
+    /**
+     * Le maitre de zoo
+     */
     private MaitreZooFantastique maitre;
+    /**
+     * Le zoo
+     */
     private zooFantastique unZoo;
+
+    /**
+     * Constructeur de la classe Model
+     */
     public Model() {
         try (BufferedReader br = new BufferedReader(new FileReader("out/production/ZooFantastique/app/config.txt"))) {
             String line;
@@ -40,6 +65,12 @@ public class Model {
             devMode = false;
         }
     }
+
+    /**
+     * Fonction permettant de récupérer l'ENUM correspondant au string passé en parametre
+     * @param s
+     * @return
+     */
     public EspecesEnum getEspeceByStr(String s) {
         switch (s) {
             case "dragon":
@@ -62,10 +93,21 @@ public class Model {
                 return null;
         }
     }
+
+    /**
+     * Fonction qui permet de savoir si l'utilisateur est en mode développement
+     * @return
+     */
     public boolean isDevMode() {
         return devMode;
     }
 
+    /**
+     * Fonction qui va créer un zoo et un maitre de zoo à partir des éléments passés en paramètres
+     * @param nom
+     * @param nomMaitreDeZoo
+     * @return
+     */
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
         if (nomMaitreDeZoo.equals("")) nomMaitreDeZoo = "UnMaitreSuper";
@@ -91,6 +133,11 @@ public class Model {
         return unZoo;
     }
 
+    /**
+     * Fonction qui permet de vérifier si un nom n'est pas déja utilisé et le change si c'est le cas pour simplifer les recherches de crétures
+     * @param animal
+     * @param nom
+     */
     public void verifierNomEtRenommerCreature(Creature animal, String nom) {
         int id = 1;
         String nvNom = nom;
@@ -105,14 +152,26 @@ public class Model {
         animal.setNom(nvNom);
     }
 
+    /**
+     * Getter de maitre
+     * @return
+     */
     public MaitreZooFantastique getMaitre() {
         return maitre;
     }
 
+    /**
+     * Getter de unZoo
+     * @return
+     */
     public zooFantastique getZoo() {
         return unZoo;
     }
 
+    /**
+     * Fonction permettant de récupérer les 7 premier enclos du zoo
+     * @return
+     */
     public ArrayList<String> get7erEnclos() {
         ArrayList<String> liste = new ArrayList<>();
         for (Enclos e:unZoo.getEnclosExistant()) {
@@ -123,6 +182,11 @@ public class Model {
         for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
         return liste;
     }
+
+    /**
+     * Fonction permettant de récupérer les 7 premières créatures malades du zoo
+     * @return
+     */
     public ArrayList<String> get7erMalades() {
         ArrayList<String> liste = new ArrayList<>();
         for (Enclos e:unZoo.getEnclosExistant()) {
@@ -135,6 +199,11 @@ public class Model {
         for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
         return liste;
     }
+
+    /**
+     * Fonction permettant de récupérer les 7 premières créatures qui ont faim du zoo
+     * @return
+     */
     public ArrayList<String> get7erFaims() {
         ArrayList<String> liste = new ArrayList<>();
         for (Enclos e:unZoo.getEnclosExistant()) {
@@ -147,6 +216,11 @@ public class Model {
         for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
         return liste;
     }
+
+    /**
+     * Fonction permettant de récupérer les 7 premières créatures qui dorment du zoo
+     * @return
+     */
     public ArrayList<String> get7erDormir() {
         ArrayList<String> liste = new ArrayList<>();
         for (Enclos e:unZoo.getEnclosExistant()) {
@@ -159,6 +233,11 @@ public class Model {
         for (int i = 0; i < nombreAAjouter; i+=1) {liste.add(" ");}
         return liste;
     }
+
+    /**
+     * Fonction permettant de récupérer les 7 premières créatures mortes du zoo
+     * @return
+     */
     public ArrayList<String> get7erMorts() {
         ArrayList<String> liste = new ArrayList<>();
         for (Enclos e:unZoo.getEnclosExistant()) {
@@ -172,6 +251,11 @@ public class Model {
         return liste;
     }
 
+    /**
+     * Fonction permettant de savoir si une créature est enceinte
+     * @param s
+     * @return
+     */
     public boolean estEnceinte(String s) {
         Creature c = unZoo.getCreatureByNom(s);
         for (Creature ce:c.getEnclos().getListeCreatures()) {
@@ -180,6 +264,9 @@ public class Model {
         return false;
     }
 
+    /**
+     * Fonction permettant de trier par ordre alphabétiques les enclos du zoo
+     */
     public void trierEnclos() {
         ArrayList<Enclos> liste = unZoo.getEnclosExistant();
         int min = 0;
@@ -197,6 +284,12 @@ public class Model {
         }
     }
 
+    /**
+     * Fonction qui permet de savoir si un string est plus petit alphabétiquemement que le second
+     * @param str1
+     * @param str2
+     * @return
+     */
     private static int comparerASCII(String str1, String str2) {
         int minLength = Math.min(str1.length(), str2.length());
 
@@ -213,6 +306,10 @@ public class Model {
         return 2;
     }
 
+    /**
+     * Fonction permettant de trier les créatures d'un enclos passé en parametre
+     * @param enclos
+     */
     public void trierUnEnclos(Enclos enclos) {
         ArrayList<Creature> liste = enclos.getListeCreatures();
         int min = 0;

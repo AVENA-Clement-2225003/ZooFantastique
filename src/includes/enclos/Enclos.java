@@ -185,15 +185,6 @@ public abstract class Enclos {
         return strConteneur;
     }
 
-    public String afficherCreaturesEnclos() {
-        if (listeCreatures.isEmpty()) return "L'enclos " + nom +  " est vide";
-        String strConteneur = "Enclos " + nom + " :";
-        for (Creature c:listeCreatures) {
-            strConteneur += "\n" + c.toString();
-        }
-        return strConteneur;
-    }
-
     /**
      * Fonction qui permet la récupération d'un affichage utilisateur
      * @return un string avec le nom de toutes les informations de l'enclos
@@ -201,9 +192,22 @@ public abstract class Enclos {
     public String afficherEnclos() {
         return nom + " d'une superficie de " + superficie + "m² pouvant accueillir " + capaciteEnclos + " créatures avec " + listeCreatures.size() + " présentes et il est en " + propreteEnum + " état";
     }
+
+    /**
+     * Fonction qui permet la comparaison de deux créature et savoir si il s'agit de la même
+     * @param enclos
+     * @return
+     */
     public boolean equals(Enclos enclos) {
         return this.ID == enclos.ID;
     }
+
+    /**
+     * Fonction permettant le transfert d'une créature vers un autre enclos
+     * @param creature
+     * @param enclos
+     * @return
+     */
     public int deplacerCreatureEnclos(Creature creature, Enclos enclos) {
         if (this.equals(enclos)) return 1; //Si l'enclos de destination est celui ou se trouve acutellement la créature
         if (!existInListeCreature(creature)) return 2; //Si la créature n'existe pas dans l'enclos

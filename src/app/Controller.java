@@ -5,23 +5,45 @@ import includes.enclos.EnclosAquarium;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
 import includes.zoo.zooFantastique;
-
 import java.util.*;
-
 import static includes.creatures.EspecesEnum.*;
 
+/**
+ * Classe Controlleur de notre application
+ */
 public class Controller {
+    /**
+     * Instance de la classe Controller
+     */
     private static Controller instance;
+
+    /**
+     * Fonction permettant de n'avoir qu'une isntance de la classe Model
+     * @return
+     */
     public static Controller getInstance() {
         if (instance == null) {
             instance = new Controller();
         }
         return instance;
     }
+
+    /**
+     * Fonction permettant d'appeller la fonction qui créera un zoo
+     * @param nom
+     * @param nomMaitreDeZoo
+     * @return
+     */
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         zooFantastique zoo = Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
         return zoo;
     }
+
+    /**
+     * Fonction qui permet de choisir aléatoirement un prénom lorsque l'utilisateur n'en a pas donné
+     * @param sexe
+     * @return
+     */
     private String choisirUnPrenom(int sexe) { // Il faut impérativement le même nombre de prénoms masculins et féminins
         ArrayList<ArrayList<String>> ListePrenoms = new ArrayList<>(
                 Arrays.asList(
@@ -30,6 +52,12 @@ public class Controller {
                 ));
         return ListePrenoms.get(sexe).get(new Random().nextInt(ListePrenoms.size()));
     }
+
+    /**
+     * Fonction permettant de récuperer le nom d'une commande est les options associées, puis de renvoyer le résultat de la fonction executecommande()
+     * @param commande
+     * @return
+     */
     public String entreeCommande(String commande) {
         if (!Character.isLetter(commande.charAt(0))) {
             return "N'est pas une commande, retirez l'espace devant";
@@ -59,6 +87,13 @@ public class Controller {
         }
         //potentiel appel de fonction return executerCommande(nomCommande, tabOption);
     }
+
+    /**
+     * Fonction qui va effectuer les traitements nécessaires en fonction de la commande passée en parametre et des ses options, puis renvoyer le résultat de cette commande
+     * @param nomCommande
+     * @param tabOption
+     * @return
+     */
     public String executerCommande(String nomCommande, ArrayList<String> tabOption) {
         switch (nomCommande) {
             case "help":
@@ -384,7 +419,10 @@ public class Controller {
         }
     }
 
-
+    /**
+     * Fonction qui permet de fusionner les listes d'informations pour l'affichage
+     * @return
+     */
     public ArrayList<ArrayList<String>> DonnesAffichageZoo() {
         ArrayList<String> EnclosZoo = Model.getInstance().get7erEnclos();
         ArrayList<String> Malades = Model.getInstance().get7erMalades();

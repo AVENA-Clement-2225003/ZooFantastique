@@ -4,15 +4,30 @@ import includes.zoo.zooFantastique;
 
 import java.util.ArrayList;
 
+/**
+ * Classe Vue de notre application
+ */
 public class View {
-
+    /**
+     * Instance de la classe View
+     */
     public static View instance = null;
+    /**
+     * Instance de la classe Controller
+     */
     private Controller controlleur;
 
+    /**
+     * Contructeur de la classe View
+     */
     private View() {
         controlleur = Controller.getInstance();
     }
 
+    /**
+     * Fonction permettant de n'avoir qu'une seule instance de classe de View
+     * @return
+     */
     public static View getInstance() {
         if (instance == null) {
             instance = new View();
@@ -21,11 +36,21 @@ public class View {
         return instance;
     }
 
+    /**
+     * Fonction qui va traiter le cas de la commande exit et vide, ou la transmettre pour découpage et execution
+     * @param commande
+     * @return
+     */
     public String entreeCommande(String commande) {
         if (commande.equals("exit")) return "exit";
         if (commande.equals("")) return "";
         return controlleur.entreeCommande(commande);
     }
+
+    /**
+     * Fonction qui va afficher les informations sous forme de tableau dans le shell
+     * @return
+     */
     public String affichageInfos() {
         ArrayList<ArrayList<String>> liste = Controller.getInstance().DonnesAffichageZoo();
         int enclosWidth = 15;
@@ -59,32 +84,25 @@ public class View {
         str += "\nSaisir votre commande : ";
         return str;
     }
+
+    /**
+     * Fonction qui permet de généer les lignes en fonction de l'espacement donné (sert à aligner les colonnes du tableau)
+     * @param value
+     * @param width
+     * @return
+     */
     private String formatColumn(String value, int width) {
         return String.format("%-" + (width) + "s", value);
     }
 
-
+    /**
+     * Fonction qui va appeller la fonction CreerUnZoo() du controlleur
+     * @param nom
+     * @param nomMaitreDeZoo
+     * @return
+     */
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         zooFantastique zoo = controlleur.CreerUnZoo(nom, nomMaitreDeZoo);
         return zoo;
     }
-    public void showScreen(int moreLengthName, ArrayList<String> nomCreatures, ArrayList<String> nomEnclos) {
-        if (moreLengthName < "Créatures".length()) {
-            moreLengthName = "Créatures".length();
-        }
-        System.out.println("Créatures" + "\t".repeat(((moreLengthName / 4) - 1) < 0 ? 0 : ((moreLengthName / 4) - 1)) +
-                "Enclos"+ "\t".repeat(Math.max(((moreLengthName / 4) - 1), 0)) +
-                "Malades" + "\t".repeat(Math.max(((moreLengthName / 4) - 1), 0)) +
-                "Faim");
-
-        for (int i = 0; i < 5; i++) {
-            String creature = (i < nomCreatures.size() && !nomCreatures.get(i).isEmpty()) ? nomCreatures.get(i) + "\t".repeat((moreLengthName-nomCreatures.get(i).length())/4) : "\t".repeat((moreLengthName+1/4)-1);
-            String enclos = (i < nomEnclos.size() && !nomEnclos.get(i).isEmpty()) ? nomEnclos.get(i) + "\t".repeat((moreLengthName-nomEnclos.get(i).length())/4)  : "\t".repeat((moreLengthName+1/4)-1);;
-
-            System.out.println(creature + "\t" + enclos);
-        }
-        System.out.println("...\t...\t...\t...");
-    }
-
-
 }

@@ -80,7 +80,6 @@ public class EnclosAquarium extends Enclos {
      * Fonction qui permet d'effectuer l'entretient de l'enclos
      * @return 0 si l'entretient est fait, 1 si l'entretient est pas possible (enclos non vide)
      */
-
     @Override
     public int entretientEnclos() {
         if (super.getListeCreatures().size() > 0 && super.getProprete() == PropreteEnum.MAUVAIS) {

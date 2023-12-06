@@ -53,6 +53,10 @@ public class EnclosVoliere extends Enclos {
         return 0;
     }
 
+    /**
+     * Fonction d'affichage utilisant celle de la classe super en concaténant les informations supplémentaires
+     * @return
+     */
     @Override
     public String toString() {
         return super.toString() + " | toit ok: " + (toitCageOK?"oui":"non") + " | hauteur: " + hauteur;
