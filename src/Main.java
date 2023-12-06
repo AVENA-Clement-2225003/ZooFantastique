@@ -8,7 +8,7 @@ public class Main {
         System.out.print("Donnez un nom à votre zoo : ");
         String nom = myObj.nextLine();
         System.out.print("Donnez un nom à votre maitre de zoo : ");
-        zooFantastique zoo = View.getInstance().CreerUnZoo(nom, myObj.nextLine());
+        View.getInstance().CreerUnZoo(nom, myObj.nextLine());
 
         /*Thread t1 = new Thread(zoo);
         t1.start();*/
