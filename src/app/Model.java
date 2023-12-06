@@ -3,7 +3,7 @@ import includes.creatures.*;
 import includes.enclos.Enclos;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
-import includes.maitreZoo.ENUMSexe;
+import includes.creatures.SexesEnum;
 import includes.zoo.zooFantastique;
 import includes.maitreZoo.MaitreZooFantastique;
 
@@ -67,7 +67,7 @@ public class Model {
     public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
         if (nomMaitreDeZoo.equals("")) nomMaitreDeZoo = "UnMaitreSuper";
-        maitre = new MaitreZooFantastique(nomMaitreDeZoo, ENUMSexe.Male, 23);
+        maitre = new MaitreZooFantastique(nomMaitreDeZoo, SexesEnum.MALE, 23);
         unZoo = new zooFantastique(nom, nomMaitreDeZoo/*maitre*/, 15, new ArrayList<>());
         unZoo.ajouterEnclos(new EnclosStandard("Tuto", 45, 5));
         Licorne L1 = new LicorneMale(50, 150, 25, "James", unZoo.getEnclosByNom("Tuto"));

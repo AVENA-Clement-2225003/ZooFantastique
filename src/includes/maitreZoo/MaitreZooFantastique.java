@@ -2,13 +2,14 @@ package includes.maitreZoo;
 
 
 import includes.creatures.Creature;
+import includes.creatures.SexesEnum;
 import includes.enclos.Enclos;
 
 /**
  * Classe qui représente le maître du zoo fantastique
  */
 public class MaitreZooFantastique {
-    public MaitreZooFantastique(String nom, ENUMSexe sexe, int age) {
+    public MaitreZooFantastique(String nom, SexesEnum sexe, int age) {
         this.nom = nom;
         this.sexe = sexe;
         this.age = age;
@@ -21,7 +22,7 @@ public class MaitreZooFantastique {
     /**
      * Sexe du maître du zoo
      */
-    private ENUMSexe sexe;
+    private SexesEnum sexe;
     /**
      * Age du maître du zoo
      */
@@ -51,11 +52,11 @@ public class MaitreZooFantastique {
         this.nom = nom;
     }
 
-    public ENUMSexe getSexe() {
+    public SexesEnum getSexe() {
         return sexe;
     }
 
-    public void setSexe(ENUMSexe sexe) {
+    public void setSexe(SexesEnum sexe) {
         this.sexe = sexe;
     }
 
@@ -65,7 +66,7 @@ public class MaitreZooFantastique {
      */
     @Override
     public String toString() {
-        return "maître zoo fantastique{" +
+        return "maître de zoo fantastique{" +
                 "nom='" + nom + '\'' +
                 ", sexe='" + sexe + '\'' +
                 ", age=" + age +
@@ -75,11 +76,11 @@ public class MaitreZooFantastique {
         return "Le maître de zoo " + nom + " est dans le l'" + enclos.afficherEnclos();
     }
     public String nettoyerEnclos(Enclos enclos) {
-        return nom + "a nettoyer l'" + enclos.entretientEnclos();
+        return nom + " a nettoyer l'enclos : " + enclos.entretientEnclos();
     }
     public String nourrirCreatures(Enclos enclos) {
         enclos.nourrirCreatures();
-        return nom + "a nourrit les créatures de l'" + enclos;
+        return nom + " a nourrit les créatures de l'enclos : " + enclos;
     }
     public int deplacerCreature(Creature creature, Enclos enclos) {
         return creature.getEnclos().deplacerCreatureEnclos(creature, enclos);

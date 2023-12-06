@@ -3,7 +3,6 @@ package tests.zoo;
 import includes.creatures.*;
 import includes.enclos.Enclos;
 import includes.enclos.EnclosStandard;
-import includes.maitreZoo.ENUMSexe;
 import includes.maitreZoo.MaitreZooFantastique;
 import includes.zoo.zooFantastique;
 import org.junit.jupiter.api.Test;
@@ -125,7 +124,7 @@ class zooFantastiqueTest {
         EnclosStandard EV2 = new EnclosStandard("Enclos2", 100, 10);
         listeEnclos.add(EV2);
         zooFantastique zoo = new zooFantastique("L'amnéstie","Pierre", 10, listeEnclos);
-        MaitreZooFantastique Pierre = new MaitreZooFantastique("Pierre", ENUMSexe.Male, 28);
+        MaitreZooFantastique Pierre = new MaitreZooFantastique("Pierre", SexesEnum.MALE, 28);
         //assertEquals("Enclos2 d'une superficie de 100m² pouvant accueillir 10 créatures avec 0 présentes et il est en BON état",zoo.getEnclosByNom(EV2), "L'affichage de 'getEnclosByNom' est incorrect");
     }
 
