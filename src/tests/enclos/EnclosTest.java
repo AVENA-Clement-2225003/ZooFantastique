@@ -102,9 +102,9 @@ class EnclosTest {
     void testToString() {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
         LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
-        assertEquals("Enclos{nom='Enclos1', superficie=150, capaciteEnclos=13, listeCreatures=[], proprete=BON}", E1.toString(), "L'affichage n'est pas correct");
+        assertEquals("Enclos: Enclos1 | Superficie: 150 | Capacitée: 13 | Propretée: BON", E1.toString(), "L'affichage n'est pas correct");
         E1.ajouterCreature(C1);
-        assertEquals("Enclos{nom='Enclos1', superficie=150, capaciteEnclos=13, listeCreatures=[Lycanthrope{ Creature{ID=0, nomEspece=LYCANTROPE, sexe=MALE, poids=10, taille=100, age=12, faim=false, estEnTrainDeDormir=false, sante=true, name='James'}}], proprete=BON}", E1.toString(), "L'affichage n'est pas correct");
+        assertEquals("Enclos: Enclos1 | Superficie: 150 | Capacitée: 13 | Propretée: BON", E1.toString(), "L'affichage n'est pas correct");
     }
 
     @Test
@@ -112,10 +112,10 @@ class EnclosTest {
         EnclosStandard E1 = new EnclosStandard("Enclos1", 150, 13);
         LycanthropeMale C1 = new LycanthropeMale(10, 100, 12, "James", E1);
         LycanthropeMale C2 = new LycanthropeMale(10, 100, 12, "Harry", E1);
-        assertEquals("Enclos1 = {L'enclos est vide}", E1.afficherCreatures(), "L'enclos est vide normalement");
+        assertEquals("L'enclos Enclos1 est vide", E1.afficherCreatures(), "L'enclos est vide normalement");
         E1.ajouterCreature(C1);
         E1.ajouterCreature(C2);
-        assertEquals("Enclos1 = {James, Harry}", E1.afficherCreatures(), "L'affichage n'est pas correct");
+        assertEquals("nom : James | espece : LYCANTHROPE | age : 12 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Enclos1\nnom : Harry | espece : LYCANTHROPE | age : 12 | a faim :  non  | en bonne sante :  oui  | dort :  non  | Enclos : Enclos1\n", E1.afficherCreatures(), "L'affichage n'est pas correct");
     }
 
     @Test

@@ -38,9 +38,10 @@ public class EnclosAquarium extends Enclos {
      * @param listeCreatures Liste des créatures
      * @param profondeur Profondeur du bassin
      */
-    public EnclosAquarium(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, int profondeur) {
+    public EnclosAquarium(String nom, int superficie, int capaciteEnclos, PropreteEnum propreteEnum, ArrayList<Creature> listeCreatures, int profondeur, boolean saliniteBassin) {
         super(nom, superficie, capaciteEnclos, propreteEnum, listeCreatures);
         this.profondeur = profondeur;
+        this.saliniteBassinOK = saliniteBassin;
     }
 
     /**
