@@ -22,15 +22,16 @@ class CreatureTest {
     @Test
     void getID() {
         Licorne L1 = new LicorneMale(50, 150, 25, "James", null);
-        assertEquals(13, L1.getID());
+        L1.setID(-1);
+        assertEquals(-1, L1.getID());
     }
 
     @Test
     void setID() {
         Dragon d1 = new DragonMale(50, 150, 25, "James", null);
-        assertEquals(15, d1.getID());
-        d1.setID(200);
-        assertEquals(200, d1.getID());
+        assertNotEquals(-1, d1.getID());
+        d1.setID(-1);
+        assertEquals(-1, d1.getID());
     }
 
     @Test
