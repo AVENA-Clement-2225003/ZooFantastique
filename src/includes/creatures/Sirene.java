@@ -41,7 +41,7 @@ public abstract class Sirene extends Creature implements PeutNager{
      * @return La sirene nage.
      */
     public String nager() {
-        return "Le sirene " + this.getNom() + " nage.";
+        return "La sirene " + this.getNom() + " nage.";
     }
 
     /**
