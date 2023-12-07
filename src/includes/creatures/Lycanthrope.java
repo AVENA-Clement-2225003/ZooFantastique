@@ -109,11 +109,16 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
         else {
             categorieAge = AgeEnum.Vieux;
         }
-        this.force = force;
         if ((Integer)this.force == null){
             this.force = r.nextInt(900);
         }
+        else {
+            this.force = force;
+        }
         this.meute = meute;
+        if (meute != null){
+            this.meute.ajouterLycanthrope(this);
+        }
         dominationsExercee = 0;
         dominationsSubies = 0;
         facteurDomination = dominationsExercee - dominationsSubies;
@@ -159,6 +164,9 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
             this.force = r.nextInt(900);
         }
         this.meute = meute;
+        if (meute != null){
+            this.meute.ajouterLycanthrope(this);
+        }
         dominationsExercee = 0;
         dominationsSubies = 0;
         facteurDomination = dominationsExercee - dominationsSubies;
@@ -188,7 +196,23 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
     }
 
     public String emettreUnSon(Hurlement hurlement){
-        return "Le lycanthrope " + this.getNom() + " fait un hurlement";
+        if (hurlement.getType() == HurlementEnum.Appartenance){
+            for (Creature c : this.getEnclos().getListeCreatures()){ // Fait reagir la meute
+                if (c instanceof Lycanthrope){
+                    ((Lycanthrope) c).entendreHurlement(hurlement);
+                }
+            }
+        }
+        System.out.println("Le lycanthrope " + this.getNom() + " fait un hurlement de type " + hurlement.getType());
+        return "Le lycanthrope " + this.getNom() + " fait un hurlement de type " + hurlement.getType();
+    }
+
+    public String entendreHurlement(Hurlement hurlement){
+        if (hurlement.getType() == HurlementEnum.Appartenance){
+            System.out.println("Le lycanthrope " + this.getNom() + " repond au hurlement");
+            return "Le lycanthrope " + this.getNom() + " repond au hurlement";
+        }
+        return "Pas cense arriver";                 ////////////////////////////////////:: A enlever
     }
 
     public RangEnum getRang() {
@@ -269,16 +293,12 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @return retourne l'int associe a sa categorie d'age
      */
     private int attribuerIntAge(AgeEnum categorieAge){
-        switch (categorieAge){
-            case Jeune :
-                return 1;
-            case Adulte:
-                return 2;
-            case Vieux:
-                return 4;
-            default:
-                return 4;
-        }
+        return switch (categorieAge) {
+            case Jeune -> 1;
+            case Adulte -> 2;
+            case Vieux -> 4;
+            default -> 4;
+        };
     }
 
     /**
@@ -287,21 +307,14 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @return retourne l'int associe a son rang
      */
     private int attribuerIntRang(RangEnum rang){
-        switch (rang){
-            case Alpha:
-                return 50;
-            case Beta:
-                return 40;
-            case Gamma:
-                return 30;
-            case Delta:
-                return 20;
-            case Epsilon:
-                return 10;
-            case Omega:
-                return 0;
-            default:
-                return 0;
-        }
+        return switch (rang) {
+            case Alpha -> 50;
+            case Beta -> 40;
+            case Gamma -> 30;
+            case Delta -> 20;
+            case Epsilon -> 10;
+            case Omega -> 0;
+            default -> 0;
+        };
     }
 }
