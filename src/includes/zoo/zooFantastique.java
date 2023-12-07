@@ -37,7 +37,7 @@ public class zooFantastique {
 
     /**
      * Récupère la liste des enclos
-     * @return
+     * @return retourne la liste des enclos
      */
 
     public ArrayList<Enclos> getEnclosExistant() {
@@ -46,7 +46,7 @@ public class zooFantastique {
 
     /**
      * Permet de mettre une valeur d'enclos maximal
-     * @param maxEnclos
+     * @param maxEnclos nombre d'enclos maximum dans le zoo
      */
     public void setMaxEnclos(int maxEnclos) {
         this.maxEnclos = maxEnclos;
@@ -54,7 +54,7 @@ public class zooFantastique {
 
     /**
      * Permet de récupérer la valeur d'enclos maximal
-     * @return
+     * @return retourne la valeur d'enclos maximal
      */
     public int getMaxEnclos() {
         return maxEnclos;
@@ -62,7 +62,7 @@ public class zooFantastique {
 
     /**
      * Permet de récupérer le nom du zoo
-     * @return
+     * @return retourne le nom du zoo
      */
 
     public String getNom() {
@@ -71,7 +71,7 @@ public class zooFantastique {
 
     /**
      * Permet de mettre un nom au zoo
-     * @param nom
+     * @param nom nom du zoo
      */
 
     public void setNom(String nom) {
@@ -80,15 +80,15 @@ public class zooFantastique {
 
     /**
      * Permet de récupérer la liste des enclos
-     * @param enclosExistant
+     * @param enclosExistant nombre d'enclos existant
      */
     public void setEnclosExistant(ArrayList<Enclos> enclosExistant) {
         this.enclosExistant = enclosExistant;
     }
 
     /**
-     * Permet de retourner le nombre de créature dans le zoo
-     * @return
+     * Fonction qui compte le nombre de créature dans le zoo
+     * @return retourne le nombre de créature dans le zoo
      */
     public int compteNbCreatureZoo(){
         int cpt = 0;
@@ -100,7 +100,7 @@ public class zooFantastique {
 
     /**
      * Fonction d'affichage du zoo
-     * @return
+     * @return Les caractéristiques du zoo
      */
     @Override
     public String toString() {
@@ -113,7 +113,7 @@ public class zooFantastique {
     }
     /**
      * Permet d'afficher les créatures du zoo fantastique
-     * @return
+     * @return retourne les caractéristiques des créatures du zoo
      */
     public String afficherCreature() {
         String strConteneur = "Le zoo : " + nom + " comporte les créatures suivantes :\n";
@@ -125,8 +125,8 @@ public class zooFantastique {
 
     /**
      * Permet d'afficher un enclos choisi du zoo, ainsi que ses animaux
-     * @param nomEnclos
-     * @return
+     * @param nomEnclos le nom de l'enclos cible
+     * @return les caractéristiques de l'enclos cible
      */
     public Enclos getEnclosByNom(String nomEnclos) {
         for(Enclos e:enclosExistant){
@@ -137,8 +137,8 @@ public class zooFantastique {
 
     /**
      * Permet d'afficher un enclos choisi du zoo, ainsi que ses animaux
-     * @param nomCreature
-     * @return
+     * @param nomCreature le nom de la créature cible
+     * @return retourne les caractéristiques de la créature cible
      */
     public Creature getCreatureByNom(String nomCreature) {
         for(Enclos e:enclosExistant){
@@ -150,8 +150,7 @@ public class zooFantastique {
 
     /**
      * Permet d'afficher un enclos choisi du zoo, ainsi que ses animaux
-     * @param nvEnclos
-     * @return
+     * @param nvEnclos prend le nom du nouvelle enclos
      */
     public void ajouterEnclos(Enclos nvEnclos) {
         enclosExistant.add(nvEnclos);
