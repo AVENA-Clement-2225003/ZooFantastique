@@ -6,6 +6,8 @@ import includes.enclos.Enclos;
  * Classe qui represente les lycanthopes, qui a pour interface peutCourir
  */
 public abstract class Lycanthrope extends Creature implements PeutCourir {
+
+    private RangEnum rang;
     /**
      * Constructeur qui permet de creer un lycanthrope, qui n'a pas faim, est reveille et est en bonne sante
      * @param sexe SexesEnum sexe de la creature
@@ -35,6 +37,36 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
         super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom, enclos);
     }
 
+    /**
+     * Constructeur qui permet de creer un lycanthrope, qui n'a pas faim, est reveille et est en bonne sante
+     * @param sexe SexesEnum sexe de la creature
+     * @param poids int poids de la creature
+     * @param taille int taille de la creature
+     * @param age int age de la creature
+     * @param nom String nom de la creature (ne depend pas de son espece)
+     * @param enclos Enclos du lycanthrope
+     */
+    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, String nom, Enclos enclos, RangEnum rang) {
+        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, false, false, true , nom, enclos);
+        this.rang = rang;
+    }
+
+    /**
+     * Constructeur qui permet de creer un lycanthrope en choississant sa faim, son sommeil et sa sante
+     * @param sexe SexesEnum sexe de la creature
+     * @param poids int poids de la creature
+     * @param taille int taille de la creature
+     * @param age int age de la creature
+     * @param faim boolean faim de la creature
+     * @param estEnTrainDeDormir boolean sommeil de la creature
+     * @param sante boolean sante de la creature
+     * @param nom String nom de la creature (ne depend pas de son espece)
+     * @param enclos Enclos du lycanthope
+     */
+    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos, RangEnum rang) {
+        super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom, enclos);
+        this.rang = rang;
+    }
 
     /**
      * Fonction qui permet a un lycanthrope de courir
@@ -54,4 +86,11 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
         return "Le lycanthrope " + this.getNom() + " fait un hurlement";
     }
 
+    public RangEnum getRang() {
+        return rang;
+    }
+
+    public void setRang(RangEnum rang) {
+        this.rang = rang;
+    }
 }
