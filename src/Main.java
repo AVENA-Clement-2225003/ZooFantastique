@@ -22,16 +22,26 @@ public class Main {
         Enclos lycan = new EnclosStandard("Enclos des lycanthropes", 20, 20);
         Meute m = new Meute("MeuteDesBg", new ArrayList<Lycanthrope>());
         Lycanthrope l1 = new LycanthropeMale(60, 120, 25, "L1", lycan, RangEnum.Beta, 20, m);
-        Lycanthrope l2 = new LycanthropeMale(60, 120, 25, "L2", lycan, RangEnum.Beta, 20, m);
-        Lycanthrope l3 = new LycanthropeMale(60, 120, 25, "L3", lycan, RangEnum.Beta, 20, null);
+        Lycanthrope l2 = new LycanthropeMale(60, 120, 25, "L2", lycan, RangEnum.Beta, 22, m);
+        Lycanthrope l3 = new LycanthropeMale(60, 120, 25, "L3", lycan, RangEnum.Beta, 21, m);
+        Lycanthrope l5 = new LycanthropeMale(60, 120, 25, "L5", lycan, RangEnum.Beta, 21, m);
+        Lycanthrope l6 = new LycanthropeFemelle(60, 120, 25, "L6", lycan, RangEnum.Beta, 21, m);
         Lycanthrope l4 = new LycanthropeMale(60, 120, 25, "L4", new EnclosStandard("AutreEnclos", 20, 20), RangEnum.Beta, 20, null);
 
+        l5.getEnclos().ajouterCreature(l5);
         l1.getEnclos().ajouterCreature(l1);
         l2.getEnclos().ajouterCreature(l2);
         l3.getEnclos().ajouterCreature(l3);
         l4.getEnclos().ajouterCreature(l4);
+        l6.getEnclos().ajouterCreature(l6);
         Hurlement h = new Hurlement(HurlementEnum.Appartenance);
         l1.emettreUnSon(h);
+
+        System.out.println(m.getListeMeute());
+        m.instaurerHierarchie();
+        System.out.println(m.getListeMeute());
+
+
         /*
         Thread t1 = new Thread(zoo);
         t1.start();

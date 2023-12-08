@@ -195,6 +195,10 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
         return "Le lycanthrope " + this.getNom() + " fait un hurlement";
     }
 
+    /**
+     * Fonction qui permet au lycanthrope de hurler avec un hurlement qui fait reagir les autres lycanthropes
+     * @return String confirmation hurlement
+     */
     public String emettreUnSon(Hurlement hurlement){
         if (hurlement.getType() == HurlementEnum.Appartenance){
             for (Creature c : this.getEnclos().getListeCreatures()){ // Fait reagir la meute
@@ -207,12 +211,17 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
         return "Le lycanthrope " + this.getNom() + " fait un hurlement de type " + hurlement.getType();
     }
 
+    /**
+     * Fonction qui permet au lycanthrope d'entendre un hurlement et d'y repondre a son tour si c'est un hurlement de meute
+     * @param hurlement hurlement que le lycanthrope entend
+     * @return String msg le lycanthrope repond
+     */
     public String entendreHurlement(Hurlement hurlement){
         if (hurlement.getType() == HurlementEnum.Appartenance){
             System.out.println("Le lycanthrope " + this.getNom() + " repond au hurlement");
             return "Le lycanthrope " + this.getNom() + " repond au hurlement";
         }
-        return "Pas cense arriver";                 ////////////////////////////////////:: A enlever
+        return "";
     }
 
     public RangEnum getRang() {
@@ -285,6 +294,16 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
 
     public void setDominationsSubies(int dominationsSubies) {
         this.dominationsSubies = dominationsSubies;
+    }
+
+    /**
+     * Fonction qui permet d'afficher les caracteristiques du lycanthrope
+     * @return String toString
+     */
+    @Override
+    public String toString() {
+        return "nom : " + this.getNom() + " | espece : " + getNomEspece() + " | age : " + getAge() + " | a faim : " + ((isFaim())?" oui ":" non ") +
+                " | en bonne sante : " + ((isSante())?" oui ":" non ") + " | dort : " + ((isEstEnTrainDeDormir())?" oui ":" non ") + " | Enclos : " + getEnclos().getNom() + " | Rang : " + getRang() + " | Force : " + getForce();
     }
 
     /**
