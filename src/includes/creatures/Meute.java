@@ -12,7 +12,7 @@ public class Meute {
     public Meute(String nom, ArrayList<Lycanthrope> listeMeute) {
         this.nom = nom;
         this.listeMeute = listeMeute;
-        if (this.listeMeute.size() != 0){
+        if (this.listeMeute.size() != 0) {
             this.coupleAlpha = instaurerHierarchie();
         }
     }
@@ -35,109 +35,109 @@ public class Meute {
 
     /**
      * Fonction qui permet l'ajout d'un lycanthrope dans lam meute
+     *
      * @param l lycanthrope a ajouter dans la meute
      */
-    public void ajouterLycanthrope(Lycanthrope l){
+    public void ajouterLycanthrope(Lycanthrope l) {
         this.listeMeute.add(l);
     }
 
-    public CoupleAlpha instaurerHierarchie(){
+    public CoupleAlpha instaurerHierarchie() {
         // Separer les males et les femelles
         ArrayList<Lycanthrope> sousListeMales = new ArrayList<>();
         ArrayList<Lycanthrope> sousListeFemelle = new ArrayList<>();
-        for (Lycanthrope l : listeMeute){
-            if (l instanceof LycanthropeFemelle){
+        for (Lycanthrope l : listeMeute) {
+            if (l instanceof LycanthropeFemelle) {
                 sousListeFemelle.add(l);
-            }
-            else {
+            } else {
                 sousListeMales.add(l);
             }
         }
         this.triSelectionForce(sousListeMales);
         this.triSelectionForce(sousListeFemelle);
 
+        // Attribution des rangs Mâles
         coupleAlpha.setMaleAlpha((LycanthropeMale) sousListeMales.get(0));
+        sousListeMales.get(0).setRang(RangEnum.Alpha);
+        if (sousListeMales.size() == 2) {
+            sousListeMales.get(sousListeMales.size() - 1).setRang(RangEnum.Omega);
+        } else if (sousListeMales.size() != 1){
+            if (sousListeMales.size() - 2 % 4 != 0) {
+                if (sousListeMales.size() - 2 % 4 >= 1) {
+                    sousListeMales.get(sousListeMales.size() - 2).setRang(RangEnum.Omega);
+                }
+                if (sousListeMales.size() - 2 % 4 >= 2) {
+                    sousListeMales.get(sousListeMales.size() - 3).setRang(RangEnum.Omega);
+                }
+                if (sousListeMales.size() - 2 % 4 >= 3) {
+                    sousListeMales.get(sousListeMales.size() - 4).setRang(RangEnum.Omega);
+                }
+
+            }
+            int nbParRang = (sousListeMales.size() - 2) / 4;
+            System.out.println(nbParRang + " = " + (sousListeMales.size() - 2) + "/" + 4);
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeMales.get(i + 1).setRang(RangEnum.Beta);
+            }
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeMales.get(i + 1 + nbParRang * 1).setRang(RangEnum.Gamma);
+            }
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeMales.get(i + 1 + nbParRang * 2).setRang(RangEnum.Delta);
+            }
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeMales.get(i + 1 + nbParRang * 3).setRang(RangEnum.Epsilon);
+            }
+        }
+
+        //Attribution des rangs Femelles
+
         coupleAlpha.setFemelleAlpha((LycanthropeFemelle) sousListeFemelle.get(0));
-        if (sousListeMales.size() > 1){
-            System.out.println("Coucou");
-            sousListeMales.get(sousListeMales.size()-1).setRang(RangEnum.Omega);
-        }
-        else {
-            if (sousListeMales.size()-2 % 4 != 0){
-                if (sousListeMales.size()-2 % 4 >= 1){
-                    sousListeMales.get(sousListeMales.size()-2).setRang(RangEnum.Omega);
+        sousListeFemelle.get(0).setRang(RangEnum.Alpha);
+        if (sousListeFemelle.size() == 2) {
+            sousListeFemelle.get(sousListeFemelle.size() - 1).setRang(RangEnum.Omega);
+        } else if (sousListeFemelle.size() != 1) {
+            if (sousListeFemelle.size() - 2 % 4 != 0) {
+                if (sousListeFemelle.size() - 2 % 4 >= 1) {
+                    sousListeFemelle.get(sousListeFemelle.size() - 2).setRang(RangEnum.Omega);
                 }
-                if (sousListeMales.size()-2 % 4 >= 2 ){
-                    sousListeMales.get(sousListeMales.size()-3).setRang(RangEnum.Omega);
+                if (sousListeFemelle.size() - 2 % 4 >= 2) {
+                    sousListeFemelle.get(sousListeFemelle.size() - 3).setRang(RangEnum.Omega);
                 }
-                if (sousListeMales.size()-2 % 4 >= 3){
-                    sousListeMales.get(sousListeMales.size()-4).setRang(RangEnum.Omega);
-                }
-
-            }
-            int nbParRang = (sousListeMales.size()-2) / 4;
-            System.out.println(nbParRang + " = " + (sousListeMales.size()-2) + "/" + 4);
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeMales.get(i+1).setRang(RangEnum.Beta);
-            }
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeMales.get(i+1+nbParRang*1).setRang(RangEnum.Gamma);
-            }
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeMales.get(i+1+nbParRang*2).setRang(RangEnum.Delta);
-            }
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeMales.get(i+1+nbParRang*3).setRang(RangEnum.Epsilon);
-            }
-        }
-        if (sousListeFemelle.size() > 1){
-            sousListeFemelle.get(sousListeFemelle.size()-1).setRang(RangEnum.Omega);
-        }
-        else {
-            if (sousListeFemelle.size()-2 % 4 != 0){
-                if (sousListeFemelle.size()-2 % 4 >= 1){
-                    sousListeFemelle.get(sousListeFemelle.size()-2).setRang(RangEnum.Omega);
-                }
-                if (sousListeFemelle.size()-2 % 4 >= 2 ){
-                    sousListeFemelle.get(sousListeFemelle.size()-3).setRang(RangEnum.Omega);
-                }
-                if (sousListeFemelle.size()-2 % 4 >= 3){
-                    sousListeFemelle.get(sousListeFemelle.size()-4).setRang(RangEnum.Omega);
+                if (sousListeFemelle.size() - 2 % 4 >= 3) {
+                    sousListeFemelle.get(sousListeFemelle.size() - 4).setRang(RangEnum.Omega);
                 }
 
             }
-            int nbParRang = (sousListeFemelle.size()-2) / 4;
-            nbParRang = sousListeFemelle.size()-2 / 4;
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeFemelle.get(i+1).setRang(RangEnum.Beta);
+            int nbParRang = (sousListeFemelle.size() - 2) / 4;
+            nbParRang = sousListeFemelle.size() - 2 / 4;
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeFemelle.get(i + 1).setRang(RangEnum.Beta);
             }
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeFemelle.get(i+1+nbParRang*1).setRang(RangEnum.Gamma);
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeFemelle.get(i + 1 + nbParRang * 1).setRang(RangEnum.Gamma);
             }
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeFemelle.get(i+1+nbParRang*2).setRang(RangEnum.Delta);
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeFemelle.get(i + 1 + nbParRang * 2).setRang(RangEnum.Delta);
             }
-            for (int i = 0; i < nbParRang; ++i){
-                sousListeFemelle.get(i+1+nbParRang*3).setRang(RangEnum.Epsilon);
+            for (int i = 0; i < nbParRang; ++i) {
+                sousListeFemelle.get(i + 1 + nbParRang * 3).setRang(RangEnum.Epsilon);
             }
-            System.out.println(listeMeute);
         }
-
+        System.out.println("la liste des femelles : \n" + sousListeFemelle + "\nLa liste des males : \n" + sousListeMales);
         return coupleAlpha;
     }
 
     /**
      * Fonction qui fait un tri par selection en fonction de la force des lycantropes
+     *
      * @param liste liste de l'enclos a trier
      */
-    private void triSelectionForce(ArrayList<Lycanthrope> liste)
-    {
-        for (int i = 0; i < liste.size() - 1; i++)
-        {
+    private void triSelectionForce(ArrayList<Lycanthrope> liste) {
+        for (int i = 0; i < liste.size() - 1; i++) {
             int index = i;
-            for (int j = i + 1; j < liste.size(); j++)
-            {
-                if (liste.get(j).getForce() > liste.get(index).getForce()){
+            for (int j = i + 1; j < liste.size(); j++) {
+                if (liste.get(j).getForce() > liste.get(index).getForce()) {
                     index = j;
                 }
             }

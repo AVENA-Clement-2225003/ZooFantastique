@@ -26,12 +26,11 @@ public class LycanthropeFemelle extends Lycanthrope implements Vivipare{
      * @param age age du lycanthrope
      * @param nom nom du lycanthrope
      * @param enclos Enclos du lycanthrope
-     * @param rang Rang du lycanthrope
      * @param force Force du lycanthrope
      * @param meute meute du lycanthrope
      */
-    public LycanthropeFemelle( int poids, int taille, int age, String nom, Enclos enclos, RangEnum rang, int force, Meute meute) {
-        super( SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom, enclos, rang, force, meute);
+    public LycanthropeFemelle( int poids, int taille, int age, String nom, Enclos enclos, int force, Meute meute) {
+        super( SexesEnum.FEMELLE, poids, taille, age, false, false, true , nom, enclos, force, meute);
     }
 
     /**

@@ -26,11 +26,10 @@ public class LycanthropeMale extends Lycanthrope{
      * @param age age du lycanthrope
      * @param nom nom du lycanthrope
      * @param enclos Enclos du lycanthrope
-     * @param rang Rang du lycanthrope
      * @param force Force du lycanthrope
      * @param meute meute du lycanthrope
      */
-    public LycanthropeMale( int poids, int taille, int age, String nom, Enclos enclos, RangEnum rang, int force, Meute meute) {
-        super( SexesEnum.MALE, poids, taille, age, false, false, true , nom, enclos, rang, force, meute);
+    public LycanthropeMale( int poids, int taille, int age, String nom, Enclos enclos, int force, Meute meute) {
+        super( SexesEnum.MALE, poids, taille, age, false, false, true , nom, enclos, force, meute);
     }
 }

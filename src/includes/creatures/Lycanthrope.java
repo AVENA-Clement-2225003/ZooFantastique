@@ -141,15 +141,12 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @param sante boolean sante de la creature
      * @param nom String nom de la creature (ne depend pas de son espece)
      * @param enclos Enclos du lycanthope
-     * @param rang Rang du lycanthrope
      * @param force Force du lycanthrope
      * @param meute meute du lycanthrope
      */
-    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos, RangEnum rang, int force, Meute meute) {
+    public Lycanthrope(SexesEnum sexe, int poids, int taille, int age, boolean faim, boolean estEnTrainDeDormir, boolean sante, String nom, Enclos enclos, int force, Meute meute) {
         super(EspecesEnum.LYCANTHROPE, sexe, poids, taille, age, faim, estEnTrainDeDormir, sante, nom, enclos);
-        this.rang = rang;
         Random r = new Random();
-        this.rang = rang;
         if (age < 10){
             categorieAge = AgeEnum.Jeune;
         }
@@ -171,10 +168,6 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
         dominationsSubies = 0;
         facteurDomination = dominationsExercee - dominationsSubies;
         this.facteurImpetuosite = r.nextInt(5);
-        int intAge = this.attribuerIntAge(categorieAge);
-        int intRang = this.attribuerIntRang(rang);
-
-        niveau = (this.force + facteurDomination*10 + intRang) / (intAge);
     }
 
     /**
@@ -302,8 +295,8 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      */
     @Override
     public String toString() {
-        return "nom : " + this.getNom() + " | espece : " + getNomEspece() + " | age : " + getAge() + " | a faim : " + ((isFaim())?" oui ":" non ") +
-                " | en bonne sante : " + ((isSante())?" oui ":" non ") + " | dort : " + ((isEstEnTrainDeDormir())?" oui ":" non ") + " | Enclos : " + getEnclos().getNom() + " | Rang : " + getRang() + " | Force : " + getForce();
+        return "\n" + "[ nom : " + this.getNom() + " | sexe : " + this.getSexe() + " | espece : " + getNomEspece() + " | age : " + getAge() + " | a faim : " + ((isFaim())?" oui ":" non ") +
+                " | en bonne sante : " + ((isSante())?" oui ":" non ") + " | dort : " + ((isEstEnTrainDeDormir())?" oui ":" non ") + " | Enclos : " + getEnclos().getNom() + " | Rang : " + getRang() + " | Force : " + getForce() + "]";
     }
 
     /**
