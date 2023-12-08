@@ -169,7 +169,7 @@ public abstract class Enclos {
      */
     @Override
     public String toString() {
-        return "Enclos: " + nom + " | Superficie: " + superficie + " | Capacitée: " + capaciteEnclos + " | Propretée: " + propreteEnum;
+        return "Enclos: " + nom + " | Type: " + listeCreatures.get(0).getNomEspece() + " | Superficie: " + superficie + " | Capacité: " + capaciteEnclos + " | Propreté: " + propreteEnum;
     }
 
     /**

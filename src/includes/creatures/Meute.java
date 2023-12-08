@@ -62,14 +62,15 @@ public class Meute {
         if (sousListeMales.size() == 2) {
             sousListeMales.get(sousListeMales.size() - 1).setRang(RangEnum.Omega);
         } else if (sousListeMales.size() != 1){
-            if (sousListeMales.size() - 2 % 4 != 0) {
+            sousListeMales.get(sousListeMales.size() - 1).setRang(RangEnum.Omega);
+            if ((sousListeMales.size() - 2) % 4 != 0) {
                 if (sousListeMales.size() - 2 % 4 >= 1) {
                     sousListeMales.get(sousListeMales.size() - 2).setRang(RangEnum.Omega);
                 }
-                if (sousListeMales.size() - 2 % 4 >= 2) {
+                if ((sousListeMales.size() - 2) % 4 >= 2) {
                     sousListeMales.get(sousListeMales.size() - 3).setRang(RangEnum.Omega);
                 }
-                if (sousListeMales.size() - 2 % 4 >= 3) {
+                if ((sousListeMales.size() - 2) % 4 >= 3) {
                     sousListeMales.get(sousListeMales.size() - 4).setRang(RangEnum.Omega);
                 }
 
@@ -97,20 +98,21 @@ public class Meute {
         if (sousListeFemelle.size() == 2) {
             sousListeFemelle.get(sousListeFemelle.size() - 1).setRang(RangEnum.Omega);
         } else if (sousListeFemelle.size() != 1) {
-            if (sousListeFemelle.size() - 2 % 4 != 0) {
+            sousListeFemelle.get(sousListeFemelle.size() - 1).setRang(RangEnum.Omega);
+            if ((sousListeFemelle.size() - 2) % 4 != 0) {
                 if (sousListeFemelle.size() - 2 % 4 >= 1) {
                     sousListeFemelle.get(sousListeFemelle.size() - 2).setRang(RangEnum.Omega);
                 }
-                if (sousListeFemelle.size() - 2 % 4 >= 2) {
+                if ((sousListeFemelle.size() - 2) % 4 >= 2) {
                     sousListeFemelle.get(sousListeFemelle.size() - 3).setRang(RangEnum.Omega);
                 }
-                if (sousListeFemelle.size() - 2 % 4 >= 3) {
+                if ((sousListeFemelle.size() - 2) % 4 >= 3) {
                     sousListeFemelle.get(sousListeFemelle.size() - 4).setRang(RangEnum.Omega);
                 }
 
             }
             int nbParRang = (sousListeFemelle.size() - 2) / 4;
-            nbParRang = sousListeFemelle.size() - 2 / 4;
+            nbParRang = (sousListeFemelle.size() - 2) / 4;
             for (int i = 0; i < nbParRang; ++i) {
                 sousListeFemelle.get(i + 1).setRang(RangEnum.Beta);
             }
