@@ -1,5 +1,10 @@
 package includes.creatures;
 
+import app.Controller;
+
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Classe qui represente le couple Alpha
  */
@@ -48,4 +53,15 @@ public class CoupleAlpha {
                 ", femelleAlpha=" + femelleAlpha +
                 '}';
     }
+
+    public ArrayList<Bebe> reproduire(int nbDePetits){
+        ArrayList<Bebe> bebes = new ArrayList<>();
+        Random r = new Random();
+        for (int i = 0; i<nbDePetits; ++i){
+            int sexe = r.nextInt(2);
+            bebes.add(this.getFemelleAlpha().mettreBas(Controller.getInstance().choisirUnPrenom(sexe),  (sexe == 0? SexesEnum.MALE : SexesEnum.FEMELLE) , this.getFemelleAlpha().getEnclos()));
+        }
+        return bebes;
+    }
+
 }

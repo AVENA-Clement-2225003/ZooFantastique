@@ -34,9 +34,9 @@ public class Controller {
      * @param nomMaitreDeZoo du maitre de zoo
      * @return une instance de Zoo
      */
-    public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
-        zooFantastique zoo = Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
-        return zoo;
+    public ArrayList<Object> CreerUnZoo(String nom, String nomMaitreDeZoo) {
+        ArrayList<Object> zooEtColonie = Model.getInstance().CreerUnZoo(nom, nomMaitreDeZoo);
+        return zooEtColonie;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Controller {
      * @param sexe 0 si c'est un garcon sinon 1
      * @return un prénom aléatoire
      */
-    private String choisirUnPrenom(int sexe) { // Il faut impérativement le même nombre de prénoms masculins et féminins
+    public String choisirUnPrenom(int sexe) { // Il faut impérativement le même nombre de prénoms masculins et féminins
         ArrayList<ArrayList<String>> ListePrenoms = new ArrayList<>(
                 Arrays.asList(
                         new ArrayList<>(Arrays.asList("Jean", "Pierre", "Paul", "Thomas", "Antoine", "Nicolas", "Alexandre", "David", "François", "Guillaume")),
@@ -98,7 +98,7 @@ public class Controller {
         switch (nomCommande) {
             case "help":
                 if(tabOption.isEmpty()) {
-                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, trier, reveiller, endormir, exit\nPour plus d'aide: help nomCommande";
+                    return "Liste de toutes les commandes : soigner, nourrir, renommerCreature, nettoyer, renommerEnclos, deplacer, reproduire, retirerCadavre, creerEnclos, supprimerEnclos, infos, trier, reveiller, endormir, exit, tenterDomination\nPour plus d'aide: help nomCommande";
                 }else {
                     switch (tabOption.get(0)) {
                         case "soigner":
@@ -131,6 +131,8 @@ public class Controller {
                             return "Pas encore de description\nA faire";
                         case "exit":
                             return "Commande pour quitter le jeu";
+                        case "tenterDomination":
+                            return "Commande pour qu'un lycanthrope en provoque un autre\n Tapez tenterDomination nomLycanthropeQuiProvoque nomLycanthropeQuiEstProvoque";
                         default:
                             return "Erreur help: commande non reconnue";
                     }
@@ -201,8 +203,8 @@ public class Controller {
                 if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).estVivant()) return "Créature morte! Il faut retirer son cadavre";
                 EspecesEnum especeCreature = Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece();
                 if ((especeCreature.equals(DRAGON) || especeCreature.equals(PHENIX)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosVoliere)) return "Cet enclos n'est pas adapté pour cette créature, essayez une volière";
-                if ((especeCreature.equals(KRAKEN) || especeCreature.equals(MEGALODON) || especeCreature.equals(SIRENE)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosAquarium)) return "Cet enclos n'est pas adapté pour cette créature, essayez un aquarium";
-                if ((especeCreature.equals(LICORNE) || especeCreature.equals(LYCANTHROPE) || especeCreature.equals(NYMPHE)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosStandard)) return "Cet enclos n'est pas adapté pour cette créature, essayez un enclos standard";
+                if ((especeCreature.equals(DRAGON) || especeCreature.equals(KRAKEN) || especeCreature.equals(MEGALODON) || especeCreature.equals(SIRENE)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosAquarium)) return "Cet enclos n'est pas adapté pour cette créature, essayez un aquarium";
+                if ((especeCreature.equals(DRAGON) || especeCreature.equals(LICORNE) || especeCreature.equals(LYCANTHROPE) || especeCreature.equals(NYMPHE)) && !(Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)) instanceof EnclosStandard)) return "Cet enclos n'est pas adapté pour cette créature, essayez un enclos standard";
                 if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().isEmpty()) {
                     if (!Model.getInstance().getZoo().getEnclosByNom(tabOption.get(1)).getListeCreatures().get(0).getNomEspece().equals(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece())) return "Les créatures de l'enclos de destination ne sont pas de la même espèce";
                 }
@@ -237,6 +239,16 @@ public class Controller {
                 if (tabOption.isEmpty()) return "Il manque le nom de la créature à réveiller";
                 Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).setEstEnTrainDeDormir(false);
                 return tabOption.get(0) + " a été réveillée";
+            case "tenterDomination":
+                if (tabOption.isEmpty() || tabOption.size() < 2) return "Il manque le nom des lycanthropes";
+                // Que les 2 soient des lycanthopes
+                if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getNomEspece().equals(LYCANTHROPE) && Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getNomEspece().equals(LYCANTHROPE)) return "Au moins une des deux creatures n'est pas un lycanthrope"; // Vérifie qu'il soient des lycanthropes
+                if (!Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().equals(Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)).getEnclos())) return "Les lycanthropes ne sont pas du même enclos"; // Vérifie qu'il soient du même enclos
+                if (! ((Lycanthrope) Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))).getMeute().equals(((Lycanthrope)Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1))).getMeute())) return "Les lycanthropes ne sont pas de la meme meute"; // Vérifie qu'il soient de la même meute
+                if (((Lycanthrope)Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1))).equals(((Lycanthrope)Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))).getMeute().getCoupleAlpha())) return "La cible est la femelle alpha, on ne peut pas l'attaquer"; // Verifie que la cible n'est pas la femelle alpha
+                if (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).isEstEnTrainDeDormir()) return "Le lycanthrope qui provoque dort, il faut d'abord le reveiller !"; // Verifie que le lycanthrope attaquant est reveille
+                if ( ((Lycanthrope) Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))).getForce() * ((Lycanthrope) Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))).getFacteurImpetuosite() < ((Lycanthrope)Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1))).getForce()) return "Le lycanthrope ne se considère pas assez fort"; // Vérifie que le lycanthrope attaquant se considere suffisamment fort
+                return ((Lycanthrope) Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0))).tenterDomination((Lycanthrope)Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)));
             case "nettoyer":
                 if (tabOption.isEmpty()) return "Il manque le nom de l'enclos à nettoyer";
                 if (Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)).entretientEnclos() == 1) return "L'enclos " + tabOption.get(0) + " n'est pas vide";
@@ -279,10 +291,10 @@ public class Controller {
                         ((LicorneFemelle) mere).mettreBas(nom, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), mere.getEnclos());
                         //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Bebe(LICORNE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos(), (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe().equals(SexesEnum.FEMELLE)?Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)):Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)))));
                         return "La licorne femelle a un bébé!";
-                    case LYCANTHROPE:
+                    /*case LYCANTHROPE:
                         ((LycanthropeFemelle) mere).mettreBas(nom, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), mere.getEnclos());
                         //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Bebe(LYCANTHROPE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos(), (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe().equals(SexesEnum.FEMELLE)?Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)):Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)))));
-                        return "Le lycanthrope femelle a un bébé!";
+                        return "Le lycanthrope femelle a un bébé!";*/
                     case MEGALODON:
                         ((MegalodonFemelle) mere).pondreOeuf(nom, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), mere.getEnclos());
                         //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(MEGALODON, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe().equals(SexesEnum.FEMELLE)?Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)):Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)))));
@@ -298,7 +310,9 @@ public class Controller {
                     case SIRENE:
                         ((SireneFemelle) mere).mettreBas(nom, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), mere.getEnclos());
                         //Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getEnclos().ajouterCreature(new Oeuf(SIRENE, (sexe==0?SexesEnum.MALE:SexesEnum.FEMELLE), nom, Model.getInstance().getZoo().getEnclosByNom(tabOption.get(0)), (Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)).getSexe().equals(SexesEnum.FEMELLE)?Model.getInstance().getZoo().getCreatureByNom(tabOption.get(0)):Model.getInstance().getZoo().getCreatureByNom(tabOption.get(1)))));
-                        return "Le sirène femelle a un bébé !";
+                        return "La sirène femelle a un bébé !";
+                    default:
+                        return "La creature ne peut pas se reproduire";
                 }
             case "dev":
                 if (!Model.getInstance().isDevMode()) return "Vous n'êtes pas en mode développement";

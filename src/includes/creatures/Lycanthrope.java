@@ -193,6 +193,7 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @return String confirmation hurlement
      */
     public String emettreUnSon(Hurlement hurlement){
+        System.out.println("Le lycanthrope " + this.getNom() + " fait un hurlement de type " + hurlement.getType());
         if (hurlement.getType() == HurlementEnum.Appartenance){
             for (Creature c : this.getEnclos().getListeCreatures()){ // Fait reagir la meute
                 if (c instanceof Lycanthrope){
@@ -200,7 +201,6 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
                 }
             }
         }
-        System.out.println("Le lycanthrope " + this.getNom() + " fait un hurlement de type " + hurlement.getType());
         return "Le lycanthrope " + this.getNom() + " fait un hurlement de type " + hurlement.getType();
     }
 
@@ -300,11 +300,37 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
     }
 
     /**
+     * Fonction qui permet de tenter une domination
+     */
+    public String tenterDomination(Lycanthrope l){
+        if (l.getNiveau() > this.getNiveau()){
+            l.emettreUnSon(new Hurlement(HurlementEnum.Agressivite));
+            return ("Le lycanthrope attaquant a perdu");
+        }
+        else {
+            this.dominationsExercee += 1;
+            l.dominationsSubies +=1;
+            this.calculerFacteurDomination();
+            l.calculerFacteurDomination();
+            this.emettreUnSon(new Hurlement(HurlementEnum.Domination));
+            l.emettreUnSon(new Hurlement(HurlementEnum.Soumission));
+            if (l.getRang() == RangEnum.Alpha){
+                this.getMeute().getCoupleAlpha().getFemelleAlpha().setRang(this.getRang()); // Redescend la femelle alpha
+                this.getMeute().instaurerHierarchieFemelle();
+            }
+            RangEnum transfert = this.getRang();
+            this.setRang(l.getRang());
+            l.setRang(transfert);
+            return ("Le lycanthrope a gagne");
+        }
+    }
+
+    /**
      * Fonction qui permet d'associer un int a chaque categorie d'age (utilisee pour le calcul du niveau)
      * @param categorieAge categorie d'age du lycanthrope
      * @return retourne l'int associe a sa categorie d'age
      */
-    private int attribuerIntAge(AgeEnum categorieAge){
+    public int attribuerIntAge(AgeEnum categorieAge){
         return switch (categorieAge) {
             case Jeune -> 1;
             case Adulte -> 2;
@@ -318,7 +344,7 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
      * @param rang rang du lycanthrope
      * @return retourne l'int associe a son rang
      */
-    private int attribuerIntRang(RangEnum rang){
+    public int attribuerIntRang(RangEnum rang){
         return switch (rang) {
             case Alpha -> 50;
             case Beta -> 40;
@@ -328,5 +354,12 @@ public abstract class Lycanthrope extends Creature implements PeutCourir {
             case Omega -> 0;
             default -> 0;
         };
+    }
+
+    /**
+     * Fonction qui permet de calculer et mettre a jour le facteur de domination
+     */
+    public void calculerFacteurDomination(){
+        this.setFacteurDomination(dominationsExercee - dominationsSubies);
     }
 }

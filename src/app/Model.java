@@ -1,6 +1,7 @@
 package app;
 import includes.creatures.*;
 import includes.enclos.Enclos;
+import includes.enclos.EnclosAquarium;
 import includes.enclos.EnclosStandard;
 import includes.enclos.EnclosVoliere;
 import includes.creatures.SexesEnum;
@@ -11,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Classe Modèle de notre appilication
@@ -106,29 +108,43 @@ public class Model {
      * @param nomMaitreDeZoo du maitre de zoo
      * @return une instance de Zoo
      */
-    public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
+    public ArrayList<Object> CreerUnZoo(String nom, String nomMaitreDeZoo) {
         if (nom.equals("")) nom = "UnZooSuper";
         if (nomMaitreDeZoo.equals("")) nomMaitreDeZoo = "UnMaitreSuper";
         maitre = new MaitreZooFantastique(nomMaitreDeZoo, SexesEnum.MALE, 23);
         unZoo = new zooFantastique(nom, nomMaitreDeZoo/*maitre*/, 15, new ArrayList<>());
-        unZoo.ajouterEnclos(new EnclosStandard("Tuto", 45, 5));
-        Licorne L1 = new LicorneMale(50, 150, 25, "James", unZoo.getEnclosByNom("Tuto"));
-        Licorne L3 = new LicorneMale(50, 150, 25, "Albert", unZoo.getEnclosByNom("Tuto"));
-        Licorne L4 = new LicorneMale(50, 150, 25, "Béatrice", unZoo.getEnclosByNom("Tuto"));
-        Licorne L2 = new LicorneFemelle(50, 150, 25, "Maria", unZoo.getEnclosByNom("Tuto"));
-        unZoo.getEnclosExistant().get(0).ajouterCreature(L1);
-        unZoo.getEnclosExistant().get(0).ajouterCreature(L2);
-        unZoo.getEnclosExistant().get(0).ajouterCreature(L3);
-        unZoo.getEnclosExistant().get(0).ajouterCreature(L4);
-
-        unZoo.ajouterEnclos(new EnclosVoliere("T1", 45, 5, 15));
-        Phenix P1 = new PhenixMale(50, 150, 25, "James", unZoo.getEnclosByNom("T1"));
-        Phenix P2 = new PhenixFemelle(50, 150, 25, "Maria", unZoo.getEnclosByNom("T1"));
-        verifierNomEtRenommerCreature(P1, P1.getNom());
-        verifierNomEtRenommerCreature(P2, P2.getNom());
-        unZoo.getEnclosExistant().get(1).ajouterCreature(P1);
-        unZoo.getEnclosExistant().get(1).ajouterCreature(P2);
-        return unZoo;
+        Colonie colonie = new Colonie(new ArrayList<>());
+        //Création d'un Enclos pour chaque type d'espèce
+        unZoo.ajouterEnclos(new EnclosVoliere("Enclos dragons", 1000, 5, 100));
+        unZoo.ajouterEnclos(new EnclosAquarium("Enclos krakens", 500, 4, 100));
+        unZoo.ajouterEnclos(new EnclosStandard("Enclos licornes", 250, 15));
+        unZoo.ajouterEnclos(new EnclosStandard("Enclos lycanthropes", 100, 30));
+        unZoo.ajouterEnclos(new EnclosAquarium("Enclos megalodons", 430, 7, 35));
+        unZoo.ajouterEnclos(new EnclosStandard("Enclos nymphes", 100, 9));
+        unZoo.ajouterEnclos(new EnclosVoliere("Enclos phenix", 250, 15, 50));
+        unZoo.ajouterEnclos(new EnclosAquarium("Enclos sirenes", 80, 13, 17));
+        Meute m1 = new Meute("Meute de lycanthrope", new ArrayList<>());
+        colonie.getMeutes().add(m1);
+        unZoo.getEnclosExistant().get(0).ajouterCreature(new DragonMale(20000, 15000, 20, "James", unZoo.getEnclosByNom("Enclos dragons")));
+        unZoo.getEnclosExistant().get(0).ajouterCreature(new DragonFemelle(20001, 15000, 20, "Princesse", unZoo.getEnclosByNom("Enclos dragons")));
+        unZoo.getEnclosExistant().get(1).ajouterCreature(new KrakenMale(5000, 60000, 20, "Harry", unZoo.getEnclosByNom("Enclos krakens")));
+        unZoo.getEnclosExistant().get(1).ajouterCreature(new KrakenFemelle(5000, 60000, 20, "Maria", unZoo.getEnclosByNom("Enclos krakens")));
+        unZoo.getEnclosExistant().get(2).ajouterCreature(new LicorneMale(800, 230, 20, "Bernard", unZoo.getEnclosByNom("Enclos licornes")));
+        unZoo.getEnclosExistant().get(2).ajouterCreature(new LicorneFemelle(800, 230, 20, "Micheline", unZoo.getEnclosByNom("Enclos licornes")));
+        unZoo.getEnclosExistant().get(3).ajouterCreature(new LycanthropeMale(75, 180, 20, "Henry", unZoo.getEnclosByNom("Enclos lycanthropes"), 20, m1));
+        unZoo.getEnclosExistant().get(3).ajouterCreature(new LycanthropeFemelle(75, 180, 20, "Lucy", unZoo.getEnclosByNom("Enclos lycanthropes"), 20, m1));
+        unZoo.getEnclosExistant().get(4).ajouterCreature(new MegalodonMale(2000, 250, 20, "Mathis", unZoo.getEnclosByNom("Enclos megalodons")));
+        unZoo.getEnclosExistant().get(4).ajouterCreature(new MegalodonFemelle(2000, 250, 20, "Hariette", unZoo.getEnclosByNom("Enclos megalodons")));
+        unZoo.getEnclosExistant().get(5).ajouterCreature(new NympheMale(75, 170, 20, "Jules", unZoo.getEnclosByNom("Enclos nymphes")));
+        unZoo.getEnclosExistant().get(5).ajouterCreature(new NympheFemelle(75, 170, 20, "Shana", unZoo.getEnclosByNom("Enclos nymphes")));
+        unZoo.getEnclosExistant().get(6).ajouterCreature(new PhenixMale(35, 150, 20, "Plume-sec", unZoo.getEnclosByNom("Enclos phenix")));
+        unZoo.getEnclosExistant().get(6).ajouterCreature(new PhenixFemelle(35, 150, 20, "Olivia", unZoo.getEnclosByNom("Enclos phenix")));
+        unZoo.getEnclosExistant().get(7).ajouterCreature(new SireneMale(75, 175, 20, "Alix", unZoo.getEnclosByNom("Enclos sirenes")));
+        unZoo.getEnclosExistant().get(7).ajouterCreature(new SireneFemelle(75, 175, 20, "Jeanine", unZoo.getEnclosByNom("Enclos sirenes")));
+        ArrayList<Object> aReturn = new ArrayList<>();
+        aReturn.add(unZoo);
+        aReturn.add(colonie);
+        return aReturn;
     }
 
     /**

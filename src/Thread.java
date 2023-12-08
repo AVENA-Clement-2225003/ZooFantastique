@@ -17,12 +17,15 @@ public class Thread extends java.lang.Thread {
      */
     private zooFantastique zoo;
 
+    private Colonie colonie;
+
     /**
      * Contructeur du thread
      * @param zoo Zoo avec lequel on joue
      */
-    public Thread(zooFantastique zoo){
+    public Thread(zooFantastique zoo, Colonie colonie){
         this.zoo = zoo;
+        this.colonie = colonie;
     }
 
     /**
@@ -65,8 +68,11 @@ public class Thread extends java.lang.Thread {
                     }
                 }
                 if (temps % 30 == 0){
-                    // Faire viellir et naitre
-                    // reproduire James Maria
+                    // Faire viellir et naitre et mettre a jour la hierarchie des lycanthropes
+                    for (Meute m : colonie.getMeutes()){
+                        if (m.getListeMeute().size() != 0)
+                        m.instaurerHierarchie();
+                    }
                     for (Iterator<Enclos> iteratorEnclos = zoo.getEnclosExistant().iterator(); iteratorEnclos.hasNext();) {
                         Enclos enclos = iteratorEnclos.next();
                         for (Iterator<Creature> iterator = enclos.getListeCreatures().iterator(); iterator.hasNext();) {
@@ -169,6 +175,24 @@ public class Thread extends java.lang.Thread {
                     for (Creature c : lTempCreatureASupprimer){
                         c.getEnclos().getListeCreatures().remove(c);
 
+                    }
+                }
+                /*
+                if (temps % 60 == 0){
+                    int meuteDuLycanthropeQuiHurle = r.nextInt(colonie.getMeutes().size());
+                    System.out.println(colonie.getMeutes().size());
+                    System.out.println(meuteDuLycanthropeQuiHurle);
+                    System.out.println((colonie.getMeutes().get(meuteDuLycanthropeQuiHurle).getListeMeute().size()));
+                    int tmp = r.nextInt(colonie.getMeutes().get(meuteDuLycanthropeQuiHurle).getListeMeute().size());
+                    System.out.println(tmp);
+                    colonie.getMeutes().get(meuteDuLycanthropeQuiHurle).getListeMeute().get(r.nextInt(colonie.getMeutes().get(meuteDuLycanthropeQuiHurle).getListeMeute().size())).emettreUnSon(new Hurlement(HurlementEnum.Appartenance));
+                }
+
+                 */
+                if (temps % 90 == 0){ // Saison des amours des lycanthropes
+                    for (Meute m : colonie.getMeutes()){
+                        int nbPetits = r.nextInt(8);
+                        m.getCoupleAlpha().reproduire(nbPetits);
                     }
                 }
                 temps += 5;

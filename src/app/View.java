@@ -53,7 +53,7 @@ public class View {
      */
     public String affichageInfos() {
         ArrayList<ArrayList<String>> liste = Controller.getInstance().DonnesAffichageZoo();
-        int enclosWidth = 15;
+        int enclosWidth = 25;
         int maladeWidth = 15;
         int mortWidth = 15;
         int faimWidth = 15;
@@ -101,8 +101,8 @@ public class View {
      * @param nomMaitreDeZoo du maitre de zoo
      * @return instance de Zoo
      */
-    public zooFantastique CreerUnZoo(String nom, String nomMaitreDeZoo) {
-        zooFantastique zoo = controlleur.CreerUnZoo(nom, nomMaitreDeZoo);
-        return zoo;
+    public ArrayList<Object> CreerUnZoo(String nom, String nomMaitreDeZoo) {
+        ArrayList<Object> zooEtColonie = controlleur.CreerUnZoo(nom, nomMaitreDeZoo);
+        return zooEtColonie;
     }
 }

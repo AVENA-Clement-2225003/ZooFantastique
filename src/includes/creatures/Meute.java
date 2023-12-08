@@ -33,6 +33,14 @@ public class Meute {
         this.listeMeute = listeMeute;
     }
 
+    public CoupleAlpha getCoupleAlpha() {
+        return coupleAlpha;
+    }
+
+    public void setCoupleAlpha(CoupleAlpha coupleAlpha) {
+        this.coupleAlpha = coupleAlpha;
+    }
+
     /**
      * Fonction qui permet l'ajout d'un lycanthrope dans lam meute
      *
@@ -57,6 +65,26 @@ public class Meute {
         this.triSelectionForce(sousListeFemelle);
 
         // Attribution des rangs Mâles
+        LycanthropeMale maleAlpha = instaurerHierarchieMales();
+
+        //Attribution des rangs Femelles
+        LycanthropeFemelle femelleAlpha = instaurerHierarchieFemelle();
+
+        coupleAlpha.setMaleAlpha(maleAlpha);
+        coupleAlpha.setFemelleAlpha(femelleAlpha);
+
+        //System.out.println("la liste des femelles : \n" + sousListeFemelle + "\nLa liste des males : \n" + sousListeMales);
+        attribuerNiveau();
+        return coupleAlpha;
+    }
+
+    public LycanthropeMale instaurerHierarchieMales(){
+        ArrayList<Lycanthrope> sousListeMales = new ArrayList<>();
+        for (Lycanthrope l : listeMeute) {
+            if (l instanceof LycanthropeMale) {
+                sousListeMales.add(l);
+            }
+        }
         coupleAlpha.setMaleAlpha((LycanthropeMale) sousListeMales.get(0));
         sousListeMales.get(0).setRang(RangEnum.Alpha);
         if (sousListeMales.size() == 2) {
@@ -90,9 +118,16 @@ public class Meute {
                 sousListeMales.get(i + 1 + nbParRang * 3).setRang(RangEnum.Epsilon);
             }
         }
+        return coupleAlpha.getMaleAlpha();
+    }
 
-        //Attribution des rangs Femelles
-
+    public LycanthropeFemelle instaurerHierarchieFemelle(){
+        ArrayList<Lycanthrope> sousListeFemelle = new ArrayList<>();
+        for (Lycanthrope l : listeMeute) {
+            if (l instanceof LycanthropeFemelle) {
+                sousListeFemelle.add(l);
+            }
+        }
         coupleAlpha.setFemelleAlpha((LycanthropeFemelle) sousListeFemelle.get(0));
         sousListeFemelle.get(0).setRang(RangEnum.Alpha);
         if (sousListeFemelle.size() == 2) {
@@ -126,13 +161,24 @@ public class Meute {
                 sousListeFemelle.get(i + 1 + nbParRang * 3).setRang(RangEnum.Epsilon);
             }
         }
-        System.out.println("la liste des femelles : \n" + sousListeFemelle + "\nLa liste des males : \n" + sousListeMales);
-        return coupleAlpha;
+        return coupleAlpha.getFemelleAlpha();
+    }
+
+    /**
+     * Fonction qui permet d'attribuer le niveau d'un lycanthrope
+     */
+    public void attribuerNiveau(){
+        int intAge;
+        int intRang;
+        for (Lycanthrope l : listeMeute){
+            intAge = l.attribuerIntAge(l.getCategorieAge());
+            intRang = l.attribuerIntRang(l.getRang());
+            l.setNiveau((l.getForce() + l.getFacteurDomination()*10 + intRang) / (intAge));
+        }
     }
 
     /**
      * Fonction qui fait un tri par selection en fonction de la force des lycantropes
-     *
      * @param liste liste de l'enclos a trier
      */
     private void triSelectionForce(ArrayList<Lycanthrope> liste) {
@@ -143,7 +189,6 @@ public class Meute {
                     index = j;
                 }
             }
-
             Lycanthrope min = liste.get(index);
             liste.set(index, liste.get(i));
             liste.set(i, min);
