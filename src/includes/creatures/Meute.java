@@ -59,63 +59,70 @@ public class Meute {
         coupleAlpha.setMaleAlpha((LycanthropeMale) sousListeMales.get(0));
         coupleAlpha.setFemelleAlpha((LycanthropeFemelle) sousListeFemelle.get(0));
         if (sousListeMales.size() > 1){
+            System.out.println("Coucou");
             sousListeMales.get(sousListeMales.size()-1).setRang(RangEnum.Omega);
+        }
+        else {
+            if (sousListeMales.size()-2 % 4 != 0){
+                if (sousListeMales.size()-2 % 4 >= 1){
+                    sousListeMales.get(sousListeMales.size()-2).setRang(RangEnum.Omega);
+                }
+                if (sousListeMales.size()-2 % 4 >= 2 ){
+                    sousListeMales.get(sousListeMales.size()-3).setRang(RangEnum.Omega);
+                }
+                if (sousListeMales.size()-2 % 4 >= 3){
+                    sousListeMales.get(sousListeMales.size()-4).setRang(RangEnum.Omega);
+                }
+
+            }
+            int nbParRang = (sousListeMales.size()-2) / 4;
+            System.out.println(nbParRang + " = " + (sousListeMales.size()-2) + "/" + 4);
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeMales.get(i+1).setRang(RangEnum.Beta);
+            }
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeMales.get(i+1+nbParRang*1).setRang(RangEnum.Gamma);
+            }
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeMales.get(i+1+nbParRang*2).setRang(RangEnum.Delta);
+            }
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeMales.get(i+1+nbParRang*3).setRang(RangEnum.Epsilon);
+            }
         }
         if (sousListeFemelle.size() > 1){
             sousListeFemelle.get(sousListeFemelle.size()-1).setRang(RangEnum.Omega);
         }
-        else return coupleAlpha;
-        if (sousListeMales.size()-2 % 4 != 0){
-            if (sousListeMales.size()-2 % 4 >= 1){
-                sousListeMales.get(sousListeMales.size()-2).setRang(RangEnum.Omega);
-            }
-            if (sousListeMales.size()-2 % 4 >= 2 ){
-                sousListeMales.get(sousListeMales.size()-3).setRang(RangEnum.Omega);
-            }
-            if (sousListeMales.size()-2 % 4 >= 3){
-                sousListeMales.get(sousListeMales.size()-4).setRang(RangEnum.Omega);
-            }
+        else {
+            if (sousListeFemelle.size()-2 % 4 != 0){
+                if (sousListeFemelle.size()-2 % 4 >= 1){
+                    sousListeFemelle.get(sousListeFemelle.size()-2).setRang(RangEnum.Omega);
+                }
+                if (sousListeFemelle.size()-2 % 4 >= 2 ){
+                    sousListeFemelle.get(sousListeFemelle.size()-3).setRang(RangEnum.Omega);
+                }
+                if (sousListeFemelle.size()-2 % 4 >= 3){
+                    sousListeFemelle.get(sousListeFemelle.size()-4).setRang(RangEnum.Omega);
+                }
 
-        }
-        int nbParRang = sousListeMales.size()-2 / 4;
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeMales.get(i+1).setRang(RangEnum.Beta);
-        }
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeMales.get(i+1+nbParRang*1).setRang(RangEnum.Gamma);
-        }
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeMales.get(i+1+nbParRang*2).setRang(RangEnum.Delta);
-        }
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeMales.get(i+1+nbParRang*3).setRang(RangEnum.Epsilon);
-        }
-        if (sousListeFemelle.size()-2 % 4 != 0){
-            if (sousListeFemelle.size()-2 % 4 >= 1){
-                sousListeFemelle.get(sousListeFemelle.size()-2).setRang(RangEnum.Omega);
             }
-            if (sousListeFemelle.size()-2 % 4 >= 2 ){
-                sousListeFemelle.get(sousListeFemelle.size()-3).setRang(RangEnum.Omega);
+            int nbParRang = (sousListeFemelle.size()-2) / 4;
+            nbParRang = sousListeFemelle.size()-2 / 4;
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeFemelle.get(i+1).setRang(RangEnum.Beta);
             }
-            if (sousListeFemelle.size()-2 % 4 >= 3){
-                sousListeFemelle.get(sousListeFemelle.size()-4).setRang(RangEnum.Omega);
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeFemelle.get(i+1+nbParRang*1).setRang(RangEnum.Gamma);
             }
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeFemelle.get(i+1+nbParRang*2).setRang(RangEnum.Delta);
+            }
+            for (int i = 0; i < nbParRang; ++i){
+                sousListeFemelle.get(i+1+nbParRang*3).setRang(RangEnum.Epsilon);
+            }
+            System.out.println(listeMeute);
+        }
 
-        }
-        nbParRang = sousListeFemelle.size()-2 / 4;
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeFemelle.get(i+1).setRang(RangEnum.Beta);
-        }
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeFemelle.get(i+1+nbParRang*1).setRang(RangEnum.Gamma);
-        }
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeFemelle.get(i+1+nbParRang*2).setRang(RangEnum.Delta);
-        }
-        for (int i = 0; i < nbParRang; ++i){
-            sousListeFemelle.get(i+1+nbParRang*3).setRang(RangEnum.Epsilon);
-        }
-        System.out.println(listeMeute);
         return coupleAlpha;
     }
 
