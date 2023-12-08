@@ -15,6 +15,7 @@ AVENA Clément, RIPOCHE Sarah, VINCENT Erwan
 |-------------------------------------------------------------------|
 | [GitHub](https://github.com/AVENA-Clement-2225003/ZooFantastique) |
 | [Documentation](../Documents/Manuel_Utilisation.pdf)              |
+| [Spécifications](../Documents/Specifications.pdf)                 |
 | [JavaDoc](./JavaDoc/index.html)                                   |
 ***
 ## Présentation
